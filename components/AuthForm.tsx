@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import { FcGoogle, } from "react-icons/fc"
 import { FaGithub } from "react-icons/fa6"
+import Link from "next/link"
 const AuthForm = () => {
 
     const formSchema = z.object({
@@ -41,47 +42,55 @@ const AuthForm = () => {
     }
     return (
         <div className=" px-8 py-8 border-2 border-primary-1  rounded-2xl">
-             <div className="py-2 flex justify-center items-center gap-1">
-             <img src="/images/schedule_meeting.svg" className='w-[100px] h-[100px] lg:hidden' alt="" />  
-             {/* <p className="font-semibold">Register</p> */}
-             </div>
-                   
+            <div className="py-2 flex justify-center flex-col items-center gap-2">
+                {/* <img src="/images/schedule_meeting.svg" className='w-[100px] h-[100px] lg:hidden' alt="" />   */}
+                <p className="text-4xl ">🔒 Auth</p>
+                <p className=" ">set up your account</p>
+            </div>
+
 
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
                     <FormField
                         control={form.control}
                         name="username"
                         render={({ field }) => (
-                           <div>
-                             <FormItem>
-                                <FormLabel>Username</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="shadcn" {...field} className="w-[300px]  lg:w-[350px]  focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
-                                </FormControl>
-                             
-                                <FormMessage />
-                            </FormItem>
-                            <FormItem>
-                                <FormLabel>Email</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="example@gmail.com" {...field} className="w-[300px]  lg:w-[350px]  focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
-                                </FormControl>
-                             
-                                <FormMessage />
-                            </FormItem>
-                            <FormItem>
-                                <FormLabel>Password</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="*******" {...field} className="w-[300px]  lg:w-[350px]  focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
-                                </FormControl>
-                             
-                                <FormMessage />
-                            </FormItem>
-                           </div>
+                            <div>
+                                <FormItem>
+                                    <FormLabel>Username</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="shadcn" {...field} className="w-[300px]  lg:w-[350px]  focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+                                    </FormControl>
+
+                                    <FormMessage />
+                                </FormItem>
+                                <FormItem>
+                                    <FormLabel>Email</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="example@gmail.com" {...field} className="w-[300px]  lg:w-[350px]  focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+                                    </FormControl>
+
+                                    <FormMessage />
+                                </FormItem>
+                                <FormItem>
+                                    <FormLabel>Password</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="*******" {...field} className="w-[300px]  lg:w-[350px]  focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+                                    </FormControl>
+
+                                    <FormMessage />
+                                </FormItem>
+                            </div>
                         )}
                     />
+                    <Button
+                      
 
+                    >
+                        <Link href="/">
+                            Forgot Password?
+                        </Link>
+                    </Button>
                     <Button type="submit" variant="outline" className='w-full bg-primary-2 transition-all duration-500 hover:bg-primary-3' >Submit</Button>
                     <div className="w-full flex items-center gap-x-2">
                         <Button size="lg" variant="outline" className="w-full bg-primary-3 transition-all duration-500 hover:bg-primary-1" >
@@ -92,6 +101,14 @@ const AuthForm = () => {
                         </Button>
 
                     </div>
+                    <Button
+                      
+                        className="w-full"
+                      >
+                          <Link href="/sign-in">
+                              Already have account ? SignIn
+                          </Link>
+                      </Button>
                 </form>
             </Form>
         </div>
