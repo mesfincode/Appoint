@@ -41,9 +41,12 @@ const AuthForm = () => {
     }
     return (
         <div className=" px-8 py-8 border-2 border-primary-1  rounded-2xl">
-             <div className="py-2">
-                <h1 className="text-center text-3xl font-semibold">🔒 Register</h1>
+             <div className="py-2 flex justify-center items-center gap-1">
+             <img src="/images/schedule_meeting.svg" className='w-[100px] h-[100px] lg:hidden' alt="" />  
+             {/* <p className="font-semibold">Register</p> */}
              </div>
+                   
+
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                     <FormField
