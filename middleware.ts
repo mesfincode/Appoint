@@ -1,11 +1,12 @@
-import NextAuth from "next-auth";
+import NextAuth, { Session } from "next-auth";
 import authConfig from "./auth.config";
 import { DEFAULT_LOGIN_REDIRECT, apiAuthPrefix, authRoutes, publicRoutes } from "./routes";
 
 const {auth}= NextAuth(authConfig)
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export default auth((req) => {
+export default auth(
+	(req: NextRequest & { auth: Session | null }): Response | void => {
     console.log("ROUTE: ", req.nextUrl.pathname);
     // const {nextUrl} = req;
     // const isLoggedIn = !!req.auth;
