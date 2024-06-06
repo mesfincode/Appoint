@@ -44,13 +44,13 @@ const AuthForm = () => {
         <div className=" px-8 py-8 border-2 border-primary-1  rounded-2xl">
             <div className="py-2 flex justify-center flex-col items-center gap-2">
                 {/* <img src="/images/schedule_meeting.svg" className='w-[100px] h-[100px] lg:hidden' alt="" />   */}
-                <p className="text-4xl ">🔒 Auth</p>
+                <p className="text-4xl ">🔒 Register</p>
                 <p className=" ">set up your account</p>
             </div>
 
 
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                     <FormField
                         control={form.control}
                         name="username"
@@ -83,14 +83,12 @@ const AuthForm = () => {
                             </div>
                         )}
                     />
-                    <Button
-                      
-
-                    >
-                        <Link href="/">
+                  
+                    {/* <div className="">
+                    <Link href="/" className="underline ">
                             Forgot Password?
                         </Link>
-                    </Button>
+                    </div> */}
                     <Button type="submit" variant="outline" className='w-full bg-primary-2 transition-all duration-500 hover:bg-primary-3' >Submit</Button>
                     <div className="w-full flex items-center gap-x-2">
                         <Button size="lg" variant="outline" className="w-full bg-primary-3 transition-all duration-500 hover:bg-primary-1" >
@@ -102,13 +100,13 @@ const AuthForm = () => {
 
                     </div>
                     <Button
-                      
-                        className="w-full"
-                      >
-                          <Link href="/sign-in">
-                              Already have account ? SignIn
-                          </Link>
-                      </Button>
+
+                        className="w-full underline"
+                    >
+                        <Link href="/sign-in">
+                            Already have account ? SignIn
+                        </Link>
+                    </Button>
                 </form>
             </Form>
         </div>
