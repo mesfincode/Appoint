@@ -20,7 +20,8 @@ const config: Config = {
         primary:{
           1: "#E6A9B9",
           2: "#FFC8E8",
-          3: "#F1EBED"
+          3: "#F1EBED",
+          4: "#FFF5FB"
         },
         black:{
           1: "#15171C",

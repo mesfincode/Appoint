@@ -73,10 +73,10 @@ const AuthForm = () => {
                                     render={({ field }) => (<FormItem>
                                         <FormLabel>Username</FormLabel>
                                         <FormControl>
-                                            <Input type="text" placeholder="shadcn" {...field} className="w-[300px]  lg:w-[350px]  focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+                                            <Input type="text" placeholder="appoint" {...field} className="w-[300px]  lg:w-[350px]  focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
 
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage className="text-red-400" />
                                     </FormItem>)}
                                 />
                                   <FormField
@@ -88,7 +88,7 @@ const AuthForm = () => {
                                 <Input type="email" placeholder="example@gmail.com" {...field} className="w-[300px]  lg:w-[350px]  focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
 
                                 </FormControl>
-                                <FormMessage />
+                                <FormMessage className="text-red-400" />
                             </FormItem>)}
                      />
                                 <FormField
@@ -100,7 +100,7 @@ const AuthForm = () => {
                                 <Input type="password" placeholder="*******" {...field} className="w-[300px]  lg:w-[350px]  focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
 
                                 </FormControl>
-                                <FormMessage />
+                                <FormMessage className="text-red-400" />
                             </FormItem>)}
                        />
                              
