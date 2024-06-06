@@ -62,15 +62,15 @@ export const {
 
             }
 
-            if( session.user){
-              session.user.isTwoFactorEnabled = token.isTwoFactorEnabled
+        //     if( session.user){
+        //       session.user.isTwoFactorEnabled = token.isTwoFactorEnabled
 
-          }
-          if(session.user){
-            session.user.name = token.name;
-            session.user.email = token.email;
-            session.user.isOAuth = token.isOAuth;
-          }
+        //   }
+        //   if(session.user){
+        //     session.user.name = token.name;
+        //     session.user.email = token.email;
+        //     session.user.isOAuth = token.isOAuth;
+        //   }
        
             return session;
         }
