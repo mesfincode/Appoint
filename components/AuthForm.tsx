@@ -25,6 +25,7 @@ import { RegisterSchema } from "@/validators"
 import { register } from "@/actions/auth"
 import { FormError } from "./FormError"
 import { FormSuccess } from "./FormSuccess"
+import { Loader } from "lucide-react"
 const AuthForm = () => {
 
     const [error, setError] = useState<string | undefined>();
@@ -115,7 +116,13 @@ const AuthForm = () => {
                     </div> */}
                     <FormError message={error} />
                     <FormSuccess message={success} />
-                    <Button type="submit" variant="outline" className='w-full bg-primary-2 transition-all duration-500 hover:bg-primary-3' >Submit</Button>
+                    <Button type="submit" variant="outline" className='w-full bg-primary-2 transition-all duration-500 hover:bg-primary-3' >
+                        {
+                            isPending?<>
+                            <Loader/>Loading
+                            </>:<>Submit</>
+                        }
+                    </Button>
                     <div className="w-full flex items-center justify-center gap-x-2">
                         <Button size="lg" variant="outline" className=" rounded-full bg-primary-3 transition-all duration-500 hover:bg-primary-1" >
                             <FcGoogle className="h-5 w-5" />
