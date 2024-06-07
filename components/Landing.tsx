@@ -33,7 +33,7 @@ const Landing = () => {
                 <div className='flex max-md:flex-col-reverse  flex-col justify-center items-center'>
                     <h1 className='text-4xl max-lg:text-2xl text-black-2  text-center max-lg:w-full lg:max-w-[600px] '>Use <span className=' text-primary-1 '>Appoint</span> To Schedule your appointments</h1>
 
-                    <img src="/images/appoint_with_teachers.svg" alt="" className='w-[400px] h-[400px]' />
+                    <img src="/images/appint_wit_doctors.svg" alt="" className='w-[400px] h-[400px]' />
                 </div>
                 {/* <Button  className='px-7 bg-primary-3 lg:hidden max-w-[300px]'>
                         Start Now

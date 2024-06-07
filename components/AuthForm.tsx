@@ -52,7 +52,7 @@ const AuthForm = () => {
 
     }
     return (
-        <div className=" px-8 py-8 border-2 border-primary-1  rounded-2xl">
+        <div className=" mx-4 px-4 py-8 border-2 border-primary-1  rounded-2xl w-full max-w-[450px] ">
             <div className="py-2 flex justify-center flex-col items-center gap-2">
                 {/* <img src="/images/schedule_meeting.svg" className='w-[100px] h-[100px] lg:hidden' alt="" />   */}
                 <p className="text-4xl ">Register</p>
@@ -73,37 +73,37 @@ const AuthForm = () => {
                                     render={({ field }) => (<FormItem>
                                         <FormLabel>Username</FormLabel>
                                         <FormControl>
-                                            <Input type="text" placeholder="appoint" {...field} className="w-[300px]  lg:w-[350px]  focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+                                            <Input type="text" placeholder="appoint" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
 
                                         </FormControl>
                                         <FormMessage className="text-red-400" />
                                     </FormItem>)}
                                 />
-                                  <FormField
-                            control={form.control}
-                            name='email'
-                            render={({ field }) => (<FormItem>
-                                <FormLabel>Email</FormLabel>
-                                <FormControl>
-                                <Input type="email" placeholder="example@gmail.com" {...field} className="w-[300px]  lg:w-[350px]  focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
-
-                                </FormControl>
-                                <FormMessage className="text-red-400" />
-                            </FormItem>)}
-                     />
                                 <FormField
-                            control={form.control}
-                            name='password'
-                            render={({ field }) => (<FormItem>
-                                <FormLabel>Password</FormLabel>
-                                <FormControl>
-                                <Input type="password" placeholder="*******" {...field} className="w-[300px]  lg:w-[350px]  focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+                                    control={form.control}
+                                    name='email'
+                                    render={({ field }) => (<FormItem>
+                                        <FormLabel>Email</FormLabel>
+                                        <FormControl>
+                                            <Input type="email" placeholder="example@gmail.com" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
 
-                                </FormControl>
-                                <FormMessage className="text-red-400" />
-                            </FormItem>)}
-                       />
-                             
+                                        </FormControl>
+                                        <FormMessage className="text-red-400" />
+                                    </FormItem>)}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name='password'
+                                    render={({ field }) => (<FormItem>
+                                        <FormLabel>Password</FormLabel>
+                                        <FormControl>
+                                            <Input type="password" placeholder="*******" {...field} className="w-full  focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+
+                                        </FormControl>
+                                        <FormMessage className="text-red-400" />
+                                    </FormItem>)}
+                                />
+
                             </div>
                         )}
                     />
@@ -113,7 +113,7 @@ const AuthForm = () => {
                             Forgot Password?
                         </Link>
                     </div> */}
-                          <FormError message={error} />
+                    <FormError message={error} />
                     <FormSuccess message={success} />
                     <Button type="submit" variant="outline" className='w-full bg-primary-2 transition-all duration-500 hover:bg-primary-3' >Submit</Button>
                     <div className="w-full flex items-center justify-center gap-x-2">

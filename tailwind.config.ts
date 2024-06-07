@@ -18,10 +18,10 @@ const config: Config = {
           5: "rgba(255, 255, 255, 0.80)",
         },
         primary:{
-          1: "#E6A9B9",
-          2: "#FFC8E8",
-          3: "#F1EBED",
-          4: "#FFF5FB"
+          1: "#47689A",
+          2: "#D3DDF0",
+          3: "#EDF6FF",
+          4: "#EDF6FF"
         },
         black:{
           1: "#15171C",
