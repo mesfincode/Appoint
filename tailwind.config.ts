@@ -26,7 +26,14 @@ const config: Config = {
         black:{
           1: "#15171C",
           2: "#7B7E85"
-        }
+        },
+        dark: {
+          1: '#1C1F2E',
+          2: '#161925',
+          3: '#252A41',
+          4: '#1E2757',
+        },
+
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

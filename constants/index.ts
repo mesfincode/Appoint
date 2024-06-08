@@ -30,19 +30,19 @@ export const companyServiceProviders = [
   },
   {
     profileUrl: "https://img.freepik.com/free-psd/3d-rendering-avatar_23-2150833546.jpg?size=626&ext=jpg&ga=GA1.1.1017060813.1707830517&semt=sph",
-    name: "Abebe Kebede",
+    name: "Alemu Kebede",
     company: "General Moters",
     serviceDescription: "We excell at providing the best spare parts for cars"
   },
   {
     profileUrl: "https://img.freepik.com/free-psd/3d-rendering-avatar_23-2150833546.jpg?size=626&ext=jpg&ga=GA1.1.1017060813.1707830517&semt=sph",
-    name: "Abebe Kebede",
+    name: "Ayele Kebede",
     company: "General Moters",
     serviceDescription: "We excell at providing the best spare parts for cars"
   },
   {
     profileUrl: "https://img.freepik.com/free-psd/3d-rendering-avatar_23-2150833546.jpg?size=626&ext=jpg&ga=GA1.1.1017060813.1707830517&semt=sph",
-    name: "Abebe Kebede",
+    name: "Zeleke Kebede",
     company: "General Moters",
     serviceDescription: "We excell at providing the best spare parts for cars"
   },
