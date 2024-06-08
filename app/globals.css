@@ -6,4 +6,10 @@
   .place-center{
     @apply flex justify-center items-center
   }
+  .left_sidebar {
+    @apply sticky left-0 top-0  flex w-fit flex-col  justify-between     border-r-4 border-primary-2 pt-8 text-white-1 max-md:hidden lg:w-[270px] lg:pl-8;
+  }
+  .right_sidebar {
+    @apply sticky right-0 top-0 flex w-fit flex-col  justify-between     border-l-4 border-primary-2 pt-8 text-white-1 max-md:hidden lg:w-[270px] lg:pl-8;
+  }
 }

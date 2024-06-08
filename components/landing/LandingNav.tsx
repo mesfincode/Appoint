@@ -8,7 +8,7 @@ const LandingNav = () => {
         <nav className='flex justify-between items-center'>
             <Link href="/" className='flex justify-center items-center gap-2'>
                 <Image src="/images/logo-image.png" width={40} height={40} alt='logo-icon'/>
-                <h1 className='text-4xl max-md:text-2xl'>Appoint</h1>
+                <h1 className='text-2xl max-md:text-2xl'>Appoint</h1>
             </Link>
           <ul className='max-md:hidden block'>
             <li className='flex gap-4 justify-center items-center'>

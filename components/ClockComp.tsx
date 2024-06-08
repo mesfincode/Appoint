@@ -44,7 +44,7 @@ const ClockComp = () => {
     <div>
     
       <div className='flex justify-start items-baseline flex-wrap gap-3'>
-      <Clock value={value} size={250} />
+      <Clock renderNumbers={true} value={value} size={250} />
 
       <div className={` cursor-pointer  ${play?"bg-primary-2 rounded-full p-1":""}`}>
       <Image src="/icons/Speaker_Icon.svg" onClick={handleClick} width={30} height={30} alt='speaker_icon' />
