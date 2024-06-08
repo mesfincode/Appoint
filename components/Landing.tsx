@@ -14,7 +14,7 @@ const Landing = () => {
             <div className='px-8 md:px-16  gap-4 xl:px-32 py-16  flex max-lg:flex-col justify-between max-lg:items-center'>
                 <div className='flex  flex-col gap-6'>
 
-                    <ClockComp />
+                    <ClockComp size={200}  showSpeaker={true}/>
                     <h1 className='text-4xl max-lg:text-2xl text-black-2 text-center  max-w-[300px] max-lg:w-full lg:max-w-[600px] '>Set up your appointments fast</h1>
 
                     <Button className='px-7 bg-primary-2 transition-all duration-500 hover:bg-primary-3  max-w-[300px] w-full ' onClick={() => navigate.push('/sign-up')}>

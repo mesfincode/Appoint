@@ -7,9 +7,56 @@
     @apply flex justify-center items-center
   }
   .left_sidebar {
-    @apply sticky left-0 top-0  flex w-fit flex-col  justify-between     border-r-4 border-primary-2 pt-8 text-white-1 max-md:hidden lg:w-[270px] lg:pl-8;
+    @apply sticky left-0 top-0  flex w-fit flex-col  justify-between     border-r-4 border-primary-2 pt-4 text-white-1 max-md:hidden lg:w-[270px] ;
   }
   .right_sidebar {
-    @apply sticky right-0 top-0 flex w-fit flex-col  justify-between     border-l-4 border-primary-2 pt-8 text-white-1 max-md:hidden lg:w-[270px] lg:pl-8;
+    @apply sticky right-0 top-0 flex w-fit flex-col  gap-4     border-l-4 border-primary-2 pt-4 text-white-1 max-md:hidden lg:w-[270px] lg:pl-8; ;
   }
+}
+
+
+/* ===== custom classes ===== */
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #15171c;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #222429;
+  border-radius: 50px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.glassmorphism-auth {
+  background: rgba(6, 3, 3, 0.711);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.glassmorphism-black {
+  background: rgba(18, 18, 18, 0.64);
+  backdrop-filter: blur(37px);
+  -webkit-backdrop-filter: blur(37px);
 }
