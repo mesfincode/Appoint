@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import { SignedIn, UserButton } from '@clerk/nextjs';
+import { SignedIn, UserButton, useUser } from '@clerk/nextjs';
 import HomeNav from '@/components/home/HomeNav';
 import { companyServiceProviders } from '@/constants';
 import Image from 'next/image';
@@ -13,6 +13,8 @@ import { Profile, profileRepCard } from '@/types';
 const Home = () => {
     const [isOpen,setIsOpen] = useState(false)
     const [profile,setProfile]= useState<Profile | null >(null)
+    const {user} = useUser()
+    console.log(user)
     return (
         <section className='pt-4  flex justify-center items-center flex-col gap-4'>
             <div className=' border-2 mb-4 border-primary-1 px-4 flex justify-between items-center w-[350px] h-[45px] rounded-full'>

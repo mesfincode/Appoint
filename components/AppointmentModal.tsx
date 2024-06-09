@@ -15,13 +15,14 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Profile, profileRepCard } from "@/types"
 import { CopyIcon } from "lucide-react"
+import Image from "next/image"
 
 interface modalProps {
     isOpen: boolean;
     handleClose: () => void;
     profile: Profile | null
 }
-const AppointmentModal = ({ isOpen, handleClose,profile }: modalProps) => {
+const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
     return (
         <Dialog open={isOpen} onOpenChange={handleClose} >
             {/* <DialogTrigger asChild>
@@ -29,24 +30,25 @@ const AppointmentModal = ({ isOpen, handleClose,profile }: modalProps) => {
             </DialogTrigger> */}
             <DialogContent className="sm:max-w-[425px]  z-50">
                 <DialogHeader>
-                    <DialogTitle>{profile?.name}</DialogTitle>
-                    <DialogDescription>
-                        Make changes to your profile here. Click save when you're done.
-                    </DialogDescription>
+                    <div className="flex flex-col justify-center items-center gap-4">
+                        <DialogTitle >Request Appointment</DialogTitle>
+                        <DialogDescription>
+                            Fill the following form and request appointment
+                        </DialogDescription>
+                    </div>
                 </DialogHeader>
-                <div className="grid gap-4 py-4">
-                    <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right">
-                            
-                        </Label>
-                        <Input id="name" value="Pedro Duarte" className="col-span-3" />
+                <div className="flex flex-col justify-center items-center gap-1">
+                    <div className="pb-4 flex flex-col justify-center items-center">
+                        {
+                            profile?.profileUrl && (
+                                <Image src={profile?.profileUrl} width={40} height={40} alt={profile.name} style={{ borderRadius: "100%" }} />
+
+                            )
+                        }
+                        <h1>{profile?.name}</h1>
+                        <h1>{profile?.company}</h1>
                     </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="username" className="text-right">
-                            Username
-                        </Label>
-                        <Input id="username" value="@peduarte" className="col-span-3" />
-                    </div>
+                  
                 </div>
                 <DialogFooter>
                     <Button type="submit">Save changes</Button>
