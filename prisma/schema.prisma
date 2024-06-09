@@ -45,7 +45,12 @@ model User {
   name  String
   email String  @unique
   phone String
-
+  service      String?
+  serviceDscription      String?
+  companyName      String?
+  verified Boolean @default(false)
+  readyForAppointments Boolean @default(false)
+  
   requestedAppointments Appointment[]  @relation("requestedBy")
   requestedForAppointments Appointment[]   @relation("requestedFor")
 }
