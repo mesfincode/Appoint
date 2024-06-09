@@ -22,11 +22,11 @@ export const register = async (values: any)=>{
     return {error: "Email already in use!"};
   }
 
-  await db.user.create({
-    data:{
-        name:username,email,password:hashedPassword
-    }
-  })
+  // await db.user.create({
+  //   data:{
+  //       name:username,email,password:hashedPassword
+  //   }
+  // })
 //   TODO send verification token email
 
 // const verificationToken = await generateVerificationToken(email);

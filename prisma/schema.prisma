@@ -42,6 +42,7 @@ model Appointment {
 
 model User {
   id    String  @id @default(cuid())
+  clerkId String
   name  String
   email String  @unique
   phone String
@@ -50,7 +51,12 @@ model User {
   companyName      String?
   verified Boolean @default(false)
   readyForAppointments Boolean @default(false)
-  
+  profileUrl String
+  profession String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+
   requestedAppointments Appointment[]  @relation("requestedBy")
   requestedForAppointments Appointment[]   @relation("requestedFor")
 }

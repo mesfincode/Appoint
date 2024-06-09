@@ -9,6 +9,7 @@ import { FaSearchengin } from 'react-icons/fa6';
 import { Input } from '@/components/ui/input';
 import AppointmentModal from '@/components/AppointmentModal';
 import { Profile, profileRepCard } from '@/types';
+import ProfileModal from '@/components/ProfileModal';
 
 const Home = () => {
     const [isOpen,setIsOpen] = useState(false)
@@ -35,6 +36,7 @@ const Home = () => {
                 }
             </div>
             <AppointmentModal profile={profile}  handleClose={()=>setIsOpen((prev)=>!prev)} isOpen={isOpen} />
+            <ProfileModal />
         </section>
     )
 }

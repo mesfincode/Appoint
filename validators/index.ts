@@ -1,39 +1,8 @@
-import { UserRole } from "@prisma/client"
+
+import { Phone } from "lucide-react"
 import * as z from "zod"
 
 
-export const SettingSchema = z.object({
-    name: z.optional(z.string()),
-    isTwoFactorEnabled: z.optional(z.boolean()),
-    role: z.enum([UserRole.ADMIN, UserRole.USER]),
-    email:z.optional(z.string().email()),
-    password:z.optional(z.string().min(6)),
-    newPassword:z.optional(z.string().min(6))
-}).refine((data)=>{
-    if(data.password && !data.newPassword){
-        return false;
-    }
-
-    if(data.newPassword && !data.password){
-        return false;
-    }
-    return true;
-},{
-    message: "New password is required !",
-    path: ["newPassword"]
-}).refine((data)=>{
-    if(!data.password && data.newPassword){
-        return false;
-    }
-
-    if(data.newPassword && !data.password){
-        return false;
-    }
-    return true;
-},{
-    message: "password is required !",
-    path: ["password"]
-})
 
 
 export const NewPasswordSchema = z.object({
@@ -83,4 +52,35 @@ const PersonSchema = z.object({
     createdAt: z.date().optional(),
     updatedAt: z.date().optional(),
   });
-  
+
+export const ProfileSchema = z.object({
+    clerkId: z.string().min(5,{
+        message:"clerkId is required"
+    }),
+    name: z.string().min(5,{
+        message:"name is required"
+    }),
+    email: z.string().min(5,{
+        message:"email is required"
+    }),
+    phone: z.string().min(5,{
+        message:"phone is required"
+    }),
+    service: z.string().min(5,{
+        message:"sercice is required"
+    }),
+    serviceDscription:  z.string().min(5,{
+        message:"service description is required"
+    }),
+    companyName:  z.string().min(5,{
+        message:"company name is required"
+    }),
+    verified: z.boolean(),
+    readyForAppointments: z.boolean(),
+    profileUrl:  z.string().min(5,{
+        message:"profile url is required"
+    }),
+    profession:  z.string().min(5,{
+        message:"profession is required"
+    }),
+})
