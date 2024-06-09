@@ -64,3 +64,23 @@ export const RegisterSchema = z.object({
     }),
     password: z.string().min(1,{message:"Password is rquired"})
 })
+
+const PersonSchema = z.object({
+    name: z.string(),
+    email: z.string().email(),
+    phone: z.string(),
+  });
+  
+  const AppointmentSchema = z.object({
+    // id: z.string().optional(),
+    requestedBy: PersonSchema,
+    requestedFor: PersonSchema,
+    appointmentDate: z.date(),
+    appointmentType: z.enum(['virtual', 'in-person']),
+    reason: z.string(),
+    notes: z.string().optional(),
+    status: z.enum(['pending', 'confirmed', 'cancelled','completed']).default('pending'),
+    createdAt: z.date().optional(),
+    updatedAt: z.date().optional(),
+  });
+  
