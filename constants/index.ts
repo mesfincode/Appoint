@@ -10,6 +10,16 @@ export const sidebarLinks = [
     label: "APPOINTMENT",
   },
   {
+    imgURL: "/icons/sned-appointment.svg",
+    route: "/home/requested-appointment",
+    label: "REQUESTED",
+  },
+  {
+    imgURL: "/icons/receved-appointment.svg",
+    route: "/home/received-appointment",
+    label: "RECEIVED",
+  },
+  {
     imgURL: "/icons/watch.svg",
     route: "/home/upcoming",
     label: "UPCOMING",

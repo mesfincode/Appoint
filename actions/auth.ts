@@ -12,16 +12,7 @@ export const register = async ( values: any)=>{
         return {error:"Invalid data"}
     }
 
-    // const {email} = validatedFields.data;
 
-  // const existingUser = await db.user.findUnique({
-  //   where:{
-  //       email
-  //   }
-  // });
-  // if(existingUser){
-  //   return {error: "Email already in use!"};
-  // }
 
   try{
     await db.user.create({
@@ -31,10 +22,7 @@ export const register = async ( values: any)=>{
     console.log(e)
     return {error:"Failed to create profile ! "}
   }
-//   TODO send verification token email
 
-// const verificationToken = await generateVerificationToken(email);
-// await sendVerificationEmail(verificationToken.email,verificationToken.token);
 
     return {success:"Profile created successfully ! "}
 }

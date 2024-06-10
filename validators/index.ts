@@ -40,17 +40,17 @@ const PersonSchema = z.object({
     phone: z.string(),
   });
   
-  const AppointmentSchema = z.object({
+ export const AppointmentSchema = z.object({
     // id: z.string().optional(),
-    requestedBy: PersonSchema,
-    requestedFor: PersonSchema,
+    // requestedBy: PersonSchema,
+    // requestedFor: PersonSchema,
     appointmentDate: z.date(),
-    appointmentType: z.enum(['virtual', 'in-person']),
+    appointmentType: z.enum(['VIRTUAL', 'IN_PERSON']),
     reason: z.string(),
     notes: z.string().optional(),
-    status: z.enum(['pending', 'confirmed', 'cancelled','completed']).default('pending'),
-    createdAt: z.date().optional(),
-    updatedAt: z.date().optional(),
+    // status: z.enum(['PENDING', 'CONFIRMED', 'CANCELED','COMPLETED']).default('PENDING'),
+    // createdAt: z.date().optional(),
+    // updatedAt: z.date().optional(),
   });
 
 export const ProfileSchema = z.object({
