@@ -37,6 +37,7 @@ import { ProfileSchema } from "@/validators"
 import { FormError } from "./FormError"
 import { FormSuccess } from "./FormSuccess"
 import { Switch } from "./ui/switch"
+import { register } from "@/actions/auth"
 
 interface ProfileModalProps {
     isOpen: boolean;
@@ -45,23 +46,25 @@ interface ProfileModalProps {
 }
 const ProfileModal = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { email, id, imageUrl, firstName, lastName } = useCurrentUser()
-    console.log("ProfileModal", email)
+    const { email, clerkId, profileUrl, firstName, lastName } = useCurrentUser()
     useEffect(() => {
+    console.log("user email -------", email)
 
         const getUserfromdb = async () => {
 
-            const user = await getUserByEmail(email || "")
-            // console.log("ProfileModal", user)
+           if(email != null && email.length>0){
+            const user = await getUserByEmail(email)
+            console.log("ProfileModal", user)
             if (user == null) {
                 // setTimeout(()=>setIsOpen(true),3000)
                 setIsOpen(true)
 
             }
+           }
         }
         getUserfromdb();
         //  
-    }, [])
+    }, [email])
 
     const [error, setError] = useState<string | undefined>();
     const [success, setSuccess] = useState<string | undefined>();
@@ -86,15 +89,16 @@ const ProfileModal = () => {
 
     const onSubmit = (values: z.infer<typeof ProfileSchema>) => {
         const name =`${firstName} ${lastName}`
-        const data = {...values,id,name,email,imageUrl}
+        const data = {...values,clerkId,name,email,profileUrl}
         console.log(data)
         setError("");
         setSuccess("");
         startTransition(() => {
-            // register(values).then((data) => {
-            //     setError(data.error)
-            //     setSuccess(data.success)
-            // })
+            register(data).then((data) => {
+                console.log(data)
+                setError(data.error)
+                setSuccess(data.success)
+            })
         })
 
     }
@@ -115,8 +119,8 @@ const ProfileModal = () => {
                 <div className="flex flex-col justify-center items-center gap-1">
                     <div className="pb-4 flex flex-col justify-center items-center">
                         {
-                            imageUrl && (
-                                <Image src={imageUrl} width={40} height={40} alt="profileImage" style={{ borderRadius: "100%" }} />
+                            profileUrl && (
+                                <Image src={profileUrl} width={40} height={40} alt="profileImage" style={{ borderRadius: "100%" }} />
 
                             )
                         }

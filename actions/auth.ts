@@ -1,36 +1,40 @@
 "use server"
 import { db } from "@/lib/db";
-import { RegisterSchema } from "@/validators";
+import { ProfileSchema, RegisterSchema } from "@/validators";
 import bcrypt from "bcryptjs"
+import { error } from "console";
 
-export const register = async (values: any)=>{
+export const register = async ( values: any)=>{
     console.log(values)
-    const validatedFields = RegisterSchema.safeParse(values);
+    const validatedFields = ProfileSchema.safeParse(values);
 
     if(!validatedFields.success){
         return {error:"Invalid data"}
     }
 
-    const {email, password, username} = validatedFields.data;
-    const hashedPassword = await bcrypt.hash(password, 10);
-  const existingUser = await db.user.findUnique({
-    where:{
-        email
-    }
-  });
-  if(existingUser){
-    return {error: "Email already in use!"};
-  }
+    // const {email} = validatedFields.data;
 
-  // await db.user.create({
-  //   data:{
-  //       name:username,email,password:hashedPassword
+  // const existingUser = await db.user.findUnique({
+  //   where:{
+  //       email
   //   }
-  // })
+  // });
+  // if(existingUser){
+  //   return {error: "Email already in use!"};
+  // }
+
+  try{
+    await db.user.create({
+      data: values
+     })
+  }catch(e){
+    console.log(e)
+    return {error:"Failed to create profile ! "}
+  }
 //   TODO send verification token email
 
 // const verificationToken = await generateVerificationToken(email);
 // await sendVerificationEmail(verificationToken.email,verificationToken.token);
 
-    return {success:"Confirmation email sent! "}
+    return {success:"Profile created successfully ! "}
 }
