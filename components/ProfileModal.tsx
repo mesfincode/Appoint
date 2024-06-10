@@ -70,9 +70,9 @@ const ProfileModal = () => {
     const form = useForm<z.infer<typeof ProfileSchema>>({
         resolver: zodResolver(ProfileSchema),
         defaultValues: {
-            clerkId: id,
-            name: `${firstName} ${lastName}`,
-            email: email,
+            // clerkId: id,
+            // name: `${firstName} ${lastName}`,
+            // email: email,
             phone: "",
             service: "",
             serviceDscription: "",
@@ -80,12 +80,14 @@ const ProfileModal = () => {
             verified: false,
             readyForAppointments: false,
             profession: "",
-            profileUrl: imageUrl,
+            // profileUrl: imageUrl,
         }
     })
 
     const onSubmit = (values: z.infer<typeof ProfileSchema>) => {
-        console.log(values)
+        const name =`${firstName} ${lastName}`
+        const data = {...values,id,name,email,imageUrl}
+        console.log(data)
         setError("");
         setSuccess("");
         startTransition(() => {
@@ -260,7 +262,7 @@ const ProfileModal = () => {
 
                                 <DialogFooter>
                                     {/* <Button type="submit">Save changes</Button> */}
-                                    <Button onClick={()=>onSubmit(form.getValues())} variant="outline" className='w-full bg-primary-2 transition-all duration-500 hover:bg-primary-3' >
+                                    <Button type="submit" variant="outline" className='w-full bg-primary-2 transition-all duration-500 hover:bg-primary-3' >
                                         {
                                             isPending ? <>
                                                 <Loader />Loading

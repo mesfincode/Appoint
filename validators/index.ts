@@ -54,15 +54,15 @@ const PersonSchema = z.object({
   });
 
 export const ProfileSchema = z.object({
-    clerkId: z.string().min(5,{
-        message:"clerkId is required"
-    }),
-    name: z.string().min(5,{
-        message:"name is required"
-    }),
-    email: z.string().min(5,{
-        message:"email is required"
-    }),
+    // clerkId: z.string().min(5,{
+    //     message:"clerkId is required"
+    // }),
+    // name: z.string().min(5,{
+    //     message:"name is required"
+    // }),
+    // email: z.string().min(5,{
+    //     message:"email is required"
+    // }),
     phone: z.string().min(5,{
         message:"phone is required"
     }),
@@ -77,9 +77,9 @@ export const ProfileSchema = z.object({
     }),
     verified: z.boolean(),
     readyForAppointments: z.boolean(),
-    profileUrl:  z.string().min(5,{
-        message:"profile url is required"
-    }),
+    // profileUrl:  z.string().min(5,{
+    //     message:"profile url is required"
+    // }),
     profession:  z.string().min(5,{
         message:"profession is required"
     }),
