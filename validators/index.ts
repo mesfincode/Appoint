@@ -46,7 +46,9 @@ const PersonSchema = z.object({
     // requestedFor: PersonSchema,
     appointmentDate: z.date(),
     appointmentType: z.enum(['VIRTUAL', 'IN_PERSON']),
-    reason: z.string(),
+    reason: z.string().min(5,{
+        message:"reason is required"
+    }),
     notes: z.string().optional(),
     // status: z.enum(['PENDING', 'CONFIRMED', 'CANCELED','COMPLETED']).default('PENDING'),
     // createdAt: z.date().optional(),

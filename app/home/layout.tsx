@@ -17,12 +17,9 @@ export default function RootLayout({
                 <section className="
                     flex min-h-screen bg-black-3 flex-1 flex-col 
                     ">
-                    <div className="mx-auto flex  w-full max-w-5xl flex-col  ">
+                    <div className="mx-auto flex  w-full flex-col  ">
                       <HomeMobileNav />
-                        <div className="flex flex-col ">
-                            {/* <Toaster /> */}
-                            {children}
-                        </div>
+                      {children}
                     </div>
                 </section>
 

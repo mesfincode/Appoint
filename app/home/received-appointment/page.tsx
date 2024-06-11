@@ -31,14 +31,14 @@ const ReceivedAppointment = () => {
 
     }
     return (
-        <section className='pt-8 flex flex-col justify-center items-center'>
-            <h1>Requested Appointments</h1>
+        <section className='mx-8 my-8'>
+            <h1 className='text-black-1 text-center font-semibold text-2xl pb-4'>Requested Appointments</h1>
             {
                 appointmentList ?
                     <>
                         {
                             appointmentList.length != 0 ? <>
-                                <h1>{totalRequestedAppointments} Received Appointments</h1>
+                                <h1 className='text-black-2 text-lg font-semibold pb-4 text-center'>{totalRequestedAppointments} Received Appointments</h1>
                                 <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4' >
 
                                     {
@@ -46,7 +46,7 @@ const ReceivedAppointment = () => {
                                             const requestedFor = item.requestedFor;
                                             return (
                                                 <>
-                                                    <AppointmentCArd color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor.profileUrl} name={requestedFor.name} date={item.appointmentDate.toString()} company={requestedFor.companyName} />
+                                                    <AppointmentCArd sidebar={false} color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor.profileUrl} name={requestedFor.name} date={item.appointmentDate.toString()} company={requestedFor.companyName} />
 
                                                 </>
                                             )

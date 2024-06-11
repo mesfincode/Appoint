@@ -14,9 +14,13 @@ services that will be used
 - firebase for realtime functinoality 
 - stream for live chat and video meetings 
 
-- search users using (name ,email or companyName)
++ search users using (name ,email or companyName)
+- add self appointment
 - infinite scorll fetching data 
+- profile picture upload and wallpaper
 - ui 
+- send email when appointment is created
+- create user alert with email when the appointment date is near or close 
 - improve cards and coloring
 - toastify
 - spelling

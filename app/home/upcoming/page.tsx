@@ -15,7 +15,7 @@ const UpcommingAppointments = () => {
     const { clerkId } = useCurrentUser()
     useEffect(() => {
         // setIsMounted(true);
-        if(clerkId ){
+        if (clerkId) {
             getReceivedAppointments()
         }
     }, [clerkId]);
@@ -32,61 +32,65 @@ const UpcommingAppointments = () => {
 
     }
     return (
-        <section className='pt-8 flex flex-col justify-center items-center'>
-            <h1>Requested Appointments</h1>
-            {
-                appointmentList ?
-                    <>
-                        {
-                            appointmentList.length != 0 ? <>
-                                <h1>{totalRequestedAppointments} Received Appointments</h1>
-                                <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4' >
+        <section className='mx-8 my-8'>
+            <div className='flex justify-center items-center gap-2 flex-col'>
+                <h1 className='text-black-1 font-semibold text-2xl pb-4'>🕰️ Upcoming Appointments</h1>
+                <h1 className='text-black-2 text-lg font-semibold pb-4'>You have {totalRequestedAppointments} uppcomming appointments</h1>
 
-                                    {
-                                        appointmentList.map((item, index) => {
-                                            const requestedFor = item.requestedFor;
-                                            return (
-                                                <>
-                                                    <AppointmentCArd color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor.profileUrl} name={requestedFor.name} date={item.appointmentDate.toString()} company={requestedFor.companyName} />
+            </div>
+            <div>
+                {
+                    appointmentList ?
+                        <div className='' >
+                            {
+                                appointmentList.length != 0 ?
+                                    <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 ' >
 
-                                                </>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </> : <>
+                                        {
+                                            appointmentList.map((item, index) => {
+                                                const requestedFor = item.requestedFor;
+                                                return (
+                                                    <>
+                                                        <AppointmentCArd sidebar={false} color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor.profileUrl} name={requestedFor.name} date={item.appointmentDate.toString()} company={requestedFor.companyName} />
 
-                               <h1>No Received Appointments</h1>
-                            </>
-                        }
-                    </> :
-                    <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4' >
-                        <div className="flex flex-col space-y-3">
-                            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                                                    </>
+                                                )
+                                            })
+                                        }
+                                    </div> : <>
 
-                        </div>
-                        <div className="flex flex-col space-y-3">
-                            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                                        <h1>No Received Appointments</h1>
+                                    </>
+                            }
+                        </div> :
+                        < >
+                            <div className="flex flex-col space-y-3">
+                                <Skeleton className="h-[125px] w-[250px] rounded-xl" />
 
-                        </div>
-                        <div className="flex flex-col space-y-3">
-                            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                            </div>
+                            <div className="flex flex-col space-y-3">
+                                <Skeleton className="h-[125px] w-[250px] rounded-xl" />
 
-                        </div>
-                        <div className="flex flex-col space-y-3">
-                            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                            </div>
+                            <div className="flex flex-col space-y-3">
+                                <Skeleton className="h-[125px] w-[250px] rounded-xl" />
 
-                        </div>
-                        <div className="flex flex-col space-y-3">
-                            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                            </div>
+                            <div className="flex flex-col space-y-3">
+                                <Skeleton className="h-[125px] w-[250px] rounded-xl" />
 
-                        </div>
-                        <div className="flex flex-col space-y-3">
-                            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                            </div>
+                            <div className="flex flex-col space-y-3">
+                                <Skeleton className="h-[125px] w-[250px] rounded-xl" />
 
-                        </div>
-                    </div>
-            }
+                            </div>
+                            <div className="flex flex-col space-y-3">
+                                <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+
+                            </div>
+                        </>
+                }
+            </div>
         </section>
     )
 }

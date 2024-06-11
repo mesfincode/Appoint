@@ -45,6 +45,7 @@ import {
 } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
 import { createAppointment } from "@/actions/appointment"
+import { Textarea } from "./ui/textarea"
 interface modalProps {
     isOpen: boolean;
     handleClose: () => void;
@@ -90,9 +91,9 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
             requestedById,
             requestedForId,
             appointmentDate,
-            appointmentType:typeOfAppointment,
+            appointmentType: typeOfAppointment,
             status
-            
+
         }
         console.log(data)
         setError("");
@@ -121,38 +122,23 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                     </div>
                 </DialogHeader>
                 <div className="flex flex-col justify-center items-center w-full gap-1">
-                    <div className="pb-4 flex flex-col justify-center items-center">
+                    <div className="pb-4 flex gap-4 justify-center items-center">
                         {
                             profile?.profileUrl && (
-                                <Image src={profile?.profileUrl} width={40} height={40} alt={profile.name} style={{ borderRadius: "100%" }} />
+                                <Image src={profile?.profileUrl} width={80} height={80} alt={profile.name} style={{ borderRadius: "100%" }} />
 
                             )
                         }
-                        <h1>{profile?.name}</h1>
-                        <h1>{profile?.companyName}</h1>
-                        <h1>{profile?.email}</h1>
+                        <div>
+                            <h1>{profile?.name}</h1>
+                            <h1>{profile?.companyName}</h1>
+                            <h1>{profile?.email}</h1>
+                        </div>
                     </div>
                     <div>
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                            <FormLabel>Select Appointment Type</FormLabel>
 
-                            <Select onValueChange={(value) => setTypeOfAppointment(value)}>
-                                    <SelectTrigger className={cn('text-16 w-full  border-2 border-primary-1  text-gray-1  focus:ring-offset-orange-1')}>
-                                        <SelectValue placeholder="Select Appointment Type" />
-                                    </SelectTrigger>
-                                    <SelectContent className="text-16 z-50 bg-white-1  border-2 border-primary-1  font-bold text-primary-1focus:ring-offset-orange-1">
-                                        {
-                                            appointmentType.map((category) => (
-                                                <SelectItem key={category} value={category} className="capitalize focus:bg-orange-1">
-                                                    {category}
-                                                </SelectItem>
-                                            ))
-                                        }
-
-                                    </SelectContent>
-
-                                </Select>
 
                                 <FormField
                                     control={form.control}
@@ -173,14 +159,16 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                                     render={({ field }) => (<FormItem>
                                         <FormLabel>Notes</FormLabel>
                                         <FormControl>
-                                            <Input type="text" placeholder="Notes" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+                                            {/* <Input type="text" placeholder="Notes" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" /> */}
+                                            <Textarea className="input-class focus-visible:ring-offset-orange-1" placeholder="Write a short discription " {...field} />
 
                                         </FormControl>
                                         <FormMessage className="text-red-400" />
                                     </FormItem>)}
                                 />
-                                  
-                                <div className='flex w-full flex-col gap-2.5'>
+
+                               <div className="flex gap-4">
+                               <div className='flex w-full flex-col gap-2.5 flex-1'>
                                     <label className='text-base text-normal leading-[22px] text-sky-2'>Select Date and Time</label>
                                     <ReactDatePicker selected={dateTime}
                                         onChange={(date) => setDateTime(date!)}
@@ -189,43 +177,44 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                                         timeIntervals={15}
                                         timeCaption="time"
                                         dateFormat="MMMM d, yyyy h:mm aa"
-                                        className="w-full p-2 focus:outline-none"
+                                        className="w-full p-2 focus:outline-none bg-primary-3  border-2 border-primary-1 rounded-xl"
                                     />
                                 </div>
-                                {/* <FormField
-                                        control={form.control}
-                                        name='appointmentType'
-                                        render={({ field }) => (<FormItem>
-                                            <FormLabel>Appointment Type</FormLabel>
-                                            <FormControl>
-                                                <Input type="text" placeholder="Appointment Type" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+                                <div className="flex flex-col  gap-2.5">
+                                <label className='text-base text-normal leading-[22px] text-sky-2'>Select Appointment Type</label>
 
-                                            </FormControl>
-                                            <FormMessage className="text-red-400" />
-                                        </FormItem>)}
-                                    /> */}
-                            
+                                    <Select onValueChange={(value) => setTypeOfAppointment(value)}>
+                                        <SelectTrigger className={cn('text-16 w-full py-2 bg-primary-3 border-2 border-primary-1  text-gray-1  focus:ring-offset-orange-1')}>
+                                            <SelectValue placeholder="Select Appointment Type" />
+                                        </SelectTrigger>
+                                        <SelectContent className="z-50 bg-primary-3  border-2 border-primary-1  font-bold text-primary-1focus:ring-offset-orange-1">
+                                            {
+                                                appointmentType.map((category) => (
+                                                    <SelectItem key={category} value={category} className="capitalize focus:bg-orange-1">
+                                                        {category}
+                                                    </SelectItem>
+                                                ))
+                                            }
 
+                                        </SelectContent>
 
+                                    </Select>
+                                </div>
+                               </div>
 
-                                {/* <div className="">
-                    <Link href="/" className="underline ">
-                            Forgot Password?
-                        </Link>
-                    </div> */}
                                 <FormError message={error} />
                                 <FormSuccess message={success} />
 
 
                                 <DialogFooter>
-                                    <Button type="submit" variant="outline" className='w-full bg-primary-2 transition-all duration-500 hover:bg-primary-3' >
-                                    {
+                                    <Button type="submit" variant="outline" className='w-full bg-primary-1 text-white-1 transition-all duration-500 hover:bg-primary-3 hover:text-black-1' >
+                                        {
                                             isPending ? <>
                                                 <Loader />Loading
                                             </> : <>Send Appointment</>
                                         }
                                     </Button>
-                                  
+
                                 </DialogFooter>
                             </form>
                         </Form>

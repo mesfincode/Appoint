@@ -19,4 +19,5 @@ export interface appointmentCardProp {
     company: string;
     date: string;
     color: string
+    sidebar: boolean
 }
