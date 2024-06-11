@@ -55,7 +55,7 @@ const ReceivedAppointment = () => {
                                 </div>
                             </> : <>
 
-                               <h1>You Don&apos;tHave Received Appointments</h1>
+                               <h1>You Don&apos;t Have Received Appointments</h1>
                             </>
                         }
                     </> :

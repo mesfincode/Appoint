@@ -56,7 +56,7 @@ const UpcommingAppointments = () => {
                                 </div>
                             </> : <>
 
-                               <h1>You Don't Have Received Appointments</h1>
+                               <h1>No Received Appointments</h1>
                             </>
                         }
                     </> :
