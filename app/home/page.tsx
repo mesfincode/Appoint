@@ -41,16 +41,13 @@ const Home = () => {
         console.log(userData)
 
     }
-    console.log(user)
+
     return (
         <section className='pt-4  flex justify-center items-center flex-col gap-4'>
             <div className=' border-2 mb-4 border-primary-1 px-4 flex justify-between items-center w-[350px] h-[45px] rounded-full'>
-
-
                 <h1>search </h1>
                 <FaSearchengin />
             </div>
-            {/* <h1 className='text-center text-2xl py-4'>Company Representatives</h1> */}
             <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4' >
                 {
                     userList.length !==0 ?
@@ -62,51 +59,33 @@ const Home = () => {
                                             setIsOpen((prev) => !prev)
                                             setProfile(item)
                                         }}
-                                        key={index} serviceDescription={item.serviceDscription ?? ""} name={item.name} profileUrl={item.profileUrl} company={item.companyName ?? ""} />
+                                        key={index} email={item.email} serviceDescription={item.serviceDscription ?? ""} name={item.name} profileUrl={item.profileUrl} company={item.companyName ?? ""} />
                                 ))
                             }
                         </> : <> 
                         <div className="flex flex-col space-y-3">
                                 <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-                                {/* <div className="space-y-2">
-                                    <Skeleton className="h-4 w-[250px]" />
-                                    <Skeleton className="h-4 w-[200px]" />
-                                </div> */}
+                                
                             </div>
                             <div className="flex flex-col space-y-3">
                                 <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-                                {/* <div className="space-y-2">
-                                    <Skeleton className="h-4 w-[250px]" />
-                                    <Skeleton className="h-4 w-[200px]" />
-                                </div> */}
+                                
                             </div>
                             <div className="flex flex-col space-y-3">
                                 <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-                                {/* <div className="space-y-2">
-                                    <Skeleton className="h-4 w-[250px]" />
-                                    <Skeleton className="h-4 w-[200px]" />
-                                </div> */}
+                                
                             </div>
                             <div className="flex flex-col space-y-3">
                                 <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-                                {/* <div className="space-y-2">
-                                    <Skeleton className="h-4 w-[250px]" />
-                                    <Skeleton className="h-4 w-[200px]" />
-                                </div> */}
+                                
                             </div>
                             <div className="flex flex-col space-y-3">
                                 <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-                                {/* <div className="space-y-2">
-                                    <Skeleton className="h-4 w-[250px]" />
-                                    <Skeleton className="h-4 w-[200px]" />
-                                </div> */}
+                               
                             </div>
                             <div className="flex flex-col space-y-3">
                                 <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-                                {/* <div className="space-y-2">
-                                    <Skeleton className="h-4 w-[250px]" />
-                                    <Skeleton className="h-4 w-[200px]" />
-                                </div> */}
+                               
                             </div>
                         </>
                 }

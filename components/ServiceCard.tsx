@@ -5,7 +5,7 @@ import React from 'react'
 
 
 
-const ServiceCard = ({ profileUrl, name, company, serviceDescription ,onClick}: profileRepCard) => {
+const ServiceCard = ({ profileUrl, name,email, company, serviceDescription ,onClick}: profileRepCard) => {
 
     return (
         <div className='h-[250px] w-[250px] bg-primary-2 p-4 rounded-lg cursor-pointer' onClick={onClick} >
@@ -13,6 +13,7 @@ const ServiceCard = ({ profileUrl, name, company, serviceDescription ,onClick}: 
                 <Image src={profileUrl} width={40} height={40} alt={name} style={{ borderRadius: "100%" }} />
                 <h1>{name}</h1>
                 <h1>{company}</h1>
+                <h1>{email}</h1>
                 <h1 className='text-center'>{serviceDescription}</h1>
             </div>
 

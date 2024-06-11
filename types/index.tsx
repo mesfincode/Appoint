@@ -8,6 +8,7 @@ export  interface Profile {
 export interface profileRepCard {
     profileUrl: string;
     name: string;
+    email:string;
     company: string;
     serviceDescription: string;
     onClick:()=>void;

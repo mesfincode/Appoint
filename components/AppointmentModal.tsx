@@ -80,8 +80,8 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
     })
     const onSubmit = (values: z.infer<typeof AppointmentSchema>) => {
         // const name =`${firstName} ${lastName}`
-        const requestedById = profile?.id;
-        const requestedForId = clerkId;
+        const requestedById = clerkId;
+        const requestedForId = profile?.id;
         const appointmentDate = dateTime;
         const status = "PENDING"
         console.log(typeOfAppointment)

@@ -5,11 +5,6 @@ export const sidebarLinks = [
     label: "HOME",
   },
   {
-    imgURL: "/icons/clock.svg",
-    route: "/home/appointment",
-    label: "APPOINTMENT",
-  },
-  {
     imgURL: "/icons/sned-appointment.svg",
     route: "/home/requested-appointment",
     label: "REQUESTED",
@@ -18,6 +13,11 @@ export const sidebarLinks = [
     imgURL: "/icons/receved-appointment.svg",
     route: "/home/received-appointment",
     label: "RECEIVED",
+  },
+  {
+    imgURL: "/icons/clock.svg",
+    route: "/home/appointment",
+    label: "APPOINTMENT",
   },
   {
     imgURL: "/icons/watch.svg",
@@ -72,5 +72,5 @@ export const upcomingAppointments = [
     company: "General Moters",
     date: "Jan 5, 3:30"
   },
- 
+
 ]
