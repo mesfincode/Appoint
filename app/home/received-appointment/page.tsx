@@ -1,9 +1,8 @@
 "use client"
-import { getReceivedAppointmentsWithPagenation, getRequestedAppointmentsWithPagenation } from '@/actions/appointment';
+import { getReceivedAppointmentsWithPagenation } from '@/actions/appointment';
 import AppointmentCArd from '@/components/AppointmentCard';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
-import { Appointment } from '@prisma/client';
 import React, { useEffect, useState } from 'react'
 
 const ReceivedAppointment = () => {
@@ -56,7 +55,7 @@ const ReceivedAppointment = () => {
                                 </div>
                             </> : <>
 
-                               <h1>You Don't Have Received Appointments</h1>
+                               <h1>You Don&apos;tHave Received Appointments</h1>
                             </>
                         }
                     </> :

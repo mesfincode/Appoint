@@ -59,7 +59,7 @@ const RequestedAppointment = () => {
                         </div>
                         </>:
                         <>
-                        <h1>You Don't Have Requested Appointments</h1>
+                        <h1>You Don&apos;t Have Requested Appointments</h1>
                         </>
                        }
                     </> :
