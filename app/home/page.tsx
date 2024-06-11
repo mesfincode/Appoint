@@ -10,7 +10,7 @@ import AppointmentModal from '@/components/AppointmentModal';
 import { Profile, profileRepCard } from '@/types';
 import ProfileModal from '@/components/ProfileModal';
 import { User } from '@prisma/client';
-import { getServiceProviderWithPagination } from '@/data/user';
+import { getFilteredUsers, getServiceProviderWithPagination } from '@/data/user';
 import { Loader } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -24,10 +24,18 @@ const Home = () => {
     const [pageSize, setPageSize] = useState(5);
     const [totalPages, setTotalPages] = useState(0);
     const [totalUsers, setTotalUsers] = useState(0)
+    const [searchKeyword, setSearchKeyWord] = useState("")
     useEffect(() => {
         // setIsMounted(true);
         getServiceProviders()
     }, []);
+    useEffect(()=>{
+        if(searchKeyword.length >0){
+            searchUser()
+        }else{
+            getServiceProviders()
+        }
+    },[searchKeyword])
     const getServiceProviders = async () => {
         let pagenationOption = { page: 1, pageSize: pageSize }
         const userData = await getServiceProviderWithPagination(pagenationOption)
@@ -40,12 +48,24 @@ const Home = () => {
         console.log(userData)
 
     }
+    const searchUser = async () => {
+        // let pagenationOption = { page: 1, pageSize: pageSize,searchKeyword }
+        const userData = await getFilteredUsers(searchKeyword, page,pageSize)
+        setUserList(userData.data)
+        setPage(userData.page)
+        setPageSize(userData.pageSize)
+        setTotalPages(userData.totalPages)
+        setTotalUsers(userData.totalUsers)
+
+        console.log(userData)
+
+    }
 
     return (
         <section className='pt-4  flex justify-center items-center flex-col gap-4'>
-            <div className=' border-2 mb-4 border-primary-1 px-4 flex justify-between items-center w-[350px] h-[45px] rounded-full'>
-                <h1>search </h1>
-                <FaSearchengin />
+            <div className='relative '>
+                <Input type='text' onChange={(e)=>setSearchKeyWord(e.target.value)} autoFocus  className='border-primary-1 rounded-full w-[350px] focus-visible:ring-offset-primary-1'/>
+                <FaSearchengin className='absolute right-4 top-3' />
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4' >
                 {

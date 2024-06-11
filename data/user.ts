@@ -36,6 +36,7 @@ interface PaginationResponse {
     totalUsers: number;
     error:String;
   }
+
 export const getServiceProviderWithPagination = async (paginationOptions: PaginationOptions): Promise<PaginationResponse> =>{
     try {
       const { page, pageSize } = paginationOptions;
@@ -45,6 +46,65 @@ export const getServiceProviderWithPagination = async (paginationOptions: Pagina
       const totalPages = Math.ceil(totalUsers / pageSize);
   
       const users = await db.user.findMany({
+        take: pageSize,
+        skip: skip,
+      });
+  
+      return {
+        data: users,
+        page: page,
+        pageSize: pageSize,
+        totalPages: totalPages,
+        totalUsers: totalUsers,
+        error:"",
+      };
+    } catch (error) {
+      console.error('Error fetching employee data:', error);
+      return { 
+        data: [],
+        page: 0,
+        pageSize: 0,
+        totalPages: 0,
+        totalUsers: 0,
+        error: 'Error fetching employee data' };
+    } 
+  };
+
+  export const getFilteredUsers = async ( 
+     searchString: string = '',
+    page: number = 1,
+    pageSize: number = 10): Promise<PaginationResponse> =>{
+    try {
+      // const { page, pageSize } = paginationOptions;
+      const skip = (page - 1) * pageSize;
+  
+      const totalUsers = await db.user.count({
+        where: {
+          OR: [
+            { name: { contains: searchString, mode: 'insensitive' } },
+            // { lastName: { contains: searchString, mode: 'insensitive' } },
+            { email: { contains: searchString, mode: 'insensitive' } },
+  
+            { phone: { contains: searchString, mode: 'insensitive' } },
+  
+            // Add more fields as needed
+          ],
+        },
+      });
+      const totalPages = Math.ceil(totalUsers / pageSize);
+  
+      const users = await db.user.findMany({
+        where: {
+          OR: [
+            { name: { contains: searchString, mode: 'insensitive' } },
+            // { lastName: { contains: searchString, mode: 'insensitive' } },
+            { email: { contains: searchString, mode: 'insensitive' } },
+  
+            { phone: { contains: searchString, mode: 'insensitive' } },
+  
+            // Add more fields as needed
+          ],
+        },
         take: pageSize,
         skip: skip,
       });
