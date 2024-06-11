@@ -13,3 +13,13 @@ services that will be used
 - clerk for authentication
 - firebase for realtime functinoality 
 - stream for live chat and video meetings 
+
+- search users using (name ,email or companyName)
+- infinite scorll fetching data 
+- ui 
+- improve cards and coloring
+- toastify
+- spelling
+- notification and badges realtime with firebase
+- chat featcher
+- virtual appointment with video

@@ -7,7 +7,7 @@ import { Appointment } from '@prisma/client';
 import React, { useEffect, useState } from 'react'
 
 const RequestedAppointment = () => {
-    const [appointmentList, setAppointmentList] = useState<any[]>([]);
+    const [appointmentList, setAppointmentList] = useState<any[] | null>(null);
     const [page, setPage] = useState(0);
     const [pageSize, setPageSize] = useState(5);
     const [totalPages, setTotalPages] = useState(0);
@@ -15,7 +15,10 @@ const RequestedAppointment = () => {
     const { clerkId } = useCurrentUser()
     useEffect(() => {
         // setIsMounted(true);
-        getRequestedAppointments()
+        if(clerkId ){
+            getRequestedAppointments()
+        }
+       
     }, [clerkId]);
     const getRequestedAppointments = async () => {
         let pagenationOption = { page: 1, pageSize: pageSize, clerkId }
@@ -33,8 +36,12 @@ const RequestedAppointment = () => {
         <section className='pt-8 flex flex-col justify-center items-center'>
             <h1>Requested Appointments</h1>
             {
-                appointmentList.length != 0 ?
+                appointmentList  ?
                     <>
+                       {
+                        appointmentList.length >0? 
+                        <>
+                        
                         <h1>{totalRequestedAppointments} Requested Appointments</h1>
                         <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4' >
 
@@ -50,6 +57,11 @@ const RequestedAppointment = () => {
                                 })
                             }
                         </div>
+                        </>:
+                        <>
+                        <h1>You Don't Have Requested Appointments</h1>
+                        </>
+                       }
                     </> :
                     <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4' >
                         <div className="flex flex-col space-y-3">

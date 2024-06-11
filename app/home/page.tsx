@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import { SignedIn, UserButton, useUser } from '@clerk/nextjs';
-import HomeNav from '@/components/home/HomeNav';
 import { companyServiceProviders } from '@/constants';
 import Image from 'next/image';
 import ServiceCard from '@/components/ServiceCard';
