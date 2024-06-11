@@ -86,7 +86,8 @@ export const getServiceProviderWithPagination = async (paginationOptions: Pagina
             { email: { contains: searchString, mode: 'insensitive' } },
   
             { phone: { contains: searchString, mode: 'insensitive' } },
-  
+            { companyName: { contains: searchString, mode: 'insensitive' } },
+
             // Add more fields as needed
           ],
         },
@@ -101,7 +102,8 @@ export const getServiceProviderWithPagination = async (paginationOptions: Pagina
             { email: { contains: searchString, mode: 'insensitive' } },
   
             { phone: { contains: searchString, mode: 'insensitive' } },
-  
+            { companyName: { contains: searchString, mode: 'insensitive' } },
+
             // Add more fields as needed
           ],
         },

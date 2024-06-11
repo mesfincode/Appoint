@@ -64,7 +64,7 @@ const Home = () => {
     return (
         <section className='pt-4  flex justify-center items-center flex-col gap-4'>
             <div className='relative '>
-                <Input type='text' onChange={(e)=>setSearchKeyWord(e.target.value)} autoFocus  className='border-primary-1 rounded-full w-[350px] focus-visible:ring-offset-primary-1'/>
+                <Input type='text' onChange={(e)=>setSearchKeyWord(e.target.value)} placeholder='Search with name, email,phone company'  className='border-primary-1 rounded-full w-[350px] focus-visible:ring-offset-primary-1'/>
                 <FaSearchengin className='absolute right-4 top-3' />
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4' >
