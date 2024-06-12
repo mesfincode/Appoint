@@ -1,7 +1,8 @@
 "use server"
 
-import { getUserByClerkId } from "@/data/user";
+import { getUserByClerkId, getUserById } from "@/data/user";
 import { db } from "@/lib/db";
+import { sendAppointmentEmail } from "@/lib/mail";
 import { AppointmentSchema } from "@/validators";
 import { Appointment } from "@prisma/client";
 
@@ -16,15 +17,20 @@ export const createAppointment = async (values: any) => {
     // const {email} = validatedFields.data;
 
     const existingUser = await getUserByClerkId(values.requestedById)
-    if (!existingUser) {
+    const receiver = await getUserById(values.requestedForId)
+
+    if (!existingUser || !receiver) {
         return { error: "userDoesnn't exist!" };
     }
     values.requestedById = existingUser.id;
 
     try {
-        await db.appointment.create({
+      const apponitment=  await db.appointment.create({
             data: values
         })
+        console.log(receiver.email)
+        await sendAppointmentEmail(receiver.email,apponitment.id,receiver.name);
+
     } catch (e) {
         console.log(e)
         return { error: "Failed to create profile ! " }
@@ -32,9 +38,8 @@ export const createAppointment = async (values: any) => {
     //   TODO send verification token email
 
     // const verificationToken = await generateVerificationToken(email);
-    // await sendVerificationEmail(verificationToken.email,verificationToken.token);
 
-    return { success: "Profile created successfully ! " }
+    return { success: "Appointment send successfully ! " }
 }
 
 interface PaginationOptions {

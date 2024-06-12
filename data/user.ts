@@ -24,6 +24,16 @@ export const getUserByClerkId = async (clerkId:string)=>{
    return null;  
   }
 }
+export const getUserById = async (id:string)=>{
+  try{
+      const user = await db.user.findUnique({where:{id}});
+      
+      return user;
+
+  }catch{
+      return null;
+  }
+}
 interface PaginationOptions {
     page: number;
     pageSize: number;
@@ -130,13 +140,3 @@ export const getServiceProviderWithPagination = async (paginationOptions: Pagina
         error: 'Error fetching employee data' };
     } 
   };
-export const getUserById = async (id:string)=>{
-    try{
-        const user = await db.user.findUnique({where:{id}});
-        
-        return user;
-
-    }catch{
-        return null;
-    }
-}

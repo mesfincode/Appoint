@@ -46,6 +46,8 @@ import {
 import { cn } from "@/lib/utils"
 import { createAppointment } from "@/actions/appointment"
 import { Textarea } from "./ui/textarea"
+import { useToast } from "./ui/use-toast"
+
 interface modalProps {
     isOpen: boolean;
     handleClose: () => void;
@@ -56,6 +58,8 @@ const appointmentType = [
 ]
 
 const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
+    const { toast } = useToast()
+
     const { email, clerkId, profileUrl, firstName, lastName } = useCurrentUser()
     const [error, setError] = useState<string | undefined>();
     const [success, setSuccess] = useState<string | undefined>();
@@ -103,6 +107,12 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                 console.log(data)
                 setError(data.error)
                 setSuccess(data.success)
+                if(data.success){
+                    toast({
+                        title: "Meeting created and sent",
+                       
+                      })
+                }
             })
         })
 
@@ -167,7 +177,7 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                                     </FormItem>)}
                                 />
 
-                               <div className="flex gap-4">
+                               <div className="flex gap-4 max-sm:flex-col-reverse">
                                <div className='flex w-full flex-col gap-2.5 flex-1'>
                                     <label className='text-base text-normal leading-[22px] text-sky-2'>Select Date and Time</label>
                                     <ReactDatePicker selected={dateTime}
@@ -187,7 +197,7 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                                         <SelectTrigger className={cn('text-16 w-full py-2 bg-primary-3 border-2 border-primary-1  text-gray-1  focus:ring-offset-orange-1')}>
                                             <SelectValue placeholder="Select Appointment Type" />
                                         </SelectTrigger>
-                                        <SelectContent className="z-50 bg-primary-3  border-2 border-primary-1  font-bold text-primary-1focus:ring-offset-orange-1">
+                                        <SelectContent className=" z-[200] bg-primary-3  border-2 border-primary-1  font-bold text-primary-1focus:ring-offset-orange-1">
                                             {
                                                 appointmentType.map((category) => (
                                                     <SelectItem key={category} value={category} className="capitalize focus:bg-orange-1">

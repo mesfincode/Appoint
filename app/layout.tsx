@@ -13,6 +13,8 @@ import {
   ClerkProvider,
 
 } from '@clerk/nextjs'
+import { Toaster } from "@/components/ui/toaster"
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -38,7 +40,11 @@ export default function RootLayout({
           }
         }
       } >
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          {children}
+          <Toaster />
+
+          </body>
 
       </ClerkProvider>
     </html>
