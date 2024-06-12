@@ -29,7 +29,7 @@ export const createAppointment = async (values: any) => {
             data: values
         })
         console.log(receiver.email)
-        await sendAppointmentEmail(receiver.email,apponitment.id,receiver.name);
+        await sendAppointmentEmail(receiver.email,apponitment.id, existingUser.name,receiver.name);
 
     } catch (e) {
         console.log(e)
