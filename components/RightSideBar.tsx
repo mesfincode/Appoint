@@ -12,7 +12,7 @@ const RightSideBar = () => {
     const {user} = useUser()
     const [appointmentList, setAppointmentList] = useState<any[] | null>(null);
     const [page, setPage] = useState(0);
-    const [pageSize, setPageSize] = useState(5);
+    const [pageSize, setPageSize] = useState(2);
     const [totalPages, setTotalPages] = useState(0);
     const [totalRequestedAppointments, setTotalRequestedAppointments] = useState(0)
     const { clerkId } = useCurrentUser()
