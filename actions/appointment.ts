@@ -250,3 +250,79 @@ export const upcommingAppointments = async (paginationOptions: PaginationOptions
         };
     }
 };
+
+export const pastAppointments = async (paginationOptions: PaginationOptions): Promise<PaginationResponse> => {
+    try {
+
+        const { page, pageSize, clerkId } = paginationOptions;
+        const skip = (page - 1) * pageSize;
+
+        const existingUser = await getUserByClerkId(clerkId ?? "")
+        if (!existingUser) {
+            return {
+                data: [],
+                page: 0,
+                pageSize: 0,
+                totalPages: 0,
+                totalRequestedAppointments: 0,
+                error: 'Error fetching employee data'
+            };
+        }
+
+        const requestedForId = existingUser.id
+        const requestedById = existingUser.id
+
+        console.log(requestedForId)
+        const today = new Date();
+
+        const totalUsers = await db.appointment.count({
+            where: {
+                OR: [
+                    { requestedForId },
+                    { requestedById }
+                ],
+                appointmentDate: {
+                    lt: today,
+                },
+            }
+        });
+        const totalPages = Math.ceil(totalUsers / pageSize);
+
+        const users = await db.appointment.findMany({
+            where: {
+                OR: [
+                    { requestedForId },
+                    { requestedById }
+                ],
+                appointmentDate: {
+                    lt: today,
+                },
+            },
+            take: pageSize,
+            skip: skip,
+            include: {
+                requestedFor: true
+            }
+        });
+        console.log(users)
+
+        return {
+            data: users,
+            page: page,
+            pageSize: pageSize,
+            totalPages: totalPages,
+            totalRequestedAppointments: totalUsers,
+            error: "",
+        };
+    } catch (error) {
+        console.error('Error fetching employee data:', error);
+        return {
+            data: [],
+            page: 0,
+            pageSize: 0,
+            totalPages: 0,
+            totalRequestedAppointments: 0,
+            error: 'Error fetching employee data'
+        };
+    }
+};

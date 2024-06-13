@@ -1,34 +1,61 @@
 "use client"
 import { getReceivedAppointmentsWithPagenation } from '@/actions/appointment';
 import AppointmentCArd from '@/components/AppointmentCard';
+import { DataTablePagination } from '@/components/PaginationComp';
+import SkeletenComp from '@/components/SkeletenComp';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
-import React, { useEffect, useState } from 'react'
+import React, { startTransition, useEffect, useState, useTransition } from 'react'
 
 const ReceivedAppointment = () => {
     const [appointmentList, setAppointmentList] = useState<any[] | null>(null);
     const [page, setPage] = useState(0);
-    const [pageSize, setPageSize] = useState(5);
+    const [pageSize, setPageSize] = useState(6);
     const [totalPages, setTotalPages] = useState(0);
     const [totalRequestedAppointments, setTotalRequestedAppointments] = useState(0)
     const { clerkId } = useCurrentUser()
+    const [isPending, startTransition] = useTransition()
     useEffect(() => {
         // setIsMounted(true);
-        if(clerkId ){
+        if (clerkId) {
             getReceivedAppointments()
         }
     }, [clerkId]);
     const getReceivedAppointments = async () => {
         let pagenationOption = { page: 1, pageSize: pageSize, clerkId }
-        const appoinmentDta = await getReceivedAppointmentsWithPagenation(pagenationOption)
-        setAppointmentList(appoinmentDta.data)
-        setPage(appoinmentDta.page)
-        setPageSize(appoinmentDta.pageSize)
-        setTotalPages(appoinmentDta.totalPages)
-        setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
+        startTransition(() => {
+            getReceivedAppointmentsWithPagenation(pagenationOption).then((appoinmentDta) => {
+                setAppointmentList(appoinmentDta.data)
+                setPage(appoinmentDta.page)
+                setPageSize(appoinmentDta.pageSize)
+                setTotalPages(appoinmentDta.totalPages)
+                setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
 
-        console.log("Appointment Data", appoinmentDta)
+                console.log("Appointment Data", appoinmentDta)
+            })
+        })
 
+
+    }
+
+    const fetchNext = async () => {
+        let pagenationOption = { page: 1, pageSize: pageSize, clerkId }
+        startTransition(() => {
+            getReceivedAppointmentsWithPagenation(pagenationOption).then((appoinmentDta) => {
+                setAppointmentList(appoinmentDta.data)
+                setPage(appoinmentDta.page)
+                setPageSize(appoinmentDta.pageSize)
+                setTotalPages(appoinmentDta.totalPages)
+                setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
+
+                console.log("Appointment Data", appoinmentDta)
+            })
+        })
+
+
+    }
+    const updatePageSize = (pageSize: number) => {
+        setPageSize(pageSize);
     }
     return (
         <section className='mx-8 my-8'>
@@ -53,38 +80,16 @@ const ReceivedAppointment = () => {
                                         })
                                     }
                                 </div>
+                                <DataTablePagination fetchNext={fetchNext} updatePageSize={updatePageSize} page={page} pageSize={pageSize} totalPages={totalPages} />
+
                             </> : <>
 
-                               <h1>You Don&apos;t Have Received Appointments</h1>
+                                <h1>You Don&apos;t Have Received Appointments</h1>
                             </>
                         }
                     </> :
-                    <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4' >
-                        <div className="flex flex-col space-y-3">
-                            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                    <SkeletenComp length={5} />
 
-                        </div>
-                        <div className="flex flex-col space-y-3">
-                            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-
-                        </div>
-                        <div className="flex flex-col space-y-3">
-                            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-
-                        </div>
-                        <div className="flex flex-col space-y-3">
-                            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-
-                        </div>
-                        <div className="flex flex-col space-y-3">
-                            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-
-                        </div>
-                        <div className="flex flex-col space-y-3">
-                            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-
-                        </div>
-                    </div>
             }
         </section>
     )

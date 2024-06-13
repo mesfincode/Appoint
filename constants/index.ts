@@ -23,8 +23,8 @@ export const sidebarLinks = [
   
   {
     imgURL: "/icons/previous.svg",
-    route: "/home/previous",
-    label: "Previous",
+    route: "/home/past",
+    label: "Past",
   },
   {
     imgURL: "/icons/user.svg",

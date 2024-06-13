@@ -14,16 +14,19 @@ services that will be used
 - firebase for realtime functinoality 
 - stream for live chat and video meetings 
 
+- accept and reject
+- email alert with background schedule task,  create user alert with email when the appointment date is near or close , notifiy both the sender and the receiver
+- show appointment detail
 + search users using (name ,email or companyName)
 - add self appointment
 - infinite scorll fetching data 
 - profile picture upload and wallpaper
 - ui 
-- send email when appointment is created
-- create user alert with email when the appointment date is near or close 
++ send email when appointment is created
+
 - improve cards and coloring
 - toastify
 - spelling
 - notification and badges realtime with firebase
 - chat featcher
-- virtual appointment with video
+- virtual appointment with video call

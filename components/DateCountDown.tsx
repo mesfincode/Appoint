@@ -28,7 +28,7 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
 
   if (!timeRemaining) {
     return (
-      <div className=" font-bold">Completed !</div>
+      <div className=" font-bold"></div>
     );
   }
 
@@ -40,35 +40,45 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
   return (
     <div className="flex justify-center ">
       <div className="flex flex-col items-center p-1">
-        <span className=" text-black-1 rounded-md">
-          {days}
-        </span>
+        <div className='flex justify-center items-center'>
+        <TimeComp num={days} />
+
+        <p>:</p>
+        </div>
         <span className="mt-2 text-black-1">D</span>
       </div>
+     
       <div className="flex flex-col items-center p-1 ">
-        <span className=" text-black-1 rounded-md">
-          {hours}
-        </span>
+      <div className='flex justify-center items-center'>
+        <TimeComp num={hours} />
+
+        <p>:</p>
+        </div>
         <span className="mt-2 text-black-1">H</span>
       </div>
       <div className="flex flex-col items-centerp-1 p-1">
-        <span className="text-black-1 rounded-md">
-          {minutes}
-        </span>
+      <div className='flex justify-center items-center'>
+        <TimeComp num={minutes} />
+
+        <p>:</p>
+        </div>
         <span className="mt-2 text-black-1">M</span>
       </div>
       <div className="flex flex-col items-center p-1">
-        <span
-          className={`text-black-1 rounded-md countdown-seconds ${
-            seconds % 2 === 0 ? 'bg-green-500' : 'bg-red-500'
-          }`}
-        >
-          {seconds}
-        </span>
+        <SecondComp num={seconds} />
         <span className="mt-2 text-black-1">S</span>
       </div>
     </div>
   );
 };
-
+const TimeComp = ({ num }: { num: number }) => {
+  return <div className=" text-black-1 rounded-md border-2 border-gray-200 px-2 py-1">
+    <h1 className='font-bold'>{num}</h1>
+  </div>
+}
+const SecondComp = ({ num }: { num: number }) => {
+  return <div className={`text-black-1 rounded-md border-2 border-gray-200 px-2 py-1  `}>
+    <h1 className={`rounded-md font-bold countdown-seconds text-black-1`}>{num}</h1>
+  </div>
+}
 export default Countdown;

@@ -1,5 +1,5 @@
 "use client"
-import { getReceivedAppointmentsWithPagenation, getRequestedAppointmentsWithPagenation, upcommingAppointments } from '@/actions/appointment';
+import { getReceivedAppointmentsWithPagenation, getRequestedAppointmentsWithPagenation, pastAppointments, upcommingAppointments } from '@/actions/appointment';
 import AppointmentCArd from '@/components/AppointmentCard';
 import { DataTablePagination } from '@/components/PaginationComp';
 import SkeletenComp from '@/components/SkeletenComp';
@@ -33,7 +33,7 @@ const UpcommingAppointments = () => {
         console.log(pagenationOption)
         startTransition(() => {
 
-            upcommingAppointments(pagenationOption).then((appoinmentDta) => {
+            pastAppointments(pagenationOption).then((appoinmentDta) => {
                 console.log(appoinmentDta)
                 handleAddAppointment(appoinmentDta.data);
                 setPage(appoinmentDta.page )
@@ -54,7 +54,7 @@ const UpcommingAppointments = () => {
         console.log(pagenationOption)
         startTransition(() => {
 
-            upcommingAppointments(pagenationOption).then((appoinmentDta) => {
+            pastAppointments(pagenationOption).then((appoinmentDta) => {
                 console.log(appoinmentDta)
                 setAppointmentList(appoinmentDta.data)
                 setPage(appoinmentDta.page )
