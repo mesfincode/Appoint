@@ -37,6 +37,7 @@ import { User } from '@prisma/client'
 import { Switch } from './ui/switch'
 import { FormError } from './FormError'
 import { FormSuccess } from './FormSuccess'
+import { Textarea } from './ui/textarea'
 interface  ProfileViewProps{
     email:string
     phone:string;
@@ -155,9 +156,10 @@ const ViewProfile = ({phone,email,service,serviceDscription,companyName,verified
                                                 control={form.control}
                                                 name='serviceDscription'
                                                 render={({ field }) => (<FormItem>
-                                                    <FormLabel>serviceDscription</FormLabel>
+                                                    <FormLabel>Service Descreption</FormLabel>
                                                     <FormControl>
-                                                        <Input type="text" placeholder="Service Description" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+                                                        {/* <Input type="text" placeholder="Service Description" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" /> */}
+                                                        <Textarea  className="input-class focus-visible:ring-offset-orange-1" placeholder="Write a short discription " {...field} />
 
                                                     </FormControl>
                                                     <FormMessage className="text-red-400" />

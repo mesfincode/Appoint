@@ -38,6 +38,7 @@ import { FormError } from "./FormError"
 import { FormSuccess } from "./FormSuccess"
 import { Switch } from "./ui/switch"
 import { register } from "@/actions/auth"
+import { Textarea } from "./ui/textarea"
 
 interface ProfileModalProps {
     isOpen: boolean;
@@ -194,9 +195,10 @@ const ProfileModal = () => {
                                                 control={form.control}
                                                 name='serviceDscription'
                                                 render={({ field }) => (<FormItem>
-                                                    <FormLabel>serviceDscription</FormLabel>
+                                                    <FormLabel>Service Description</FormLabel>
                                                     <FormControl>
-                                                        <Input type="text" placeholder="Service Description" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+                                                        {/* <Input type="text" placeholder="Service Description" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" /> */}
+                                                        <Textarea  className="input-class focus-visible:ring-offset-orange-1" placeholder="Write a short discription " {...field} />
 
                                                     </FormControl>
                                                     <FormMessage className="text-red-400" />

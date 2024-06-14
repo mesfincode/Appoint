@@ -20,7 +20,7 @@ const ServiceCard = ({ profileUrl,email, company, serviceDescription ,firstName,
                 <h1 className=' font-semibold text-black-1'>{company.length > 20 ? `${company.slice(0, 20)}...` : company}</h1>
                 <h1 className='text-black-2'>{email}</h1>
                 {/* <h1 className='text-center pt-2'>{serviceDescription.slice(0, 100)}</h1> */}
-                <h1 className='text-center pt-1 px-2'>{serviceDescription.length > 30 ? `${serviceDescription.slice(0, 30)}...` : serviceDescription}</h1>
+                <h1 className='text-center pt-1 px-2 max-w-[250px] overflow-wrap-break-word'>{serviceDescription.length > 30 ? `${serviceDescription.slice(0, 30)}...` : serviceDescription}</h1>
             </div>
 
         </div>

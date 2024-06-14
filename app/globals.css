@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+.overflow-wrap-normal {
+  overflow-wrap: normal;
+}
+
+.overflow-wrap-break-word {
+  overflow-wrap: break-word;
+}
+
+.overflow-wrap-anywhere {
+  overflow-wrap: anywhere;
+}
 @layer utilities {
   .place-center{
     @apply flex justify-center items-center

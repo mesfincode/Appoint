@@ -20,11 +20,12 @@ import {
     receiverName:string;
     appointmentId:string;
     appointmentLink:string;
+    appointment:any
 
   }
   
 const Email = ({
-    senderName,receiverName,appointmentId,appointmentLink
+    senderName,receiverName,appointmentId,appointmentLink,appointment
   }: EmailTemplateProps) => {
     const baseUrl = process.env.BASE_URL
   ? `https://${process.env.BASE_URL}`
@@ -47,6 +48,14 @@ const Email = ({
             <Text style={paragraph}>Hi {receiverName},</Text>
             <Text style={paragraph}>
              {senderName} has sent you a new Appointment
+            </Text>
+          
+            <Text style={paragraph}>
+             Reason: {appointment.reason} 
+            </Text>
+           
+            <Text style={paragraph}>
+             Description: {appointment.notes} 
             </Text>
             <Section style={btnContainer}>
               <Button style={button} href={appointmentLink}>
@@ -90,6 +99,13 @@ const Email = ({
             <Text style={paragraph}>
              {appointment.requestedFor.name} has Confirmed the appointment request
             </Text>
+            <Text style={paragraph}>
+             Reason: {appointment.reason} 
+            </Text>
+           
+            <Text style={paragraph}>
+             Description: {appointment.notes} 
+            </Text>
             <Section style={btnContainer}>
               <Button style={button} href={`${baseUrl}/requested-appointment/${appointment.id}`}>
                 See appointment
@@ -111,9 +127,9 @@ const Email = ({
   };
 
   export const html = ({
-    senderName,receiverName,appointmentId,appointmentLink
+    senderName,receiverName,appointmentId,appointmentLink,appointment
   }: EmailTemplateProps)=>{
-    return render(<Email senderName={senderName} receiverName={receiverName} appointmentId={appointmentId} appointmentLink={appointmentLink}/>,{pretty:true})
+    return render(<Email appointment={appointment} senderName={senderName} receiverName={receiverName} appointmentId={appointmentId} appointmentLink={appointmentLink}/>,{pretty:true})
   }
 
   export const appointmentConfirmEmailString = (appointment:any)=>{

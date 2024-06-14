@@ -65,22 +65,22 @@ export const ProfileSchema = z.object({
     // email: z.string().min(5,{
     //     message:"email is required"
     // }),
-    firstName: z.string().min(5,{
+    firstName: z.string().min(3,{
         message:"first name is required"
     }),
-    lastName: z.string().min(5,{
+    lastName: z.string().min(3,{
         message:"last name is required"
     }),
-    phone: z.string().min(5,{
+    phone: z.string().min(3,{
         message:"phone is required"
     }),
-    service: z.string().min(5,{
+    service: z.string().min(3,{
         message:"sercice is required"
     }),
-    serviceDscription:  z.string().min(5,{
+    serviceDscription:  z.string().min(3,{
         message:"service description is required"
     }),
-    companyName:  z.string().min(5,{
+    companyName:  z.string().min(3,{
         message:"company name is required"
     }),
     verified: z.boolean(),
@@ -88,7 +88,7 @@ export const ProfileSchema = z.object({
     // profileUrl:  z.string().min(5,{
     //     message:"profile url is required"
     // }),
-    profession:  z.string().min(5,{
+    profession:  z.string().min(3,{
         message:"profession is required"
     }),
 })

@@ -30,15 +30,13 @@ export const createAppointment = async (values: any) => {
             data: values
         })
         console.log(receiver.email)
-        await sendAppointmentEmail(receiver.email,apponitment.id, existingUser.name,receiver.name);
+        await sendAppointmentEmail(receiver.email,apponitment.id, existingUser.name,receiver.name,apponitment);
 
     } catch (e) {
         console.log(e)
         return { error: "Failed to create profile ! " }
     }
-    //   TODO send verification token email
 
-    // const verificationToken = await generateVerificationToken(email);
 
     return { success: "Appointment send successfully ! " }
 }

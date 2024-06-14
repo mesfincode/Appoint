@@ -107,11 +107,11 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                 console.log(data)
                 setError(data.error)
                 setSuccess(data.success)
-                if(data.success){
+                if (data.success) {
                     toast({
                         title: "Meeting created and sent",
-                       
-                      })
+
+                    })
                 }
             })
         })
@@ -143,7 +143,13 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                             <h1>{profile?.name}</h1>
                             <h1>{profile?.companyName}</h1>
                             <h1>{profile?.email}</h1>
+
                         </div>
+
+                    </div>
+                    <div className="max-w-[300px]">
+                        <h1 className="overflow-wrap-break-word">{profile?.serviceDscription}</h1>
+
                     </div>
                     <div>
                         <Form {...form}>
@@ -177,40 +183,40 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                                     </FormItem>)}
                                 />
 
-                               <div className="flex gap-4 max-sm:flex-col-reverse">
-                               <div className='flex w-full flex-col gap-2.5 flex-1'>
-                                    <label className='text-base text-normal leading-[22px] text-sky-2'>Select Date and Time</label>
-                                    <ReactDatePicker selected={dateTime}
-                                        onChange={(date) => setDateTime(date!)}
-                                        showTimeSelect
-                                        timeFormat="HH:mm"
-                                        timeIntervals={15}
-                                        timeCaption="time"
-                                        dateFormat="MMMM d, yyyy h:mm aa"
-                                        className="w-full p-2 focus:outline-none bg-primary-3  border-2 border-primary-1 rounded-xl"
-                                    />
+                                <div className="flex gap-4 max-sm:flex-col-reverse">
+                                    <div className='flex w-full flex-col gap-2.5 flex-1'>
+                                        <label className='text-base text-normal leading-[22px] text-sky-2'>Select Date and Time</label>
+                                        <ReactDatePicker selected={dateTime}
+                                            onChange={(date) => setDateTime(date!)}
+                                            showTimeSelect
+                                            timeFormat="HH:mm"
+                                            timeIntervals={15}
+                                            timeCaption="time"
+                                            dateFormat="MMMM d, yyyy h:mm aa"
+                                            className="w-full p-2 focus:outline-none bg-primary-3  border-2 border-primary-1 rounded-xl"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col  gap-2.5">
+                                        <label className='text-base text-normal leading-[22px] text-sky-2'>Select Appointment Type</label>
+
+                                        <Select onValueChange={(value) => setTypeOfAppointment(value)}>
+                                            <SelectTrigger className={cn('text-16 w-full py-2 bg-primary-3 border-2 border-primary-1  text-gray-1  focus:ring-offset-orange-1')}>
+                                                <SelectValue placeholder="Select Appointment Type" />
+                                            </SelectTrigger>
+                                            <SelectContent className=" z-[200] bg-primary-3  border-2 border-primary-1  font-bold text-primary-1focus:ring-offset-orange-1">
+                                                {
+                                                    appointmentType.map((category) => (
+                                                        <SelectItem key={category} value={category} className="capitalize focus:bg-orange-1">
+                                                            {category}
+                                                        </SelectItem>
+                                                    ))
+                                                }
+
+                                            </SelectContent>
+
+                                        </Select>
+                                    </div>
                                 </div>
-                                <div className="flex flex-col  gap-2.5">
-                                <label className='text-base text-normal leading-[22px] text-sky-2'>Select Appointment Type</label>
-
-                                    <Select onValueChange={(value) => setTypeOfAppointment(value)}>
-                                        <SelectTrigger className={cn('text-16 w-full py-2 bg-primary-3 border-2 border-primary-1  text-gray-1  focus:ring-offset-orange-1')}>
-                                            <SelectValue placeholder="Select Appointment Type" />
-                                        </SelectTrigger>
-                                        <SelectContent className=" z-[200] bg-primary-3  border-2 border-primary-1  font-bold text-primary-1focus:ring-offset-orange-1">
-                                            {
-                                                appointmentType.map((category) => (
-                                                    <SelectItem key={category} value={category} className="capitalize focus:bg-orange-1">
-                                                        {category}
-                                                    </SelectItem>
-                                                ))
-                                            }
-
-                                        </SelectContent>
-
-                                    </Select>
-                                </div>
-                               </div>
 
                                 <FormError message={error} />
                                 <FormSuccess message={success} />
