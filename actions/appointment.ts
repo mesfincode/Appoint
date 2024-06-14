@@ -2,9 +2,10 @@
 
 import { getUserByClerkId, getUserById } from "@/data/user";
 import { db } from "@/lib/db";
-import { sendAppointmentEmail } from "@/lib/mail";
+import { sendAppointmentConfirmedEmail, sendAppointmentEmail } from "@/lib/mail";
 import { AppointmentSchema } from "@/validators";
 import { Appointment } from "@prisma/client";
+import { error } from "console";
 
 export const createAppointment = async (values: any) => {
     console.log(values)
@@ -54,6 +55,7 @@ interface PaginationResponse {
     totalPages: number;
     totalRequestedAppointments: number;
     error: String;
+    userId?: string;
 }
 
 export const getRequestedAppointmentsWithPagenation = async (paginationOptions: PaginationOptions): Promise<PaginationResponse> => {
@@ -88,7 +90,9 @@ export const getRequestedAppointmentsWithPagenation = async (paginationOptions: 
             take: pageSize,
             skip: skip,
             include: {
-                requestedFor: true
+                requestedFor: true,
+                requestedBy:true
+
             }
         });
         console.log(users)
@@ -96,6 +100,7 @@ export const getRequestedAppointmentsWithPagenation = async (paginationOptions: 
         return {
             data: users,
             page: page,
+            userId:existingUser.id,
             pageSize: pageSize,
             totalPages: totalPages,
             totalRequestedAppointments: totalUsers,
@@ -148,7 +153,8 @@ export const getReceivedAppointmentsWithPagenation = async (paginationOptions: P
             take: pageSize,
             skip: skip,
             include: {
-                requestedFor: true
+                requestedFor: true,
+                requestedBy:true
             }
         });
         console.log(users)
@@ -156,6 +162,7 @@ export const getReceivedAppointmentsWithPagenation = async (paginationOptions: P
         return {
             data: users,
             page: page,
+            userId:existingUser.id,
             pageSize: pageSize,
             totalPages: totalPages,
             totalRequestedAppointments: totalUsers,
@@ -225,13 +232,16 @@ export const upcommingAppointments = async (paginationOptions: PaginationOptions
             take: pageSize,
             skip: skip,
             include: {
-                requestedFor: true
+                requestedFor: true,
+                requestedBy:true
+
             }
         });
         console.log(users)
 
         return {
             data: users,
+            userId:existingUser.id,
             page: page,
             pageSize: pageSize,
             totalPages: totalPages,
@@ -301,7 +311,9 @@ export const pastAppointments = async (paginationOptions: PaginationOptions): Pr
             take: pageSize,
             skip: skip,
             include: {
-                requestedFor: true
+                requestedFor: true,
+                requestedBy:true
+
             }
         });
         console.log(users)
@@ -309,6 +321,7 @@ export const pastAppointments = async (paginationOptions: PaginationOptions): Pr
         return {
             data: users,
             page: page,
+            userId:existingUser.id,
             pageSize: pageSize,
             totalPages: totalPages,
             totalRequestedAppointments: totalUsers,
@@ -326,3 +339,29 @@ export const pastAppointments = async (paginationOptions: PaginationOptions): Pr
         };
     }
 };
+
+export const confirmAppointment = async (appointmentId:string)=>{
+    try{
+        const appointment = await db.appointment.update({
+            where: {
+              id: appointmentId
+            },
+            data: {
+             status:"CONFIRMED"
+            }, 
+            include: {
+                requestedFor: true,
+                requestedBy:true
+
+            }
+          })
+          await sendAppointmentConfirmedEmail(appointment);
+
+        return { success: "Appointment Confirmed successfully ! " ,appointment}
+        ;
+    }catch(e){
+        console.log(e)
+        return { error: "Error Confirming appointment " }
+
+    }
+ }

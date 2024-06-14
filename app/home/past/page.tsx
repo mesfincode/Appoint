@@ -1,6 +1,7 @@
 "use client"
 import { getReceivedAppointmentsWithPagenation, getRequestedAppointmentsWithPagenation, pastAppointments, upcommingAppointments } from '@/actions/appointment';
 import AppointmentCArd from '@/components/AppointmentCard';
+import AppointmentDetailModal from '@/components/AppointmentDetailModal';
 import { DataTablePagination } from '@/components/PaginationComp';
 import SkeletenComp from '@/components/SkeletenComp';
 import { Button } from '@/components/ui/button';
@@ -18,7 +19,10 @@ const UpcommingAppointments = () => {
     const [totalRequestedAppointments, setTotalRequestedAppointments] = useState(0)
     const { clerkId } = useCurrentUser()
     const [isPending, startTransition] = useTransition();
-
+    const [userId,setUserId] = useState("");
+    const [isOpen, setIsOpen] = useState(false)
+    const [appointment, setAppointment] = useState(false)
+    const [iRequested,setIRequested] = useState(false)
     useEffect(() => {
         // setIsMounted(true);
         if (clerkId) {
@@ -38,6 +42,8 @@ const UpcommingAppointments = () => {
                 handleAddAppointment(appoinmentDta.data);
                 setPage(appoinmentDta.page )
                 setPageSize(appoinmentDta.pageSize)
+                setUserId(appoinmentDta.userId ??"")
+
                 setTotalPages(appoinmentDta.totalPages)
                 setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
 
@@ -58,6 +64,8 @@ const UpcommingAppointments = () => {
                 console.log(appoinmentDta)
                 setAppointmentList(appoinmentDta.data)
                 setPage(appoinmentDta.page )
+                setUserId(appoinmentDta.userId ??"")
+
                 setPageSize(appoinmentDta.pageSize)
                 setTotalPages(appoinmentDta.totalPages)
                 setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
@@ -103,9 +111,15 @@ const UpcommingAppointments = () => {
                                                     {
                                                         appointmentList.map((item, index) => {
                                                             const requestedFor = item.requestedFor;
+                                                            console.log(item.requestedById,userId)
+                                                            const iRequested = item.requestedById == userId? true:false;
                                                             return (
                                                                 <>
-                                                                    <AppointmentCArd sidebar={false} color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor?.profileUrl ?? ""} name={requestedFor.name} date={item.appointmentDate.toString()} company={requestedFor.companyName} />
+                                                                    <AppointmentCArd onClick={()=>{
+                                                                        setIsOpen(true)
+                                                                        setAppointment(item)
+                                                                        setIRequested(iRequested)
+                                                                    }} appointment={item}  iRequested={iRequested} status={item.status} sidebar={false} color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor?.profileUrl ?? ""} name={requestedFor.name} date={item.appointmentDate.toString()} company={requestedFor.companyName} />
 
                                                                 </>
                                                             )
@@ -132,6 +146,8 @@ const UpcommingAppointments = () => {
 
                 }
             </div>
+            <AppointmentDetailModal iRequested={iRequested} appointment={appointment} handleClose={() => setIsOpen((prev) => !prev)} isOpen={isOpen} />
+
         </section>
     )
 }

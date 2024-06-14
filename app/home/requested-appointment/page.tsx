@@ -1,6 +1,7 @@
 "use client"
 import { getRequestedAppointmentsWithPagenation } from '@/actions/appointment';
 import AppointmentCArd from '@/components/AppointmentCard';
+import AppointmentDetailModal from '@/components/AppointmentDetailModal';
 import { DataTablePagination, PaginationOptions } from '@/components/PaginationComp';
 import SkeletenComp from '@/components/SkeletenComp';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -16,6 +17,11 @@ const RequestedAppointment = () => {
     const [totalRequestedAppointments, setTotalRequestedAppointments] = useState(0)
     const [isPending,startTransition] = useTransition()
     const { clerkId } = useCurrentUser()
+    const [userId,setUserId] = useState("");
+    const [isOpen, setIsOpen] = useState(false)
+    const [appointment, setAppointment] = useState(false)
+    const [iRequested,setIRequested] = useState(false)
+
     useEffect(() => {
         // setIsMounted(true);
         if (clerkId) {
@@ -30,6 +36,8 @@ const RequestedAppointment = () => {
                 setAppointmentList(appoinmentDta.data)
                 setPage(appoinmentDta.page)
                 setPageSize(appoinmentDta.pageSize)
+                setUserId(appoinmentDta.userId ??"")
+
                 setTotalPages(appoinmentDta.totalPages)
                 setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
             })
@@ -44,6 +52,8 @@ const RequestedAppointment = () => {
                 setAppointmentList(appoinmentDta.data)
                 setPage(appoinmentDta.page)
                 setPageSize(appoinmentDta.pageSize)
+                setUserId(appoinmentDta.userId ??"")
+
                 setTotalPages(appoinmentDta.totalPages)
                 setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
             })
@@ -70,9 +80,17 @@ const RequestedAppointment = () => {
                                         {
                                             appointmentList.map((item, index) => {
                                                 const requestedFor = item.requestedFor;
+                                                console.log(item.requestedById,userId)
+                                                const iRequested = item.requestedById == userId? true:false;
                                                 return (
                                                     <>
-                                                        <AppointmentCArd sidebar={false} color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor.profileUrl} name={requestedFor.name} date={item.appointmentDate.toString()} company={requestedFor.companyName} />
+                                                        <AppointmentCArd   onClick={()=>{
+                                                                        setIsOpen(true)
+                                                                        setAppointment(item)
+                                                                        setIRequested(iRequested)
+                                                                    }}
+                                                                    appointment={item}
+                                                                    iRequested={iRequested} status={item.status} sidebar={false} color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor.profileUrl} name={requestedFor.name} date={item.appointmentDate.toString()} company={requestedFor.companyName} />
 
                                                     </>
                                                 )
@@ -89,6 +107,8 @@ const RequestedAppointment = () => {
                     </> :
                     <SkeletenComp length={5} />
             }
+                        <AppointmentDetailModal iRequested={iRequested} appointment={appointment} handleClose={() => setIsOpen((prev) => !prev)} isOpen={isOpen} />
+
         </section>
     )
 }

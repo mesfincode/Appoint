@@ -56,7 +56,7 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
         </div>
         <span className="mt-2 text-black-1">H</span>
       </div>
-      <div className="flex flex-col items-centerp-1 p-1">
+      <div className="flex flex-col items-center  p-1">
       <div className='flex justify-center items-center'>
         <TimeComp num={minutes} />
 

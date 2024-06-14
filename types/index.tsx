@@ -18,8 +18,13 @@ export interface appointmentCardProp {
     name: string;
     company: string;
     date: string;
-    color: string
-    sidebar: boolean
+    color: string;
+    sidebar: boolean;
+    status: string;
+    iRequested?:boolean;
+    appointment?:any;
+    onClick:()=>void;
+
 }
 export interface PaginationOptions {
     page: number;

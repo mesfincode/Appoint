@@ -1,6 +1,7 @@
 "use client"
 import { getReceivedAppointmentsWithPagenation, getRequestedAppointmentsWithPagenation, upcommingAppointments } from '@/actions/appointment';
 import AppointmentCArd from '@/components/AppointmentCard';
+import AppointmentDetailModal from '@/components/AppointmentDetailModal';
 import { DataTablePagination } from '@/components/PaginationComp';
 import SkeletenComp from '@/components/SkeletenComp';
 import { Button } from '@/components/ui/button';
@@ -18,6 +19,10 @@ const UpcommingAppointments = () => {
     const [totalRequestedAppointments, setTotalRequestedAppointments] = useState(0)
     const { clerkId } = useCurrentUser()
     const [isPending, startTransition] = useTransition();
+    const [userId,setUserId] = useState("");
+    const [isOpen, setIsOpen] = useState(false)
+    const [appointment, setAppointment] = useState(false)
+    const [iRequested,setIRequested] = useState(false)
 
     useEffect(() => {
         // setIsMounted(true);
@@ -39,6 +44,8 @@ const UpcommingAppointments = () => {
                 setPage(appoinmentDta.page )
                 setPageSize(appoinmentDta.pageSize)
                 setTotalPages(appoinmentDta.totalPages)
+                setUserId(appoinmentDta.userId ??"")
+
                 setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
 
                 console.log("Appointment Data", appoinmentDta)
@@ -61,7 +68,7 @@ const UpcommingAppointments = () => {
                 setPageSize(appoinmentDta.pageSize)
                 setTotalPages(appoinmentDta.totalPages)
                 setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
-
+                setUserId(appoinmentDta.userId ??"")
                 console.log("Appointment Data", appoinmentDta)
             })
         })
@@ -102,10 +109,24 @@ const UpcommingAppointments = () => {
 
                                                     {
                                                         appointmentList.map((item, index) => {
+                                                           
+                                                            const iRequested = item.requestedById == userId? true:false;
                                                             const requestedFor = item.requestedFor;
+                                                            console.log(item.requestedById,userId)
                                                             return (
                                                                 <>
-                                                                    <AppointmentCArd sidebar={false} color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor?.profileUrl ?? ""} name={requestedFor.name} date={item.appointmentDate.toString()} company={requestedFor.companyName} />
+                                                                    <AppointmentCArd
+                                                                    onClick={()=>{
+                                                                        setIsOpen(true)
+                                                                        setAppointment(item)
+                                                                        setIRequested(iRequested)
+                                                                    }}
+                                                                     
+                                                                     iRequested={iRequested}
+                                                                      status={item.status} 
+                                                                      sidebar={false} 
+                                                                      appointment={item}
+                                                                      color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor?.profileUrl ?? ""} name={requestedFor.name} date={item.appointmentDate.toString()} company={requestedFor.companyName} />
 
                                                                 </>
                                                             )
@@ -120,7 +141,7 @@ const UpcommingAppointments = () => {
                                                 <DataTablePagination fetchNext={fetchNext} updatePageSize={updatePageSize} page={page} pageSize={pageSize} totalPages={totalPages} />
                                             </> : <>
 
-                                                <h1>No Received Appointments</h1>
+                                            <h1>You Don&apos;t Have Upcomming Appointments</h1>
                                             </>
                                     }
                                 </div> : <SkeletenComp length={pageSize} />
@@ -132,6 +153,8 @@ const UpcommingAppointments = () => {
 
                 }
             </div>
+            <AppointmentDetailModal iRequested={iRequested} appointment={appointment} handleClose={() => setIsOpen((prev) => !prev)} isOpen={isOpen} />
+
         </section>
     )
 }

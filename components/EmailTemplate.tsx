@@ -67,11 +67,57 @@ const Email = ({
       </Html>
     );
   };
+  const AppointmentConfirmedEmail = ({appointment}:{appointment:any}) => {
+    const baseUrl = process.env.BASE_URL
+  ? `https://${process.env.BASE_URL}`
+  : "";
+    return (
+        <Html>
+        <Head />
+        <Preview>
+          The appointment app 
+        </Preview>
+        <Body style={main}>
+          <Container style={container}>
+            {/* <Img
+              src={`https://appoint.victocode.com/_next/image?url=%2Fimages%2Flogo-image.png&w=96&q=75`}
+              width="170"
+              height="50"
+              alt="Koala"
+              style={logo}
+            /> */}
+            <Text style={paragraph}>Hi {appointment.requestedBy.name},</Text>
+            <Text style={paragraph}>
+             {appointment.requestedFor.name} has Confirmed the appointment request
+            </Text>
+            <Section style={btnContainer}>
+              <Button style={button} href={`${baseUrl}/requested-appointment/${appointment.id}`}>
+                See appointment
+              </Button>
+            </Section>
+            <Text style={paragraph}>
+              Best,
+              <br />
+             The Appoint Team
+            </Text>
+            <Hr style={hr} />
+            <Text style={footer}>
+              Addis Ababa Ethiopia
+            </Text>
+          </Container>
+        </Body>
+      </Html>
+    );
+  };
 
   export const html = ({
     senderName,receiverName,appointmentId,appointmentLink
   }: EmailTemplateProps)=>{
     return render(<Email senderName={senderName} receiverName={receiverName} appointmentId={appointmentId} appointmentLink={appointmentLink}/>,{pretty:true})
+  }
+
+  export const appointmentConfirmEmailString = (appointment:any)=>{
+    return render(<AppointmentConfirmedEmail appointment={appointment} />,{pretty:true})
   }
 export const emalHtmlTemplet=()=>{
 
