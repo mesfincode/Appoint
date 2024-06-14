@@ -85,7 +85,7 @@ const ProfilePage = () => {
 
 
   return (
-    <section className='mt-8 flex flex-col justify-center items-center'>
+    <section className='mt-8 mx-4 flex flex-col justify-center items-center'>
       <div className='flex flex-col justify-center items-center'>
         {
           profileUrl && (<Image onClick={() => openUserProfile()} src={profileUrl} alt='profile-url' width={60} height={60} style={{ borderRadius: "100%", cursor: "pointer" }} />)
