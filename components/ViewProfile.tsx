@@ -142,7 +142,7 @@ const ViewProfile = ({phone,email,service,serviceDscription,companyName,verified
                                                     control={form.control}
                                                     name='service'
                                                     render={({ field }) => (<FormItem>
-                                                        <FormLabel>service</FormLabel>
+                                                        <FormLabel>Service Type</FormLabel>
                                                         <FormControl>
                                                             <Input type="text" placeholder="Service" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
 
@@ -169,7 +169,7 @@ const ViewProfile = ({phone,email,service,serviceDscription,companyName,verified
                                                 control={form.control}
                                                 name='companyName'
                                                 render={({ field }) => (<FormItem>
-                                                    <FormLabel>companyName</FormLabel>
+                                                    <FormLabel>Company Name</FormLabel>
                                                     <FormControl>
                                                         <Input type="text" placeholder="Company Name" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
 

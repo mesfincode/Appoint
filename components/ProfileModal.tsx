@@ -208,7 +208,7 @@ const ProfileModal = () => {
                                                 control={form.control}
                                                 name='companyName'
                                                 render={({ field }) => (<FormItem>
-                                                    <FormLabel>companyName</FormLabel>
+                                                    <FormLabel>Company Name</FormLabel>
                                                     <FormControl>
                                                         <Input type="text" placeholder="Company Name" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
 
@@ -220,7 +220,7 @@ const ProfileModal = () => {
                                                 control={form.control}
                                                 name='profession'
                                                 render={({ field }) => (<FormItem>
-                                                    <FormLabel>profession</FormLabel>
+                                                    <FormLabel>Profession</FormLabel>
                                                     <FormControl>
                                                         <Input type="text" placeholder="Your Profession" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
 

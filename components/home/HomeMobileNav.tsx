@@ -19,13 +19,15 @@ import {
 import { sidebarLinks } from '@/constants'
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { SignedIn, UserButton } from '@clerk/nextjs'
+import { SignedIn, UserButton, useClerk } from '@clerk/nextjs'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 
 const HomeMobileNav = () => {
     const pathname = usePathname();
-    const { email ,profileUrl} = useCurrentUser()
+    const { email, profileUrl } = useCurrentUser()
     const router = useRouter()
+    const {signOut} = useClerk()
+
     return (
         <div className="flex 
     items-center justify-between md:hidden
@@ -60,20 +62,23 @@ const HomeMobileNav = () => {
                             </section>
                         </SheetClose>
                     </div>
-                    <div className='absolute bottom-8 pl-4'>
-                            {/* <SignedIn>
+                    <div className='absolute bottom-8 left-0 right-0 px-4'>
+                        {/* <SignedIn>
               <UserButton afterSignOutUrl="/sign-in" />
             </SignedIn> */}
-                <SheetClose asChild>
-                <div className='flex justify-start flex-col gap-2 items-start'>
+                        <SheetClose asChild>
+                            <div className='flex justify-start flex-col gap-2 items-start'>
 
-                            {
-                                profileUrl && <Image onClick={() => router.push("/home/profile")} src={profileUrl} width={40} height={40} alt="profile" style={{ borderRadius: "100%" }} />
-                            }
-                                 <h1 className='text-black-1'> {email?.slice(0, 15)}... </h1>
-                                 </div>
-                            </SheetClose>
-                       
+                                <div className='flex  justify-between items-center w-full'>
+                                    {
+                                        profileUrl && <Image onClick={() => router.push("/home/profile")} src={profileUrl} width={40} height={40} alt="profile" style={{ borderRadius: "100%" }} />
+                                    }
+                                    <Image onClick={() => signOut()} src="/icons/log-out.svg" width={30} height={30} alt='logout' style={{ cursor: "pointer" }} />
+                                </div>
+                                <h1 className='text-black-1'> {email?.slice(0, 15)}... </h1>
+                            </div>
+                        </SheetClose>
+
                     </div>
 
                 </SheetContent>
