@@ -223,9 +223,10 @@ const ViewProfile = ({phone,email,service,serviceDscription,companyName,verified
                                 <FormSuccess message={success} />
 
 
-                                <DialogFooter>
+                               <div className='mb-8'>
+                               <DialogFooter>
                                     {/* <Button type="submit">Save changes</Button> */}
-                                    <Button type="submit" variant="outline" className='w-full bg-primary-2 transition-all duration-500 hover:bg-primary-3' >
+                                    <Button type="submit" variant="outline" className='w-full text-white-1 bg-primary-1 transition-all duration-500 hover:bg-primary-2' >
                                         {
                                             isPending ? <>
                                                 <Loader />Loading
@@ -233,6 +234,7 @@ const ViewProfile = ({phone,email,service,serviceDscription,companyName,verified
                                         }
                                     </Button>
                                 </DialogFooter>
+                               </div>
                             </form>
                         </Form>
                     </div>

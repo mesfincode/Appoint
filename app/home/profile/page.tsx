@@ -10,23 +10,23 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog"
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -48,38 +48,41 @@ import ViewProfile from '@/components/ViewProfile'
 const ProfilePage = () => {
   const { signOut, openUserProfile } = useClerk()
   const [isOpen, setIsOpen] = useState(false);
-    const { email, clerkId, profileUrl, firstName, lastName } = useCurrentUser()
-    const [user,setUser] = useState<User | null>(null)
-    useEffect(() => {
+  const { email, clerkId, profileUrl, firstName, lastName } = useCurrentUser()
+  const [user, setUser] = useState<User | null>(null)
+  useEffect(() => {
     console.log("user email -------", email)
 
-        const getUserfromdb = async () => {
+    const getUserfromdb = async () => {
 
-           if(email != null && email.length>0){
-            const user = await getUserByEmail(email)
-            setUser(user);
-            console.log("ProfileModal", user)
-            if (user == null) {
-                // setTimeout(()=>setIsOpen(true),3000)
+      if (email != null && email.length > 0) {
+        const user = await getUserByEmail(email)
+        setUser(user);
+        console.log("ProfileModal", user)
+        if (user == null) {
+          // setTimeout(()=>setIsOpen(true),3000)
 
-                setIsOpen(true)
+          setIsOpen(true)
 
-            }
-           }
         }
-        getUserfromdb();
-        //  
-    }, [email])
-
-  
-     
-
-    if(!user){
-      return <div>
-        Lloading
-      </div>
+      }
     }
-   
+    getUserfromdb();
+    //  
+  }, [email])
+
+
+
+
+  if (!user) {
+    return <div className='h-screen flex justify-center items-center'>
+      <div className='flex gap-2'>
+        <Loader />
+        <h1 className='text-black-1 text-2xl text-center'> Lloading Profile...</h1>
+      </div>
+    </div>
+  }
+
 
   return (
     <section className='mt-8 flex flex-col justify-center items-center'>
@@ -91,7 +94,7 @@ const ProfilePage = () => {
         <h1>{email}</h1>
       </div>
       {
-        user &&       <ViewProfile email={user.email} readyForAppointments={user.readyForAppointments} profession={user.profession} phone={user.phone??""}  service={user.service??""} serviceDscription={user.serviceDscription??""} companyName={user.companyName??""} verified={user.verified}/>
+        user && <ViewProfile email={user.email} readyForAppointments={user.readyForAppointments} profession={user.profession} phone={user.phone ?? ""} service={user.service ?? ""} serviceDscription={user.serviceDscription ?? ""} companyName={user.companyName ?? ""} verified={user.verified} />
 
       }
     </section>
