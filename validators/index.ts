@@ -65,6 +65,12 @@ export const ProfileSchema = z.object({
     // email: z.string().min(5,{
     //     message:"email is required"
     // }),
+    firstName: z.string().min(5,{
+        message:"first name is required"
+    }),
+    lastName: z.string().min(5,{
+        message:"last name is required"
+    }),
     phone: z.string().min(5,{
         message:"phone is required"
     }),

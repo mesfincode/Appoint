@@ -43,6 +43,8 @@ model User {
   id    String  @id @default(cuid())
   clerkId String
   name  String
+  firstName String @default("")
+  lastName String @default("")
   email String  @unique
   phone String
   service      String?

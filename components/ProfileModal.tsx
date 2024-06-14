@@ -76,6 +76,8 @@ const ProfileModal = () => {
             // clerkId: id,
             // name: `${firstName} ${lastName}`,
             // email: email,
+            firstName:"",
+            lastName:"",
             phone: "",
             service: "",
             serviceDscription: "",
@@ -131,6 +133,34 @@ const ProfileModal = () => {
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                             <div>
+                            <div className="flex gap-4">
+                                                <FormField
+                                                    control={form.control}
+                                                    name='firstName'
+                                                    render={({ field }) => (<FormItem>
+                                                        <FormLabel>First Name</FormLabel>
+                                                        <FormControl>
+                                                            <Input type="text" placeholder="First Name" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+
+                                                        </FormControl>
+                                                        <FormMessage className="text-red-400" />
+                                                    </FormItem>)}
+                                                />
+
+
+                                                <FormField
+                                                    control={form.control}
+                                                    name='lastName'
+                                                    render={({ field }) => (<FormItem>
+                                                        <FormLabel>Last Name</FormLabel>
+                                                        <FormControl>
+                                                            <Input type="text" placeholder="Last Name" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+
+                                                        </FormControl>
+                                                        <FormMessage className="text-red-400" />
+                                                    </FormItem>)}
+                                                />
+                                            </div>
                                             <div className="flex gap-4">
                                                 <FormField
                                                     control={form.control}
@@ -138,7 +168,7 @@ const ProfileModal = () => {
                                                     render={({ field }) => (<FormItem>
                                                         <FormLabel>Phone</FormLabel>
                                                         <FormControl>
-                                                            <Input type="text" placeholder="appoint" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+                                                            <Input type="text" placeholder="Phone number" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
 
                                                         </FormControl>
                                                         <FormMessage className="text-red-400" />
@@ -150,7 +180,7 @@ const ProfileModal = () => {
                                                     control={form.control}
                                                     name='service'
                                                     render={({ field }) => (<FormItem>
-                                                        <FormLabel>service</FormLabel>
+                                                        <FormLabel>Service Type</FormLabel>
                                                         <FormControl>
                                                             <Input type="text" placeholder="Service" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
 

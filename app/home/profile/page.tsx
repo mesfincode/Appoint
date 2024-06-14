@@ -86,15 +86,15 @@ const ProfilePage = () => {
 
   return (
     <section className='mt-8 mx-4 flex flex-col justify-center items-center'>
-      <div className='flex flex-col justify-center items-center'>
+      <div className='flex flex-col justify-center items-center mb-4'>
         {
-          profileUrl && (<Image onClick={() => openUserProfile()} src={profileUrl} alt='profile-url' width={60} height={60} style={{ borderRadius: "100%", cursor: "pointer" }} />)
+          user.profileUrl && (<Image onClick={() => openUserProfile()} src={user.profileUrl} alt='profile-url' width={60} height={60} style={{ borderRadius: "100%", cursor: "pointer" }} />)
         }
-        <h1>{firstName} {lastName}</h1>
-        <h1>{email}</h1>
+        <h1 className='text-black-1 font-bold'>{user.firstName} {user.lastName}</h1>
+        <h1 className='text-black-2 font-semibold'>{email}</h1>
       </div>
       {
-        user && <ViewProfile email={user.email} readyForAppointments={user.readyForAppointments} profession={user.profession} phone={user.phone ?? ""} service={user.service ?? ""} serviceDscription={user.serviceDscription ?? ""} companyName={user.companyName ?? ""} verified={user.verified} />
+        user && <ViewProfile firstName={user.firstName} lastName={user.lastName} email={user.email} readyForAppointments={user.readyForAppointments} profession={user.profession} phone={user.phone ?? ""} service={user.service ?? ""} serviceDscription={user.serviceDscription ?? ""} companyName={user.companyName ?? ""} verified={user.verified} />
 
       }
     </section>

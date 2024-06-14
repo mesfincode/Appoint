@@ -111,7 +111,7 @@ const Home = () => {
                                             setIsOpen((prev) => !prev)
                                             setProfile(item)
                                         }}
-                                        key={index} email={item.email} serviceDescription={item.serviceDscription ?? ""} name={item.name} profileUrl={item.profileUrl} company={item.companyName ?? ""} />
+                                        key={index} firstName={item.firstName} lastName={item.lastName} email={item.email} serviceDescription={item.serviceDscription ?? ""}  profileUrl={item.profileUrl} company={item.companyName ?? ""} />
                                 ))
                             }
                         </div>

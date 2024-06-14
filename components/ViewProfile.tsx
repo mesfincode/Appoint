@@ -46,9 +46,11 @@ interface  ProfileViewProps{
     verified:boolean;
     readyForAppointments:boolean;
     profession:string;
+    firstName:string;
+    lastName:string;
 }
-const ViewProfile = ({phone,email,service,serviceDscription,companyName,verified,readyForAppointments,profession}:ProfileViewProps ) => {
-    const {  clerkId, profileUrl, firstName, lastName } = useCurrentUser()
+const ViewProfile = ({phone,email,service,serviceDscription,companyName,verified,readyForAppointments,profession,firstName,lastName}:ProfileViewProps ) => {
+    const {  clerkId, profileUrl, } = useCurrentUser()
 // console.log(user)
     const form = useForm<z.infer<typeof ProfileSchema>>({
         resolver: zodResolver(ProfileSchema),
@@ -56,6 +58,8 @@ const ViewProfile = ({phone,email,service,serviceDscription,companyName,verified
             // clerkId: id,
             // name: `${firstName} ${lastName}`,
             // email: email,
+            firstName,
+            lastName,
             phone,
             service:service??"",
             serviceDscription:serviceDscription??"",
@@ -90,6 +94,34 @@ const ViewProfile = ({phone,email,service,serviceDscription,companyName,verified
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                             <div>
+                            <div className="flex gap-4">
+                                                <FormField
+                                                    control={form.control}
+                                                    name='firstName'
+                                                    render={({ field }) => (<FormItem>
+                                                        <FormLabel>First Name</FormLabel>
+                                                        <FormControl>
+                                                            <Input type="text" placeholder="First Name" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+
+                                                        </FormControl>
+                                                        <FormMessage className="text-red-400" />
+                                                    </FormItem>)}
+                                                />
+
+
+                                                <FormField
+                                                    control={form.control}
+                                                    name='lastName'
+                                                    render={({ field }) => (<FormItem>
+                                                        <FormLabel>Last Name</FormLabel>
+                                                        <FormControl>
+                                                            <Input type="text" placeholder="Last Name" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+
+                                                        </FormControl>
+                                                        <FormMessage className="text-red-400" />
+                                                    </FormItem>)}
+                                                />
+                                            </div>
                                             <div className="flex gap-4">
                                                 <FormField
                                                     control={form.control}
