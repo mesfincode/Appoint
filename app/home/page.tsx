@@ -94,7 +94,7 @@ const Home = () => {
         <section className='mx-8 my-8'>
             <div className='flex justify-center items-center flex-col gap-4 pb-4'>
                 <div className='relative '>
-                    <Input type='text' onChange={(e) => setSearchKeyWord(e.target.value)} placeholder='Search with name, email,phone company' className='border-primary-1 rounded-full w-[350px] focus-visible:ring-offset-primary-1' />
+                    <Input type='text' onChange={(e) => setSearchKeyWord(e.target.value)} placeholder='Search with name, email,phone company' className='border-primary-1 rounded-full max-sm:w-[300px] w-[350px] focus-visible:ring-offset-primary-1' />
                     <FaSearchengin className='absolute right-4 top-3' />
                 </div>
             </div>

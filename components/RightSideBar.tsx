@@ -42,13 +42,13 @@ const RightSideBar = () => {
     }
     return (
         <div className='right_sidebar '>
-            <div className='flex justify-center items-center pt-2'>
+            {/* <div className='flex justify-center items-center pt-2'>
                 <SignedIn>
                     <UserButton  afterSignOutUrl="/sign-in" />
                 </SignedIn>
                 <h1>{user?.username}</h1>
            
-            </div>
+            </div> */}
             <ClockComp size={100} showSpeaker={true} />
          
             <div className=' flex flex-col justify-start  items-start gap-4 '>

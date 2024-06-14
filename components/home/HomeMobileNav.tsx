@@ -19,10 +19,12 @@ import {
 import { sidebarLinks } from '@/constants'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { SignedIn, UserButton } from '@clerk/nextjs'
+import { useCurrentUser } from '@/hooks/useCurrentUser'
 
 const HomeMobileNav = () => {
     const pathname = usePathname();
-
+    const {email}= useCurrentUser()
     return (
         <div className="flex 
     items-center justify-between md:hidden
@@ -56,6 +58,14 @@ const HomeMobileNav = () => {
                                 }
                             </section>
                         </SheetClose>
+                    </div>
+                    <div className='absolute bottom-8 pl-4'>
+                        <div className='flex justify-start flex-col gap-2 items-start'>
+                            <SignedIn>
+                                <UserButton afterSignOutUrl="/sign-in" />
+                            </SignedIn>
+                            <h1 className='text-black-1'>  {email}</h1>
+                        </div>
                     </div>
 
                 </SheetContent>
