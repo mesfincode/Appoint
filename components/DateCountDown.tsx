@@ -43,7 +43,7 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
         <div className='flex justify-center items-center'>
         <TimeComp num={days} />
 
-        <p>:</p>
+        <p className='text-black-1'>:</p>
         </div>
         <span className="mt-2 text-black-1">D</span>
       </div>
@@ -52,7 +52,7 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
       <div className='flex justify-center items-center'>
         <TimeComp num={hours} />
 
-        <p>:</p>
+        <p className='text-black-1'>:</p>
         </div>
         <span className="mt-2 text-black-1">H</span>
       </div>
@@ -60,7 +60,7 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
       <div className='flex justify-center items-center'>
         <TimeComp num={minutes} />
 
-        <p>:</p>
+        <p className='text-black-1'>:</p>
         </div>
         <span className="mt-2 text-black-1">M</span>
       </div>

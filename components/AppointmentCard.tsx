@@ -17,7 +17,7 @@ const AppointmentCArd = ({ profileUrl, name, company, date, color, sidebar, stat
 
     return (
 
-        <div className={`  max-sm:w-full ${sidebar ? "w-[200px] h-[230px]" : "w-[250px]"} border-2 bg-gray-100 border-gray-200 transition-all duration-500 hover:bg-primary-2 cursor-pointer  p-4 rounded-lg`} onClick={onClick}>
+        <div className={`  max-sm:w-full  ${sidebar ? "w-[200px] h-[230px]" : "w-[250px]"} border-2 bg-gray-100 border-gray-200 transition-all duration-500 hover:bg-primary-2 cursor-pointer  p-4 rounded-lg`} onClick={onClick}>
             <div className=' flex flex-col gap-1 justify-center  items-center'>
                 {
                     iRequested ? <>
@@ -39,7 +39,7 @@ const AppointmentCArd = ({ profileUrl, name, company, date, color, sidebar, stat
                                         iRequested ? <>
 
                                             {
-                                                status == "PENDING" ? <h1>Sent Pending</h1> : <h1>{status}</h1>
+                                                status == "PENDING" ? <h1 className='text-primary-1'>Waiting Confirmation</h1> : <h1>{status}</h1>
                                             }
                                         </> : <> {
                                             status == "PENDING" ? <h1>Confirm</h1> : <h1>{status}</h1>

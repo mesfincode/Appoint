@@ -133,11 +133,7 @@ const UpcommingAppointments = () => {
                                                         })
                                                     }
                                                 </div>
-                                                {/* <Button disabled={page ==totalPages+1} onClick={() => {
-                                          
-                                            getReceivedAppointments()
-
-                                        }}>See more</Button> */}
+                                               
                                                 <DataTablePagination fetchNext={fetchNext} updatePageSize={updatePageSize} page={page} pageSize={pageSize} totalPages={totalPages} />
                                             </> : <>
 

@@ -8,7 +8,7 @@ import React from 'react'
 const ServiceCard = ({ profileUrl, name,email, company, serviceDescription ,onClick}: profileRepCard) => {
 
     return (
-       <div className='max-sm:mx-2'>
+       <div className='max-sm:mx-4'>
          <div className='h-[250px] max-sm:w-full  w-[250px] border-2 border-gray-200 bg-gray-100 transition-all duration-500 hover:bg-primary-2  lg:p-4 rounded-lg cursor-pointer' onClick={onClick} >
             <div className=' flex flex-col gap-1 justify-center  items-center'>
                 <Image src={profileUrl} width={40} height={40} alt={name} style={{ borderRadius: "100%" }} />

@@ -92,7 +92,7 @@ const UpcommingAppointments = () => {
     return (
         <section className='mx-8 my-8'>
             <div className='flex justify-center items-center gap-2 flex-col'>
-                <h1 className='text-black-1 font-semibold text-2xl pb-4'>🕰️ Upcoming Appointments</h1>
+                <h1 className='text-black-1 font-semibold text-2xl pb-4'>🕰️ Past Appointments</h1>
 
             </div>
             <div>
@@ -104,7 +104,7 @@ const UpcommingAppointments = () => {
                                     {
                                         appointmentList.length != 0 ?
                                             <>
-                                                <h1 className='text-black-2 text-lg text-center font-semibold pb-4'>You have {totalRequestedAppointments} uppcomming appointments</h1>
+                                                <h1 className='text-black-2 text-lg text-center font-semibold pb-4'>You have {totalRequestedAppointments} Past appointments</h1>
 
                                                 <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 ' >
 
@@ -134,7 +134,7 @@ const UpcommingAppointments = () => {
                                                 <DataTablePagination fetchNext={fetchNext} updatePageSize={updatePageSize} page={page} pageSize={pageSize} totalPages={totalPages} />
                                             </> : <>
 
-                                                <h1>No Received Appointments</h1>
+                                                <h1>No Past Appointments</h1>
                                             </>
                                     }
                                 </div> : <SkeletenComp length={pageSize} />
