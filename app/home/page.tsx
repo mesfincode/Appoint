@@ -98,7 +98,7 @@ const Home = () => {
                     <FaSearchengin className='absolute right-4 top-3' />
                 </div>
             </div>
-
+<h1 className='text-center font-bold text-black-2 py-4'>Send Appointment Request To Any Service Providers</h1>
 
             {
                 userList.length !== 0 ?
