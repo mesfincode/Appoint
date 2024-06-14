@@ -1,10 +1,9 @@
-// import { CopyIcon } from "@radix-ui/react-icons"
+import React from 'react'
 
-"use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { boolean, z } from "zod"
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -27,65 +26,49 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { getUserByEmail } from "@/actions/user"
+import { getUserByEmail, updateUserProfile } from "@/actions/user"
 import { useCurrentUser } from "@/hooks/useCurrentUser"
 import { Profile, profileRepCard } from "@/types"
 import { CopyIcon, Loader } from "lucide-react"
 import Image from "next/image"
 import { useEffect, useState, useTransition } from "react"
 import { ProfileSchema } from "@/validators"
-import { FormError } from "./FormError"
-import { FormSuccess } from "./FormSuccess"
-import { Switch } from "./ui/switch"
-import { register } from "@/actions/auth"
-
-interface ProfileModalProps {
-    isOpen: boolean;
-    handleClose: () => void;
-    profile: Profile | null
+import { User } from '@prisma/client'
+import { Switch } from './ui/switch'
+import { FormError } from './FormError'
+import { FormSuccess } from './FormSuccess'
+interface  ProfileViewProps{
+    email:string
+    phone:string;
+    service:string;
+    serviceDscription:string;
+    companyName:string;
+    verified:boolean;
+    readyForAppointments:boolean;
+    profession:string;
 }
-const ProfileModal = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const { email, clerkId, profileUrl, firstName, lastName } = useCurrentUser()
-    useEffect(() => {
-    console.log("user email -------", email)
-
-        const getUserfromdb = async () => {
-
-           if(email != null && email.length>0){
-            const user = await getUserByEmail(email)
-            console.log("ProfileModal", user)
-            if (user == null) {
-                // setTimeout(()=>setIsOpen(true),3000)
-                setIsOpen(true)
-
-            }
-           }
-        }
-        getUserfromdb();
-        //  
-    }, [email])
-
-    const [error, setError] = useState<string | undefined>();
-    const [success, setSuccess] = useState<string | undefined>();
-    const [isPending, startTransition] = useTransition();
-
+const ViewProfile = ({phone,email,service,serviceDscription,companyName,verified,readyForAppointments,profession}:ProfileViewProps ) => {
+    const {  clerkId, profileUrl, firstName, lastName } = useCurrentUser()
+// console.log(user)
     const form = useForm<z.infer<typeof ProfileSchema>>({
         resolver: zodResolver(ProfileSchema),
         defaultValues: {
             // clerkId: id,
             // name: `${firstName} ${lastName}`,
             // email: email,
-            phone: "",
-            service: "",
-            serviceDscription: "",
-            companyName: "",
-            verified: false,
-            readyForAppointments: false,
-            profession: "",
+            phone,
+            service:service??"",
+            serviceDscription:serviceDscription??"",
+            companyName:companyName??"",
+            verified,
+            readyForAppointments,
+            profession,
             // profileUrl: imageUrl,
         }
     })
+    const [error, setError] = useState<string | undefined>();
+    const [success, setSuccess] = useState<string | undefined>();
+    const [isPending, startTransition] = useTransition();
 
     const onSubmit = (values: z.infer<typeof ProfileSchema>) => {
         const name =`${firstName} ${lastName}`
@@ -94,7 +77,7 @@ const ProfileModal = () => {
         setError("");
         setSuccess("");
         startTransition(() => {
-            register(data).then((data) => {
+            updateUserProfile(email,data).then((data) => {
                 console.log(data)
                 setError(data.error)
                 setSuccess(data.success)
@@ -102,32 +85,8 @@ const ProfileModal = () => {
         })
 
     }
-    return (
-        <Dialog open={isOpen} onOpenChange={() => setIsOpen((prv) => !prv)} >
-            {/* <DialogTrigger asChild>
-                <Button variant="outline">Share</Button>
-            </DialogTrigger> */}
-            <DialogContent className="sm:max-w-[425px]  z-50">
-                <DialogHeader>
-                    <div className="flex flex-col justify-center items-center gap-4">
-                        <DialogTitle >Set Up Your Profile</DialogTitle>
-                        <DialogDescription>
-                            Let your clients and customers discover you , good profile good impression
-                        </DialogDescription>
-                    </div>
-                </DialogHeader>
-                <div className="flex flex-col justify-center items-center gap-1">
-                    <div className="pb-4 flex flex-col justify-center items-center">
-                        {
-                            profileUrl && (
-                                <Image src={profileUrl} width={40} height={40} alt="profileImage" style={{ borderRadius: "100%" }} />
-
-                            )
-                        }
-                        <h1>{firstName} {lastName}</h1>
-                        {/* <h1>{profile?.company}</h1> */}
-                    </div>
-                    <div>
+  return (
+    <div>
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                             <div>
@@ -277,13 +236,7 @@ const ProfileModal = () => {
                             </form>
                         </Form>
                     </div>
-
-
-                </div>
-
-            </DialogContent>
-        </Dialog>
-    )
+  )
 }
 
-export default ProfileModal
+export default ViewProfile

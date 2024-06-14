@@ -9,7 +9,8 @@ import { SignedIn, UserButton } from '@clerk/nextjs'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 const LeftSideBar = () => {
   const pathname = usePathname()
-  const { firstName, lastName, email } = useCurrentUser()
+  const { firstName, lastName, email,profileUrl } = useCurrentUser()
+   const router = useRouter()
   return (
     <div className='left_sidebar'>
       <div className='flex flex-col  justify-between'>
@@ -32,12 +33,15 @@ const LeftSideBar = () => {
           }
 
         </nav>
-        <div className='absolute bottom-8 pl-4'>
+        <div className='absolute bottom-8 pl-4 z-[1000]'>
           <div className='flex justify-start flex-col gap-2 items-start'>
-            <SignedIn>
+            {/* <SignedIn>
               <UserButton afterSignOutUrl="/sign-in" />
-            </SignedIn>
-            <h1 className='text-black-1'>  {email}</h1>
+            </SignedIn> */}
+            {
+              profileUrl &&<Image onClick={()=>router.push("/home/profile")} src={profileUrl} width={40 } height={40}  alt="profile"style={{ borderRadius: "100%" }}  />
+            }
+            <h1 className='text-black-1'> {email?.slice(0, 15)}... </h1>
           </div>
         </div>
       </div>

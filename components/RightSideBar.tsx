@@ -41,7 +41,7 @@ const RightSideBar = () => {
 
     }
     return (
-        <div className='right_sidebar '>
+        <div className='right_sidebar mt-4 '>
             {/* <div className='flex justify-center items-center pt-2'>
                 <SignedIn>
                     <UserButton  afterSignOutUrl="/sign-in" />
@@ -82,10 +82,10 @@ const RightSideBar = () => {
                                         })
                                     }
                                 </div>
-                            </> : <>
+                            </> : <div>
 
-                               <h1>No Received Appointments</h1>
-                            </>
+                               <h1 className='text-black-2 font-semibold'>No Upcoming Appointments</h1>
+                            </div>
                         }
                     </> :
                     <div className='grid grid-cols-1 gap-4' >

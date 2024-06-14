@@ -140,3 +140,23 @@ export const getServiceProviderWithPagination = async (paginationOptions: Pagina
         error: 'Error fetching employee data' };
     } 
   };
+
+  export const updateUserProfile = async (email:string,data:any)=>{
+    try{
+        const appointment = await db.user.update({
+            where: {
+              email: email
+            },
+            data
+           
+          })
+          // await sendAppointmentConfirmedEmail(appointment);
+
+        return { success: "Profile Updated successfully ! " ,appointment}
+        ;
+    }catch(e){
+        console.log(e)
+        return { error: "Profile Update Error " }
+
+    }
+ }

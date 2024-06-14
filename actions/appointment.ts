@@ -1,6 +1,6 @@
 "use server"
 
-import { getUserByClerkId, getUserById } from "@/data/user";
+import { getUserByClerkId, getUserById } from "@/actions/user";
 import { db } from "@/lib/db";
 import { sendAppointmentConfirmedEmail, sendAppointmentEmail } from "@/lib/mail";
 import { AppointmentSchema } from "@/validators";

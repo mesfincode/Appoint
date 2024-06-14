@@ -17,14 +17,15 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 import { sidebarLinks } from '@/constants'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { SignedIn, UserButton } from '@clerk/nextjs'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 
 const HomeMobileNav = () => {
     const pathname = usePathname();
-    const {email}= useCurrentUser()
+    const { email ,profileUrl} = useCurrentUser()
+    const router = useRouter()
     return (
         <div className="flex 
     items-center justify-between md:hidden
@@ -60,12 +61,19 @@ const HomeMobileNav = () => {
                         </SheetClose>
                     </div>
                     <div className='absolute bottom-8 pl-4'>
-                        <div className='flex justify-start flex-col gap-2 items-start'>
-                            <SignedIn>
-                                <UserButton afterSignOutUrl="/sign-in" />
-                            </SignedIn>
-                            <h1 className='text-black-1'>  {email}</h1>
-                        </div>
+                            {/* <SignedIn>
+              <UserButton afterSignOutUrl="/sign-in" />
+            </SignedIn> */}
+                <SheetClose asChild>
+                <div className='flex justify-start flex-col gap-2 items-start'>
+
+                            {
+                                profileUrl && <Image onClick={() => router.push("/home/profile")} src={profileUrl} width={40} height={40} alt="profile" style={{ borderRadius: "100%" }} />
+                            }
+                                 <h1 className='text-black-1'> {email?.slice(0, 15)}... </h1>
+                                 </div>
+                            </SheetClose>
+                       
                     </div>
 
                 </SheetContent>

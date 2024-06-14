@@ -10,7 +10,7 @@ import AppointmentModal from '@/components/AppointmentModal';
 import { Profile, profileRepCard } from '@/types';
 import ProfileModal from '@/components/ProfileModal';
 import { User } from '@prisma/client';
-import { getFilteredUsers, getServiceProviderWithPagination } from '@/data/user';
+import { getFilteredUsers, getServiceProviderWithPagination } from '@/actions/user';
 import { Loader } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import SkeletenComp from '@/components/SkeletenComp';
