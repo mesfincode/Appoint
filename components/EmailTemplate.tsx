@@ -130,6 +130,61 @@ const Email = ({
     );
   };
 
+  const NextDayEmailAlert = ({appointment,name}:{appointment:any,name:string}) => {
+    const baseUrl = process.env.BASE_URL
+  ? `https://${process.env.BASE_URL}`
+  : "";
+    return (
+        <Html>
+        <Head />
+        <Preview>
+          The appointment app Alert
+        </Preview>
+        <Body style={main}>
+          <Container style={container}>
+            {/* <Img
+              src={`https://appoint.victocode.com/_next/image?url=%2Fimages%2Flogo-image.png&w=96&q=75`}
+              width="170"
+              height="50"
+              alt="Koala"
+              style={logo}
+            /> */}
+            <Text style={paragraph}>Hi {name},</Text>
+            <Text style={paragraph}>
+             You have an appointment scheduled for tomorrow
+            </Text>
+            <Text style={paragraph}>
+             Appointment Type: {appointment.appointmentType} 
+            </Text>
+            <Text style={paragraph}>
+             Reason: {appointment.reason} 
+            </Text>
+           
+            <Text style={paragraph}>
+             Description: {appointment.notes} 
+            </Text>
+            <Section style={btnContainer}>
+              <Button style={button} href={`${baseUrl}/home/requested-appointment`}>
+                See appointment
+              </Button>
+            </Section>
+            <Text style={paragraph}>
+              Best,
+              <br />
+             The Appoint Team
+            </Text>
+            <Hr style={hr} />
+            <Text style={footer}>
+              Addis Ababa Ethiopia
+            </Text>
+          </Container>
+        </Body>
+      </Html>
+    );
+  };
+  export const nextDayEmailAlertString = (appointment:any,name:string,)=>{
+    return render(<NextDayEmailAlert appointment={appointment} name={name} />,{pretty:true})
+  }
   export const html = ({
     senderName,receiverName,appointmentId,appointment
   }: EmailTemplateProps)=>{

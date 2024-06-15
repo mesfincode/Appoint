@@ -1,4 +1,4 @@
-import { appointmentConfirmEmailString, html } from '@/components/EmailTemplate';
+import { appointmentConfirmEmailString, html, nextDayEmailAlertString } from '@/components/EmailTemplate';
 import { Appointment } from '@prisma/client';
 import { Resend } from 'resend';
 
@@ -28,6 +28,22 @@ export const sendAppointmentConfirmedEmail = async (appointment: any) => {
     subject: 'New Appointment',
     // html: `<p>${name} has sent you a new appointment. Click <a href="${appointmentLink}">here</a> to see the appointment !</p>`
     html: appointmentConfirmEmailString(appointment)
+  });
+  if (error) {
+    return console.error({ error });
+  }
+
+  console.log({ data });
+}
+
+export const sendNextDayEmailAlert = async (appointment: any,name:string,email:string) => {
+
+  const { data, error } = await resend.emails.send({
+    from: 'Appoint@appoint.victocode.com',
+    to: email,
+    subject: 'Appointment Alert',
+    // html: `<p>${name} has sent you a new appointment. Click <a href="${appointmentLink}">here</a> to see the appointment !</p>`
+    html: nextDayEmailAlertString(appointment,name)
   });
   if (error) {
     return console.error({ error });
