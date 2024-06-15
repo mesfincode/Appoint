@@ -59,7 +59,7 @@ const Email = ({
              Description: {appointment.notes} 
             </Text>
             <Section style={btnContainer}>
-              <Button style={button} href={`${baseUrl}/received-appointment`}>
+              <Button style={button} href={`${baseUrl}/home/received-appointment`}>
                 See appointment
               </Button>
             </Section>
@@ -111,7 +111,7 @@ const Email = ({
              Description: {appointment.notes} 
             </Text>
             <Section style={btnContainer}>
-              <Button style={button} href={`${baseUrl}/requested-appointment`}>
+              <Button style={button} href={`${baseUrl}/home/requested-appointment`}>
                 See appointment
               </Button>
             </Section>

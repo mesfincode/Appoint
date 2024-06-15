@@ -171,7 +171,7 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
                             iRequested ?
 
                                 <>
-                                    <div className="flex gap-4 flex-col justify-center">
+                                    <div className="flex gap-4 flex-col justify-center items-center">
                                         <Image src={appointment.requestedFor?.profileUrl} width={40} height={40} alt={appointment.requestedFor.name} style={{ borderRadius: "100%" }} />
                                         <div>
                                             <div className="flex gap-2">
