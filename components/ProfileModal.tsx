@@ -127,7 +127,7 @@ const ProfileModal = () => {
 
                             )
                         }
-                        <h1>{firstName} {lastName}</h1>
+                        <h1 className="text-black-1 font-bold">{firstName} {lastName}</h1>
                         {/* <h1>{profile?.company}</h1> */}
                     </div>
                     <div>

@@ -8,6 +8,7 @@ import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { upcommingAppointments } from '@/actions/appointment'
 import { Skeleton } from './ui/skeleton'
 import AppointmentDetailModal from './AppointmentDetailModal'
+import EmptyData from './EmptyData'
 
 const RightSideBar = () => {
     const {user} = useUser()
@@ -75,7 +76,7 @@ const RightSideBar = () => {
                                                                         setIsOpen(true)
                                                                         setAppointment(item)
                                                                         setIRequested(iRequested)
-                                                                    }} status={item.status} iRequested={true} appointment={item} sidebar={true} color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor.profileUrl} name={requestedFor.name} date={item.appointmentDate.toString()} company={requestedFor.companyName} />
+                                                                    }} status={item.status} iRequested={true} appointment={item} sidebar={true} color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor.profileUrl} date={item.appointmentDate.toString()} company={requestedFor.companyName} />
 
                                                 </>
                                             )
@@ -84,7 +85,7 @@ const RightSideBar = () => {
                                 </div>
                             </> : <div>
 
-                               <h1 className='text-black-2 font-semibold'>No Upcoming Appointments</h1>
+                               <EmptyData message='No Upcoming Appointments' sidebar={true} />
                             </div>
                         }
                     </> :

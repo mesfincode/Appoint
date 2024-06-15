@@ -140,7 +140,10 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                             )
                         }
                         <div>
-                            <h1>{profile?.name}</h1>
+                          <div className="flex gap-2 text-black-1 font-bold uppercase">
+                          <h1>{profile?.firstName}</h1>
+                          <h1>{profile?.lastName}</h1>
+                          </div>
                             <h1>{profile?.companyName}</h1>
                             <h1>{profile?.email}</h1>
 

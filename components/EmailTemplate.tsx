@@ -25,7 +25,7 @@ import {
   }
   
 const Email = ({
-    senderName,receiverName,appointmentId,appointmentLink,appointment
+    senderName,receiverName,appointmentId,appointment
   }: EmailTemplateProps) => {
     const baseUrl = process.env.BASE_URL
   ? `https://${process.env.BASE_URL}`
@@ -34,7 +34,7 @@ const Email = ({
         <Html>
         <Head />
         <Preview>
-          The appointment app that is designd to help you manage your appointments
+          The appointment app 
         </Preview>
         <Body style={main}>
           <Container style={container}>
@@ -49,7 +49,9 @@ const Email = ({
             <Text style={paragraph}>
              {senderName} has sent you a new Appointment
             </Text>
-          
+            <Text style={paragraph}>
+             Appointment Type: {appointment.appointmentType} 
+            </Text>
             <Text style={paragraph}>
              Reason: {appointment.reason} 
             </Text>
@@ -58,7 +60,7 @@ const Email = ({
              Description: {appointment.notes} 
             </Text>
             <Section style={btnContainer}>
-              <Button style={button} href={appointmentLink}>
+              <Button style={button} href={`${baseUrl}/received-appointment`}>
                 See appointment
               </Button>
             </Section>
@@ -100,6 +102,9 @@ const Email = ({
              {appointment.requestedFor.name} has Confirmed the appointment request
             </Text>
             <Text style={paragraph}>
+             Appointment Type: {appointment.appointmentType} 
+            </Text>
+            <Text style={paragraph}>
              Reason: {appointment.reason} 
             </Text>
            
@@ -107,7 +112,7 @@ const Email = ({
              Description: {appointment.notes} 
             </Text>
             <Section style={btnContainer}>
-              <Button style={button} href={`${baseUrl}/requested-appointment/${appointment.id}`}>
+              <Button style={button} href={`${baseUrl}/requested-appointment`}>
                 See appointment
               </Button>
             </Section>

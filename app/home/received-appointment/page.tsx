@@ -2,7 +2,9 @@
 import { getReceivedAppointmentsWithPagenation } from '@/actions/appointment';
 import AppointmentCArd from '@/components/AppointmentCard';
 import AppointmentDetailModal from '@/components/AppointmentDetailModal';
+import EmptyData from '@/components/EmptyData';
 import { DataTablePagination } from '@/components/PaginationComp';
+import ProfileModal from '@/components/ProfileModal';
 import SkeletenComp from '@/components/SkeletenComp';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
@@ -93,7 +95,7 @@ const ReceivedAppointment = () => {
                                                                     }} 
                                                                     appointment={item}
 
-                                                                    iRequested={iRequested} status={item.status} sidebar={false} color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor.profileUrl} name={requestedFor.name} date={item.appointmentDate.toString()} company={requestedFor.companyName} />
+                                                                    iRequested={iRequested} status={item.status} sidebar={false} color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor.profileUrl}  date={item.appointmentDate.toString()} company={requestedFor.companyName} />
 
                                                 </>
                                             )
@@ -104,7 +106,8 @@ const ReceivedAppointment = () => {
 
                             </> : <>
 
-                                <h1>You Don&apos;t Have Received Appointments</h1>
+                                {/* <h1></h1> */}
+                                <EmptyData message='You Don&apos;t Have Received Appointments' />
                             </>
                         }
                     </> :
@@ -112,7 +115,7 @@ const ReceivedAppointment = () => {
 
             }
                         <AppointmentDetailModal iRequested={iRequested} appointment={appointment} handleClose={() => setIsOpen((prev) => !prev)} isOpen={isOpen} />
-
+<ProfileModal />
         </section>
     )
 }

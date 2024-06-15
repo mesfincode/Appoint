@@ -2,7 +2,9 @@
 import { getReceivedAppointmentsWithPagenation, getRequestedAppointmentsWithPagenation, upcommingAppointments } from '@/actions/appointment';
 import AppointmentCArd from '@/components/AppointmentCard';
 import AppointmentDetailModal from '@/components/AppointmentDetailModal';
+import EmptyData from '@/components/EmptyData';
 import { DataTablePagination } from '@/components/PaginationComp';
+import ProfileModal from '@/components/ProfileModal';
 import SkeletenComp from '@/components/SkeletenComp';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -126,7 +128,7 @@ const UpcommingAppointments = () => {
                                                                       status={item.status} 
                                                                       sidebar={false} 
                                                                       appointment={item}
-                                                                      color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor?.profileUrl ?? ""} name={requestedFor.name} date={item.appointmentDate.toString()} company={requestedFor.companyName} />
+                                                                      color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor?.profileUrl ?? ""}  date={item.appointmentDate.toString()} company={requestedFor.companyName} />
 
                                                                 </>
                                                             )
@@ -137,7 +139,8 @@ const UpcommingAppointments = () => {
                                                 <DataTablePagination fetchNext={fetchNext} updatePageSize={updatePageSize} page={page} pageSize={pageSize} totalPages={totalPages} />
                                             </> : <>
 
-                                            <h1>You Don&apos;t Have Upcomming Appointments</h1>
+                                      
+                                            <EmptyData message='You Don&apos;t Have Upcomming Appointments'  />
                                             </>
                                     }
                                 </div> : <SkeletenComp length={pageSize} />
@@ -150,6 +153,7 @@ const UpcommingAppointments = () => {
                 }
             </div>
             <AppointmentDetailModal iRequested={iRequested} appointment={appointment} handleClose={() => setIsOpen((prev) => !prev)} isOpen={isOpen} />
+            <ProfileModal />
 
         </section>
     )

@@ -171,28 +171,34 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
                             iRequested ?
 
                                 <>
-                                 <div className="flex gap-4 flex-col justify-center">
-                                 <Image src={appointment.requestedFor?.profileUrl} width={40} height={40} alt={appointment.requestedFor.name} style={{ borderRadius: "100%" }} />
-                                    <div>
-                                        <h1 className="text-center font-bold">{appointment.requestedFor?.name}</h1>
-                                        <h1 className="text-center">{appointment.requestedFor?.companyName}</h1>
-                                        <h1 className="text-center">{appointment.requestedFor?.email}</h1>
+                                    <div className="flex gap-4 flex-col justify-center">
+                                        <Image src={appointment.requestedFor?.profileUrl} width={40} height={40} alt={appointment.requestedFor.name} style={{ borderRadius: "100%" }} />
+                                        <div>
+                                            <div className="flex gap-2">
+                                                <h1 className="text-center font-bold">{appointment.requestedFor?.firstName}</h1>
+                                                <h1 className="text-center font-bold">{appointment.requestedFor?.lastName}</h1>
+                                            </div>
+                                            <h1 className="text-center">{appointment.requestedFor?.companyName}</h1>
+                                            <h1 className="text-center">{appointment.requestedFor?.email}</h1>
 
+                                        </div>
                                     </div>
-                                 </div>
                                     <h1 className="overflow-wrap-break-word  max-w-[300px]">{appointment.requestedFor?.serviceDscription}</h1>
 
                                 </> :
                                 <>
-                                  <div className="flex gap-4 flex-col items-center">
-                                  <Image src={appointment.requestedBy?.profileUrl} width={40} height={40} alt={appointment.requestedBy?.name} style={{ borderRadius: "100%" }} />
-                                    <div>
-                                        <h1 className="text-center font-bold">{appointment.requestedBy?.name}</h1>
-                                        <h1 className="text-center">{appointment.requestedBy?.companyName}</h1>
-                                        <h1 className="text-center">{appointment.requestedBy?.email}</h1>
+                                    <div className="flex gap-4 flex-col items-center">
+                                        <Image src={appointment.requestedBy?.profileUrl} width={40} height={40} alt={appointment.requestedBy?.name} style={{ borderRadius: "100%" }} />
+                                        <div>
+                                            <div className="flex gap-2">
+                                                <h1 className="text-center font-bold">{appointment.requestedBy?.firstName}</h1>
+                                                <h1 className="text-center font-bold">{appointment.requestedBy?.lastName}</h1>
+                                            </div>
+                                            <h1 className="text-center">{appointment.requestedBy?.companyName}</h1>
+                                            <h1 className="text-center">{appointment.requestedBy?.email}</h1>
 
+                                        </div>
                                     </div>
-                                  </div>
                                     <h1 className="overflow-wrap-break-word max-w-[300px]">{appointment.requestedBy?.serviceDscription}</h1>
 
                                 </>
@@ -213,18 +219,18 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
 
                     <DialogFooter>
                         {
-                            appointment.status == "PENDING" && !iRequested ? 
-                            <Button onClick={handleConfirmAppointment} type="submit" variant="outline" className='w-full bg-primary-1 text-white-1 transition-all duration-500 hover:bg-primary-3 hover:text-black-1' >
-                                {
-                                    isPending ? <>
-                                        <Loader />Loading
-                                    </> : <>Confirm Appointment</>
-                                }
-                            </Button> : <div className="flex flex-col justify-center items-center ">
-                                <h1>Status</h1>
+                            appointment.status == "PENDING" && !iRequested ?
+                                <Button onClick={handleConfirmAppointment} type="submit" variant="outline" className='w-full bg-primary-1 text-white-1 transition-all duration-500 hover:bg-primary-3 hover:text-black-1' >
+                                    {
+                                        isPending ? <>
+                                            <Loader />Loading
+                                        </> : <>Confirm Appointment</>
+                                    }
+                                </Button> : <div className="flex flex-col justify-center items-center ">
+                                    <h1>Status</h1>
 
-                                <h1>{appointment.status}</h1>
-                            </div>
+                                    <h1>{appointment.status}</h1>
+                                </div>
 
                         }
                     </DialogFooter>

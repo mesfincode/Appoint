@@ -16,7 +16,7 @@ export interface profileRepCard {
 }
 export interface appointmentCardProp {
     profileUrl: string;
-    name: string;
+    
     company: string;
     date: string;
     color: string;

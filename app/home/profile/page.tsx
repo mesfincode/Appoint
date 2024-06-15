@@ -44,6 +44,7 @@ import { FormError } from '@/components/FormError'
 import { FormSuccess } from '@/components/FormSuccess'
 import { User } from '@prisma/client'
 import ViewProfile from '@/components/ViewProfile'
+import ProfileModal from '@/components/ProfileModal'
 
 const ProfilePage = () => {
   const { signOut, openUserProfile } = useClerk()
@@ -97,6 +98,8 @@ const ProfilePage = () => {
         user && <ViewProfile firstName={user.firstName} lastName={user.lastName} email={user.email} readyForAppointments={user.readyForAppointments} profession={user.profession} phone={user.phone ?? ""} service={user.service ?? ""} serviceDscription={user.serviceDscription ?? ""} companyName={user.companyName ?? ""} verified={user.verified} />
 
       }
+                  <ProfileModal />
+
     </section>
   )
 }
