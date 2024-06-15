@@ -19,7 +19,6 @@ import {
     senderName: string;
     receiverName:string;
     appointmentId:string;
-    appointmentLink:string;
     appointment:any
 
   }
@@ -132,9 +131,9 @@ const Email = ({
   };
 
   export const html = ({
-    senderName,receiverName,appointmentId,appointmentLink,appointment
+    senderName,receiverName,appointmentId,appointment
   }: EmailTemplateProps)=>{
-    return render(<Email appointment={appointment} senderName={senderName} receiverName={receiverName} appointmentId={appointmentId} appointmentLink={appointmentLink}/>,{pretty:true})
+    return render(<Email appointment={appointment} senderName={senderName} receiverName={receiverName} appointmentId={appointmentId} />,{pretty:true})
   }
 
   export const appointmentConfirmEmailString = (appointment:any)=>{
