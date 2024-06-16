@@ -122,7 +122,7 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
                 setSuccess(data.success)
                 if (data.success) {
                     toast({
-                        title: "Meeting created and sent",
+                        title: "Appointment Confirmed successfully",
                     })
                 }
             })

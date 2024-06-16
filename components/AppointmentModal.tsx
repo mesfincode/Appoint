@@ -106,7 +106,7 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                 setSuccess(data.success)
                 if (data.success) {
                     toast({
-                        title: "Meeting created and sent",
+                        title: "Appointmnet created and sent",
 
                     })
                 }
