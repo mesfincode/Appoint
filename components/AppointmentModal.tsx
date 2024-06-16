@@ -263,7 +263,7 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                                         <h1>{profile?.lastName}</h1>
                                     </div>
                                     <h1>{profile?.companyName}</h1>
-                                    <h1>{profile?.email}</h1>
+                                    {/* <h1>{profile?.email}</h1> */}
 
                                 </div>
 
