@@ -175,7 +175,7 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
                                                 <h1 className="text-center font-bold">{appointment.requestedFor?.lastName}</h1>
                                             </div>
                                             <h1 className="text-center">{appointment.requestedFor?.companyName}</h1>
-                                            <h1 className="text-center">{appointment.requestedFor?.email}</h1>
+                                            {/* <h1 className="text-center">{appointment.requestedFor?.email}</h1> */}
 
                                         </div>
                                     </div>
@@ -191,7 +191,7 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
                                                 <h1 className="text-center font-bold">{appointment.requestedBy?.lastName}</h1>
                                             </div>
                                             <h1 className="text-center">{appointment.requestedBy?.companyName}</h1>
-                                            <h1 className="text-center">{appointment.requestedBy?.email}</h1>
+                                            {/* <h1 className="text-center">{appointment.requestedBy?.email}</h1> */}
 
                                         </div>
                                     </div>

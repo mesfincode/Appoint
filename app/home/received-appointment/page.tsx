@@ -69,7 +69,7 @@ const ReceivedAppointment = () => {
     }
     return (
         <section className='mx-8 my-8'>
-            <h1 className='text-black-1 text-center font-semibold text-2xl pb-4'>Requested Appointments</h1>
+            <h1 className='text-black-1 text-center font-semibold text-2xl pb-4'>Received Appointments</h1>
             {
                 appointmentList ?
                     <>
