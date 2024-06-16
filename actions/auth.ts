@@ -2,10 +2,8 @@
 import { db } from "@/lib/db";
 import { ProfileSchema, RegisterSchema } from "@/validators";
 import bcrypt from "bcryptjs"
-import { error } from "console";
 
 export const register = async ( values: any)=>{
-    console.log(values)
     const validatedFields = ProfileSchema.safeParse(values);
 
     if(!validatedFields.success){
@@ -19,7 +17,6 @@ export const register = async ( values: any)=>{
       data: values
      })
   }catch(e){
-    console.log(e)
     return {error:"Failed to create profile ! "}
   }
 

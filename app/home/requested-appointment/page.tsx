@@ -82,7 +82,6 @@ const RequestedAppointment = () => {
                                         {
                                             appointmentList.map((item, index) => {
                                                 const requestedFor = item.requestedFor;
-                                                console.log(item.requestedById,userId)
                                                 const iRequested = item.requestedById == userId? true:false;
                                                 return (
                                                     <>

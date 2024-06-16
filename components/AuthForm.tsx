@@ -41,7 +41,6 @@ const AuthForm = () => {
         }
     })
     const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
-        console.log(values)
         setError("");
         setSuccess("");
         startTransition(() => {

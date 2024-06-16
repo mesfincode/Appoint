@@ -81,7 +81,6 @@ import {
               className="hidden h-8 w-8 p-0 lg:flex"
               onClick={() => {
                 // table.previousPage()
-                console.log("Previous page")
                 let pagenationOption = {page:1,pageSize:pageSize}
 
                 fetchNext(pagenationOption);
@@ -96,7 +95,6 @@ import {
               className="h-8 w-8 p-0"
               onClick={() => {
                 // table.previousPage()
-                console.log("Previous page")
                 let pagenationOption = {page:page-1,pageSize:pageSize}
 
                 fetchNext(pagenationOption);
@@ -111,7 +109,6 @@ import {
               className="h-8 w-8 p-0"
               onClick={() =>{
                 //  table.nextPage()
-                // console.log("Next page")
                 let pagenationOption = {page:page+1,pageSize:pageSize}
 
                 fetchNext(pagenationOption);

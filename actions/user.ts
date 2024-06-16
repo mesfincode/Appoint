@@ -5,10 +5,8 @@ import { User } from "@prisma/client";
 
 export const getUserByEmail = async (email:string)=>{
     try{
-        console.log("user email ==",email)
 
         const user = await db.user.findUnique({where:{email}});
-        console.log("user date",user)
         return user;
     }catch{
         return null;
@@ -69,7 +67,6 @@ export const getServiceProviderWithPagination = async (paginationOptions: Pagina
         error:"",
       };
     } catch (error) {
-      console.error('Error fetching employee data:', error);
       return { 
         data: [],
         page: 0,
@@ -130,7 +127,6 @@ export const getServiceProviderWithPagination = async (paginationOptions: Pagina
         error:"",
       };
     } catch (error) {
-      console.error('Error fetching employee data:', error);
       return { 
         data: [],
         page: 0,
@@ -155,7 +151,6 @@ export const getServiceProviderWithPagination = async (paginationOptions: Pagina
         return { success: "Profile Updated successfully ! " ,appointment}
         ;
     }catch(e){
-        console.log(e)
         return { error: "Profile Update Error " }
 
     }

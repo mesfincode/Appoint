@@ -89,7 +89,6 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
         const requestedForId = profile?.id;
         const appointmentDate = dateTime;
         const status = "PENDING"
-        console.log(typeOfAppointment)
         const data = {
             ...values,
             requestedById,
@@ -99,12 +98,10 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
             status
 
         }
-        console.log(data)
         setError("");
         setSuccess("");
         startTransition(() => {
             createAppointment(data).then((data) => {
-                console.log(data)
                 setError(data.error)
                 setSuccess(data.success)
                 if (data.success) {
@@ -122,126 +119,166 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
             {/* <DialogTrigger asChild>
                 <Button variant="outline">Share</Button>
             </DialogTrigger> */}
-            <DialogContent className="  z-50">
-                <DialogHeader>
-                    <div className="flex flex-col justify-center items-center gap-4">
-                        <DialogTitle >Request Appointment</DialogTitle>
-                        <DialogDescription>
-                            Fill the following form and request appointment
-                        </DialogDescription>
-                    </div>
-                </DialogHeader>
-                <div className="flex flex-col justify-center items-center w-full gap-1">
-                    <div className="pb-4 flex gap-4 justify-center items-center">
-                        {
-                            profile?.profileUrl && (
-                                <Image src={profile?.profileUrl} width={80} height={80} alt={profile.name} style={{ borderRadius: "100%" }} />
+            {
+                profile?.readyForAppointments ? <DialogContent className="  z-50">
+                    <DialogHeader>
+                        <div className="flex flex-col justify-center items-center gap-4">
+                            <DialogTitle >Request Appointment</DialogTitle>
+                            <DialogDescription>
+                                Fill the following form and request appointment
+                            </DialogDescription>
+                        </div>
+                    </DialogHeader>
+                    <div className="flex flex-col justify-center items-center w-full gap-1">
+                        <div className="pb-4 flex gap-4 justify-center items-center">
+                            {
+                                profile?.profileUrl && (
+                                    <Image src={profile?.profileUrl} width={80} height={80} alt={profile.name} style={{ borderRadius: "100%" }} />
 
-                            )
-                        }
+                                )
+                            }
+                            <div>
+                                <div className="flex gap-2 text-black-1 font-bold uppercase">
+                                    <h1>{profile?.firstName}</h1>
+                                    <h1>{profile?.lastName}</h1>
+                                </div>
+                                <h1>{profile?.companyName}</h1>
+                                <h1>{profile?.email}</h1>
+
+                            </div>
+
+                        </div>
+                        <div className="max-w-[300px]">
+                            <h1 className="overflow-wrap-break-word">{profile?.serviceDscription}</h1>
+
+                        </div>
                         <div>
-                          <div className="flex gap-2 text-black-1 font-bold uppercase">
-                          <h1>{profile?.firstName}</h1>
-                          <h1>{profile?.lastName}</h1>
-                          </div>
-                            <h1>{profile?.companyName}</h1>
-                            <h1>{profile?.email}</h1>
+                            <Form {...form}>
+                                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 
+
+                                    <FormField
+                                        control={form.control}
+                                        name='reason'
+                                        render={({ field }) => (<FormItem>
+                                            <FormLabel>Reason</FormLabel>
+                                            <FormControl>
+                                                <Input type="text" placeholder="Service Description" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
+
+                                            </FormControl>
+                                            <FormMessage className="text-red-400" />
+                                        </FormItem>)}
+                                    />
+
+                                    <FormField
+                                        control={form.control}
+                                        name='notes'
+                                        render={({ field }) => (<FormItem>
+                                            <FormLabel>Notes</FormLabel>
+                                            <FormControl>
+                                                {/* <Input type="text" placeholder="Notes" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" /> */}
+                                                <Textarea className="input-class focus-visible:ring-offset-orange-1" placeholder="Write a short discription " {...field} />
+
+                                            </FormControl>
+                                            <FormMessage className="text-red-400" />
+                                        </FormItem>)}
+                                    />
+
+                                    <div className="flex gap-4 max-sm:flex-col-reverse">
+                                        <div className='flex w-full flex-col gap-2.5 flex-1'>
+                                            <label className='text-base text-normal leading-[22px] text-sky-2'>Select Date and Time</label>
+                                            <ReactDatePicker selected={dateTime}
+                                                onChange={(date) => setDateTime(date!)}
+                                                showTimeSelect
+                                                timeFormat="HH:mm"
+                                                timeIntervals={15}
+                                                timeCaption="time"
+                                                dateFormat="MMMM d, yyyy h:mm aa"
+                                                className="w-full p-2 focus:outline-none bg-primary-3  border-2 border-primary-1 rounded-xl"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col  gap-2.5">
+                                            <label className='text-base text-normal leading-[22px] text-sky-2'>Select Appointment Type</label>
+
+                                            <Select onValueChange={(value) => setTypeOfAppointment(value)}>
+                                                <SelectTrigger className={cn('text-16 w-full py-2 bg-primary-3 border-2 border-primary-1  text-gray-1  focus:ring-offset-orange-1')}>
+                                                    <SelectValue placeholder="Select Appointment Type" />
+                                                </SelectTrigger>
+                                                <SelectContent className=" z-[200] bg-primary-3  border-2 border-primary-1  font-bold text-primary-1focus:ring-offset-orange-1">
+                                                    {
+                                                        appointmentType.map((category) => (
+                                                            <SelectItem key={category} value={category} className="capitalize focus:bg-orange-1">
+                                                                {category}
+                                                            </SelectItem>
+                                                        ))
+                                                    }
+
+                                                </SelectContent>
+
+                                            </Select>
+                                        </div>
+                                    </div>
+
+                                    <FormError message={error} />
+                                    <FormSuccess message={success} />
+
+
+                                    <DialogFooter>
+                                        <Button type="submit" variant="outline" className='w-full bg-primary-1 text-white-1 transition-all duration-500 hover:bg-primary-3 hover:text-black-1' >
+                                            {
+                                                isPending ? <>
+                                                    <Loader />Loading
+                                                </> : <>Send Appointment</>
+                                            }
+                                        </Button>
+
+                                    </DialogFooter>
+                                </form>
+                            </Form>
                         </div>
 
                     </div>
-                    <div className="max-w-[300px]">
-                        <h1 className="overflow-wrap-break-word">{profile?.serviceDscription}</h1>
 
-                    </div>
-                    <div>
-                        <Form {...form}>
-                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                </DialogContent> : <>
+                    <DialogContent className="  z-50">
+                        <DialogHeader>
+                            <div className="flex flex-col justify-center items-center gap-4">
+                                <DialogTitle >Request Appointment</DialogTitle>
+                                <DialogDescription>
+                                    Fill the following form and request appointment
+                                </DialogDescription>
+                            </div>
+                        </DialogHeader>
+                        <div className="flex flex-col justify-center items-center w-full gap-1">
+                            <div className="pb-4 flex gap-4 justify-center items-center">
+                                {
+                                    profile?.profileUrl && (
+                                        <Image src={profile?.profileUrl} width={80} height={80} alt={profile.name} style={{ borderRadius: "100%" }} />
 
-
-                                <FormField
-                                    control={form.control}
-                                    name='reason'
-                                    render={({ field }) => (<FormItem>
-                                        <FormLabel>Reason</FormLabel>
-                                        <FormControl>
-                                            <Input type="text" placeholder="Service Description" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" />
-
-                                        </FormControl>
-                                        <FormMessage className="text-red-400" />
-                                    </FormItem>)}
-                                />
-
-                                <FormField
-                                    control={form.control}
-                                    name='notes'
-                                    render={({ field }) => (<FormItem>
-                                        <FormLabel>Notes</FormLabel>
-                                        <FormControl>
-                                            {/* <Input type="text" placeholder="Notes" {...field} className="w-full focus:ring-primary-1 focus-visible:ring-offset-primary-1" /> */}
-                                            <Textarea className="input-class focus-visible:ring-offset-orange-1" placeholder="Write a short discription " {...field} />
-
-                                        </FormControl>
-                                        <FormMessage className="text-red-400" />
-                                    </FormItem>)}
-                                />
-
-                                <div className="flex gap-4 max-sm:flex-col-reverse">
-                                    <div className='flex w-full flex-col gap-2.5 flex-1'>
-                                        <label className='text-base text-normal leading-[22px] text-sky-2'>Select Date and Time</label>
-                                        <ReactDatePicker selected={dateTime}
-                                            onChange={(date) => setDateTime(date!)}
-                                            showTimeSelect
-                                            timeFormat="HH:mm"
-                                            timeIntervals={15}
-                                            timeCaption="time"
-                                            dateFormat="MMMM d, yyyy h:mm aa"
-                                            className="w-full p-2 focus:outline-none bg-primary-3  border-2 border-primary-1 rounded-xl"
-                                        />
+                                    )
+                                }
+                                <div>
+                                    <div className="flex gap-2 text-black-1 font-bold uppercase">
+                                        <h1>{profile?.firstName}</h1>
+                                        <h1>{profile?.lastName}</h1>
                                     </div>
-                                    <div className="flex flex-col  gap-2.5">
-                                        <label className='text-base text-normal leading-[22px] text-sky-2'>Select Appointment Type</label>
+                                    <h1>{profile?.companyName}</h1>
+                                    <h1>{profile?.email}</h1>
 
-                                        <Select onValueChange={(value) => setTypeOfAppointment(value)}>
-                                            <SelectTrigger className={cn('text-16 w-full py-2 bg-primary-3 border-2 border-primary-1  text-gray-1  focus:ring-offset-orange-1')}>
-                                                <SelectValue placeholder="Select Appointment Type" />
-                                            </SelectTrigger>
-                                            <SelectContent className=" z-[200] bg-primary-3  border-2 border-primary-1  font-bold text-primary-1focus:ring-offset-orange-1">
-                                                {
-                                                    appointmentType.map((category) => (
-                                                        <SelectItem key={category} value={category} className="capitalize focus:bg-orange-1">
-                                                            {category}
-                                                        </SelectItem>
-                                                    ))
-                                                }
-
-                                            </SelectContent>
-
-                                        </Select>
-                                    </div>
                                 </div>
 
-                                <FormError message={error} />
-                                <FormSuccess message={success} />
+                            </div>
+                            <div className="max-w-[300px]">
+                                <h1 className="overflow-wrap-break-word">{profile?.serviceDscription}</h1>
 
+                            </div>
 
-                                <DialogFooter>
-                                    <Button type="submit" variant="outline" className='w-full bg-primary-1 text-white-1 transition-all duration-500 hover:bg-primary-3 hover:text-black-1' >
-                                        {
-                                            isPending ? <>
-                                                <Loader />Loading
-                                            </> : <>Send Appointment</>
-                                        }
-                                    </Button>
+                            <h1 className="text-black-2"> User is Not available for appointments</h1>
+                        </div>
 
-                                </DialogFooter>
-                            </form>
-                        </Form>
-                    </div>
-
-                </div>
-
-            </DialogContent>
+                    </DialogContent>
+                </>
+            }
         </Dialog>
     )
 }

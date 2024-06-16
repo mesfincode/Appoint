@@ -91,7 +91,6 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
         const requestedForId = appointment?.id;
         const appointmentDate = dateTime;
         const status = "PENDING"
-        console.log(typeOfAppointment)
         const data = {
             ...values,
             requestedById,
@@ -101,12 +100,10 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
             status
 
         }
-        console.log(data)
         setError("");
         setSuccess("");
         startTransition(() => {
             createAppointment(data).then((data) => {
-                console.log(data)
                 setError(data.error)
                 setSuccess(data.success)
                 if (data.success) {
@@ -121,7 +118,6 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
     const handleConfirmAppointment = () => {
         startTransition(() => {
             confirmAppointment(appointment.id).then((data) => {
-                console.log(data)
                 setError(data.error)
                 setSuccess(data.success)
                 if (data.success) {

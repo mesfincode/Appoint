@@ -49,13 +49,11 @@ const ProfileModal = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { email, clerkId, profileUrl, firstName, lastName } = useCurrentUser()
     useEffect(() => {
-    console.log("user email -------", email)
 
         const getUserfromdb = async () => {
 
            if(email != null && email.length>0){
             const user = await getUserByEmail(email)
-            console.log("ProfileModal", user)
             if (user == null) {
                 // setTimeout(()=>setIsOpen(true),3000)
                 setIsOpen(true)
@@ -93,12 +91,10 @@ const ProfileModal = () => {
     const onSubmit = (values: z.infer<typeof ProfileSchema>) => {
         const name =`${firstName} ${lastName}`
         const data = {...values,clerkId,name,email,profileUrl}
-        console.log(data)
         setError("");
         setSuccess("");
         startTransition(() => {
             register(data).then((data) => {
-                console.log(data)
                 setError(data.error)
                 setSuccess(data.success)
             })

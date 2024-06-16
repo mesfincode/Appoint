@@ -48,7 +48,6 @@ const Home = () => {
         setTotalPages(userData.totalPages)
         setTotalUsers(userData.totalUsers)
 
-        console.log(userData)
 
     }
     const searchUser = async () => {
@@ -62,7 +61,6 @@ const Home = () => {
                 setPageSize(userData.pageSize)
                 setTotalPages(userData.totalPages)
                 setTotalUsers(userData.totalUsers)
-                console.log(userData)
             }))
 
 
@@ -80,7 +78,6 @@ const Home = () => {
                 setPageSize(userData.pageSize)
                 setTotalPages(userData.totalPages)
                 setTotalUsers(userData.totalUsers)
-                console.log(userData)
             }))
 
 

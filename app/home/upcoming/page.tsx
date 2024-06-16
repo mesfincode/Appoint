@@ -37,11 +37,9 @@ const UpcommingAppointments = () => {
     const getReceivedAppointments = async () => {
         let pagenationOption = { page: page, pageSize: pageSize, clerkId }
         // const appoinmentDta = await upcommingAppointments(pagenationOption)
-        console.log(pagenationOption)
         startTransition(() => {
 
             upcommingAppointments(pagenationOption).then((appoinmentDta) => {
-                console.log(appoinmentDta)
                 handleAddAppointment(appoinmentDta.data);
                 setPage(appoinmentDta.page )
                 setPageSize(appoinmentDta.pageSize)
@@ -50,7 +48,6 @@ const UpcommingAppointments = () => {
 
                 setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
 
-                console.log("Appointment Data", appoinmentDta)
             })
         })
 
@@ -60,18 +57,15 @@ const UpcommingAppointments = () => {
     const fetchNext = async({page,pageSize}:PaginationOptions)=>{
         let pagenationOption = { page: page, pageSize: pageSize, clerkId }
         // const appoinmentDta = await upcommingAppointments(pagenationOption)
-        console.log(pagenationOption)
         startTransition(() => {
 
             upcommingAppointments(pagenationOption).then((appoinmentDta) => {
-                console.log(appoinmentDta)
                 setAppointmentList(appoinmentDta.data)
                 setPage(appoinmentDta.page )
                 setPageSize(appoinmentDta.pageSize)
                 setTotalPages(appoinmentDta.totalPages)
                 setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
                 setUserId(appoinmentDta.userId ??"")
-                console.log("Appointment Data", appoinmentDta)
             })
         })
       
@@ -114,7 +108,6 @@ const UpcommingAppointments = () => {
                                                            
                                                             const iRequested = item.requestedById == userId? true:false;
                                                             const requestedFor = item.requestedFor;
-                                                            console.log(item.requestedById,userId)
                                                             return (
                                                                 <>
                                                                     <AppointmentCArd

@@ -5,10 +5,8 @@ import { db } from "@/lib/db";
 import { sendAppointmentConfirmedEmail, sendAppointmentEmail } from "@/lib/mail";
 import { AppointmentSchema } from "@/validators";
 import { Appointment } from "@prisma/client";
-import { error } from "console";
 
 export const createAppointment = async (values: any) => {
-    console.log(values)
     const validatedFields = AppointmentSchema.safeParse(values);
 
     // if(!validatedFields.success){
@@ -29,11 +27,9 @@ export const createAppointment = async (values: any) => {
       const apponitment=  await db.appointment.create({
             data: values
         })
-        console.log(receiver.email)
         await sendAppointmentEmail(receiver.email,apponitment.id, existingUser.name,receiver.name,apponitment);
 
     } catch (e) {
-        console.log(e)
         return { error: "Failed to create profile ! " }
     }
 
@@ -75,7 +71,6 @@ export const getRequestedAppointmentsWithPagenation = async (paginationOptions: 
         }
 
         const requestedById = existingUser.id
-        console.log(requestedById)
         const totalUsers = await db.appointment.count({
             where: {
                 requestedById
@@ -93,7 +88,6 @@ export const getRequestedAppointmentsWithPagenation = async (paginationOptions: 
 
             }
         });
-        console.log(users)
 
         return {
             data: users,
@@ -105,7 +99,6 @@ export const getRequestedAppointmentsWithPagenation = async (paginationOptions: 
             error: "",
         };
     } catch (error) {
-        console.error('Error fetching employee data:', error);
         return {
             data: [],
             page: 0,
@@ -138,7 +131,6 @@ export const getReceivedAppointmentsWithPagenation = async (paginationOptions: P
         }
 
         const requestedForId = existingUser.id
-        console.log(requestedForId)
         const totalUsers = await db.appointment.count({
             where: {
                 requestedForId
@@ -155,7 +147,6 @@ export const getReceivedAppointmentsWithPagenation = async (paginationOptions: P
                 requestedBy:true
             }
         });
-        console.log(users)
 
         return {
             data: users,
@@ -167,7 +158,6 @@ export const getReceivedAppointmentsWithPagenation = async (paginationOptions: P
             error: "",
         };
     } catch (error) {
-        console.error('Error fetching employee data:', error);
         return {
             data: [],
             page: 0,
@@ -201,7 +191,6 @@ export const upcommingAppointments = async (paginationOptions: PaginationOptions
         const requestedForId = existingUser.id
         const requestedById = existingUser.id
 
-        console.log(requestedForId)
         const today = new Date();
 
         const totalUsers = await db.appointment.count({
@@ -235,7 +224,6 @@ export const upcommingAppointments = async (paginationOptions: PaginationOptions
 
             }
         });
-        console.log(users)
 
         return {
             data: users,
@@ -247,7 +235,6 @@ export const upcommingAppointments = async (paginationOptions: PaginationOptions
             error: "",
         };
     } catch (error) {
-        console.error('Error fetching employee data:', error);
         return {
             data: [],
             page: 0,
@@ -280,7 +267,6 @@ export const pastAppointments = async (paginationOptions: PaginationOptions): Pr
         const requestedForId = existingUser.id
         const requestedById = existingUser.id
 
-        console.log(requestedForId)
         const today = new Date();
 
         const totalUsers = await db.appointment.count({
@@ -314,7 +300,6 @@ export const pastAppointments = async (paginationOptions: PaginationOptions): Pr
 
             }
         });
-        console.log(users)
 
         return {
             data: users,
@@ -326,7 +311,6 @@ export const pastAppointments = async (paginationOptions: PaginationOptions): Pr
             error: "",
         };
     } catch (error) {
-        console.error('Error fetching employee data:', error);
         return {
             data: [],
             page: 0,
@@ -358,7 +342,6 @@ export const confirmAppointment = async (appointmentId:string)=>{
         return { success: "Appointment Confirmed successfully ! " ,appointment}
         ;
     }catch(e){
-        console.log(e)
         return { error: "Error Confirming appointment " }
 
     }

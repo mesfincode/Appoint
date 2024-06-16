@@ -41,7 +41,6 @@ const ReceivedAppointment = () => {
                 setTotalPages(appoinmentDta.totalPages)
                 setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
 
-                console.log("Appointment Data", appoinmentDta)
             })
         })
 
@@ -60,7 +59,6 @@ const ReceivedAppointment = () => {
                 setTotalPages(appoinmentDta.totalPages)
                 setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
 
-                console.log("Appointment Data", appoinmentDta)
             })
         })
 
@@ -84,7 +82,6 @@ const ReceivedAppointment = () => {
                                         appointmentList.map((item, index) => {
                                             // const requestedFor = item.requestedFor;
                                             const requestedFor= item.requestedBy;
-                                            console.log(item.requestedById,userId)
                                             const iRequested = item.requestedById == userId? false:false;
                                             return (
                                                 <>

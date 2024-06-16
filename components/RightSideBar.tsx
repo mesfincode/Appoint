@@ -38,7 +38,6 @@ const RightSideBar = () => {
         setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
         setUserId(appoinmentDta.userId ??"")
 
-        console.log("Appointment Data", appoinmentDta)
 
     }
     return (
@@ -69,7 +68,6 @@ const RightSideBar = () => {
                                         appointmentList.map((item, index) => {
                                             const iRequested = item.requestedById == userId? true:false;
                                             const requestedFor = item.requestedFor;
-                                            console.log(item.requestedById,userId)
                                             return (
                                                 <>
                                                     <AppointmentCArd onClick={()=>{

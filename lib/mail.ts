@@ -17,7 +17,6 @@ export const sendAppointmentEmail = async (email: string, appointmentId: string,
     return console.error({ error });
   }
 
-  console.log({ data });
 }
 
 export const sendAppointmentConfirmedEmail = async (appointment: any) => {
@@ -33,7 +32,6 @@ export const sendAppointmentConfirmedEmail = async (appointment: any) => {
     return console.error({ error });
   }
 
-  console.log({ data });
 }
 
 export const sendNextDayEmailAlert = async (appointment: any,name:string,email:string) => {
@@ -49,5 +47,4 @@ export const sendNextDayEmailAlert = async (appointment: any,name:string,email:s
     return console.error({ error });
   }
 
-  console.log({ data });
 }

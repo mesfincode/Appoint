@@ -52,14 +52,12 @@ const ProfilePage = () => {
   const { email, clerkId, profileUrl, firstName, lastName } = useCurrentUser()
   const [user, setUser] = useState<User | null>(null)
   useEffect(() => {
-    console.log("user email -------", email)
 
     const getUserfromdb = async () => {
 
       if (email != null && email.length > 0) {
         const user = await getUserByEmail(email)
         setUser(user);
-        console.log("ProfileModal", user)
         if (user == null) {
           // setTimeout(()=>setIsOpen(true),3000)
 

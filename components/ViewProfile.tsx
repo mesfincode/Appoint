@@ -52,7 +52,6 @@ interface  ProfileViewProps{
 }
 const ViewProfile = ({phone,email,service,serviceDscription,companyName,verified,readyForAppointments,profession,firstName,lastName}:ProfileViewProps ) => {
     const {  clerkId, profileUrl, } = useCurrentUser()
-// console.log(user)
     const form = useForm<z.infer<typeof ProfileSchema>>({
         resolver: zodResolver(ProfileSchema),
         defaultValues: {
@@ -78,12 +77,10 @@ const ViewProfile = ({phone,email,service,serviceDscription,companyName,verified
     const onSubmit = (values: z.infer<typeof ProfileSchema>) => {
         const name =`${firstName} ${lastName}`
         const data = {...values,clerkId,name,email,profileUrl}
-        console.log(data)
         setError("");
         setSuccess("");
         startTransition(() => {
             updateUserProfile(email,data).then((data) => {
-                console.log(data)
                 setError(data.error)
                 setSuccess(data.success)
             })
