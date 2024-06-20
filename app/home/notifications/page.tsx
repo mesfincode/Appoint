@@ -8,7 +8,7 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import { FaBell } from 'react-icons/fa6';
 
-const page = () => {
+const NotificationPage = () => {
     const [unreadNotifications, setUnreadNotifications] = useState<any>(null);
     const [readNotfifications, setReadNotifications] = useState<any>(null);
 
@@ -99,4 +99,4 @@ const page = () => {
     )
 }
 
-export default page
+export default NotificationPage
