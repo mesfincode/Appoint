@@ -27,9 +27,9 @@ const ServiceCard = ({ profileUrl, email, company, serviceDescription, firstName
                 {/* <h1 className='text-center pt-2'>{serviceDescription.slice(0, 100)}</h1> */}
                 <h1 className='text-center pt-1 px-2 max-w-[300px] w-full overflow-wrap-break-word'>{serviceDescription.length > 30 ? `${serviceDescription.slice(0, 30)}...` : serviceDescription}</h1>
                 <div className='flex items-baseline'>
-                <Button variant="custom" className='border-2 border-primary-1  bg-gray-100  transition-all duration-500 hover:bg-primary-1 hover:text-white-1  rounded-full flex justify-center items-center gap-2 ' >
-                    <FaCalendarWeek />
-                    Book Appointment</Button>
+                    <Button variant="custom" className='border-2 border-primary-1  bg-gray-100  transition-all duration-500 hover:bg-primary-1 hover:text-white-1  rounded-full flex justify-center items-center gap-2 ' >
+                        <FaCalendarWeek />
+                        Book Appointment</Button>
                 </div>
             </div>
 

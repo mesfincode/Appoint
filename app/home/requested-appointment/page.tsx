@@ -6,6 +6,7 @@ import EmptyData from '@/components/EmptyData';
 import { DataTablePagination, PaginationOptions } from '@/components/PaginationComp';
 import ProfileModal from '@/components/ProfileModal';
 import SkeletenComp from '@/components/SkeletenComp';
+import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { Appointment } from '@prisma/client';
@@ -13,7 +14,7 @@ import React, { useEffect, useState, useTransition } from 'react'
 
 const RequestedAppointment = () => {
     const [appointmentList, setAppointmentList] = useState<any[] | null>(null);
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(6);
     const [totalPages, setTotalPages] = useState(0);
     const [totalRequestedAppointments, setTotalRequestedAppointments] = useState(0)
@@ -48,11 +49,11 @@ const RequestedAppointment = () => {
 
     }
     const fetchNext =  async({page,pageSize}:PaginationOptions)=> {
-        let pagenationOption = { page: page, pageSize: pageSize, clerkId }
+        let pagenationOption = { page: page+1, pageSize: pageSize, clerkId }
         startTransition(()=>{
             getRequestedAppointmentsWithPagenation(pagenationOption).then((appoinmentDta)=>{
-                setAppointmentList(appoinmentDta.data)
-                setPage(appoinmentDta.page)
+                setAppointmentList((prev)=>prev!=null?[...prev,...appoinmentDta.data]:appoinmentDta.data)
+                setPage((prev)=>prev+1)
                 setPageSize(appoinmentDta.pageSize)
                 setUserId(appoinmentDta.userId ??"")
 
@@ -98,7 +99,8 @@ const RequestedAppointment = () => {
                                             })
                                         }
                                     </div>
-                                    <DataTablePagination fetchNext={fetchNext} updatePageSize={updatePageSize} page={page} pageSize={pageSize} totalPages={totalPages} />
+                                    {/* <DataTablePagination fetchNext={fetchNext} updatePageSize={updatePageSize} page={page} pageSize={pageSize} totalPages={totalPages} /> */}
+                                    <Button disabled={page==totalPages || isPending } className='hover:border-2 hover:border-primary-1 text-primary-1 my-4' variant="custom" onClick={()=>fetchNext({page,pageSize})}> <h1 className='text-primary-1 text-lg'>Load More</h1> </Button>
 
                                 </> :
                                 <>

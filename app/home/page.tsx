@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useRouter } from 'next/navigation';
 import TopBar from '@/components/TopBar';
+import { Button } from '@/components/ui/button';
 interface Notification {
     id: string;
     title: string;
@@ -94,8 +95,8 @@ const Home = () => {
         startTransition(() => {
 
             getFilteredUsers(searchKeyword, page, pageSize).then((userData => {
-                setUserList(userData.data)
-                setPage(userData.page)
+                setUserList((prev)=>prev!=null?[...prev,...userData.data]:userData.data)
+                setPage((prev)=>prev+1)
                 setPageSize(userData.pageSize)
                 setTotalPages(userData.totalPages)
                 setTotalUsers(userData.totalUsers)
@@ -129,7 +130,7 @@ const Home = () => {
                                 ))
                             }
                         </div>
-                        <DataTablePagination fetchNext={fetchNext} updatePageSize={updatePageSize} page={page} pageSize={pageSize} totalPages={totalPages} />
+                        <Button disabled={page==totalPages || isPending } className='hover:border-2 hover:border-primary-1 text-primary-1 my-4' variant="custom" onClick={()=>fetchNext({page,pageSize})}> <h1 className='text-primary-1 text-lg'>Load More</h1> </Button>
 
                     </div>
                     : <div className='max-sm:mx-4'>

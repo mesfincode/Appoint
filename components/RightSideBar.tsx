@@ -86,7 +86,7 @@ const RightSideBar = () => {
                 <h1>{user?.username}</h1>
            
             </div> */}
-            <ClockComp size={100} showSpeaker={true} />
+            <ClockComp size={130} showSpeaker={true} />
 
             <div className=' flex flex-col justify-start  items-start gap-4 '>
                 {

@@ -12,6 +12,7 @@ import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { PaginationOptions } from '@/types';
 import { Appointment } from '@prisma/client';
 import React, { useEffect, useState, useTransition } from 'react'
+import InfiniteScroll from 'react-infinite-scroller';
 
 const UpcommingAppointments = () => {
     const [appointmentList, setAppointmentList] = useState<any[] | null>(null);
@@ -35,7 +36,7 @@ const UpcommingAppointments = () => {
 
 
     const getReceivedAppointments = async () => {
-        let pagenationOption = { page: page, pageSize: pageSize, clerkId }
+        let pagenationOption = { page: 1, pageSize: pageSize, clerkId }
         // const appoinmentDta = await upcommingAppointments(pagenationOption)
         startTransition(() => {
 
@@ -55,21 +56,22 @@ const UpcommingAppointments = () => {
     }
 
     const fetchNext = async({page,pageSize}:PaginationOptions)=>{
-        let pagenationOption = { page: page, pageSize: pageSize, clerkId }
+        let pagenationOption = { page: page+1, pageSize: pageSize, clerkId }
         // const appoinmentDta = await upcommingAppointments(pagenationOption)
         startTransition(() => {
 
             upcommingAppointments(pagenationOption).then((appoinmentDta) => {
-                setAppointmentList(appoinmentDta.data)
-                setPage(appoinmentDta.page )
+                setAppointmentList((prev)=>prev!=null?[...prev,...appoinmentDta.data]:appoinmentDta.data)
+                setPage((prev)=>prev+1)
                 setPageSize(appoinmentDta.pageSize)
                 setTotalPages(appoinmentDta.totalPages)
                 setTotalRequestedAppointments(appoinmentDta.totalRequestedAppointments)
                 setUserId(appoinmentDta.userId ??"")
             })
         })
-      
+
       }
+   
     const handleAddAppointment = (newAppointment: any) => {
         setAppointmentList((prevList) => {
             if (prevList === null) {
@@ -95,8 +97,7 @@ const UpcommingAppointments = () => {
                     appointmentList ?
                         <>
                             {
-                                !isPending ? <div className='' >
-                                    {
+                                
                                         appointmentList.length != 0 ?
                                             <>
                                                 <h1 className='text-black-2 text-lg text-center font-semibold pb-4'>You have {totalRequestedAppointments} uppcomming appointments</h1>
@@ -121,7 +122,7 @@ const UpcommingAppointments = () => {
                                                                       status={item.status} 
                                                                       sidebar={false} 
                                                                       appointment={item}
-                                                                      color={Math.floor(Math.random() * 16777215).toString(16)} key={index} profileUrl={requestedFor?.profileUrl ?? ""}  date={item.appointmentDate.toString()} company={requestedFor.companyName} />
+                                                                      color="" key={index} profileUrl={requestedFor?.profileUrl ?? ""}  date={item.appointmentDate.toString()} company={requestedFor.companyName} />
 
                                                                 </>
                                                             )
@@ -129,14 +130,14 @@ const UpcommingAppointments = () => {
                                                     }
                                                 </div>
                                                
-                                                <DataTablePagination fetchNext={fetchNext} updatePageSize={updatePageSize} page={page} pageSize={pageSize} totalPages={totalPages} />
+                                               <Button disabled={page==totalPages || isPending } className='hover:border-2 hover:border-primary-1 text-primary-1 my-4' variant="custom" onClick={()=>fetchNext({page,pageSize})}> <h1 className='text-primary-1 text-lg'>Load More</h1> </Button>
+                                                {/* <DataTablePagination fetchNext={fetchNext} updatePageSize={updatePageSize} page={page} pageSize={pageSize} totalPages={totalPages} /> */}
                                             </> : <>
 
                                       
                                             <EmptyData message='You Don&apos;t Have Upcomming Appointments'  />
                                             </>
-                                    }
-                                </div> : <SkeletenComp length={pageSize} />
+                                  
                             }
                         </>
 
