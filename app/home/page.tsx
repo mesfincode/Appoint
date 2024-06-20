@@ -44,7 +44,7 @@ const Home = () => {
     const [isPending, startTransition] = useTransition();
 
     const [userList, setUserList] = useState<User[]>([]);
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(6);
     const [totalPages, setTotalPages] = useState(0);
     const [totalUsers, setTotalUsers] = useState(0)
@@ -94,7 +94,7 @@ const Home = () => {
 
         startTransition(() => {
 
-            getFilteredUsers(searchKeyword, page, pageSize).then((userData => {
+            getFilteredUsers(searchKeyword, page+1, pageSize).then((userData => {
                 setUserList((prev)=>prev!=null?[...prev,...userData.data]:userData.data)
                 setPage((prev)=>prev+1)
                 setPageSize(userData.pageSize)
