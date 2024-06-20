@@ -57,7 +57,7 @@ const TopBar = ({setSearchKeyWord}:ChildComponentProps) => {
             <div className='relative '>
                 <Input type='text'
                     onChange={(e) => setSearchKeyWord(e.target.value)} 
-                    placeholder='Search with name, email,phone company' className='border-primary-1 rounded-full max-sm:w-[300px] w-[350px] focus-visible:ring-offset-primary-1' />
+                    placeholder='Search with name, email,phone company' className='border-primary-1 rounded-full max-sm:w-[220px] w-[350px] focus-visible:ring-offset-primary-1' />
                 <FaSearchengin className='absolute right-4 top-3' />
             </div>
             <div className='flex justify-center items-center gap-4 '>

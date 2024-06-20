@@ -129,7 +129,7 @@ const Home = () => {
                                 ))
                             }
                         </div>
-                        {/* <DataTablePagination fetchNext={fetchNext} updatePageSize={updatePageSize} page={page} pageSize={pageSize} totalPages={totalPages} /> */}
+                        <DataTablePagination fetchNext={fetchNext} updatePageSize={updatePageSize} page={page} pageSize={pageSize} totalPages={totalPages} />
 
                     </div>
                     : <div className='max-sm:mx-4'>
