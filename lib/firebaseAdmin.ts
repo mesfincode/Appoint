@@ -1,9 +1,11 @@
 import admin from 'firebase-admin';
-
+const serviceAccountKey =  JSON.parse(
+  process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string
+);
 if (!admin.apps.length) {
   admin.initializeApp({
-    credential: admin.credential.cert(require('./servicekey.json')),
-    databaseURL: "https://myproject-e140a-default-rtdb.firebaseio.com"
+    credential: admin.credential.cert(serviceAccountKey),
+    databaseURL: process.env.NEXT_PUBLIC_DATABASE_URL
   });
 }
 
