@@ -44,7 +44,7 @@ const ClockComp = ({ size, showSpeaker }: { size: number, showSpeaker: boolean }
     <div>
 
       <div className='flex justify-start items-baseline flex-wrap gap-3'>
-        <Clock renderNumbers={true} value={value} size={size} />
+        <Clock renderNumbers={true} value={value} size={size} className='text-black-2' />
 
         {
           showSpeaker && (
