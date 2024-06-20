@@ -5,7 +5,8 @@ import { db } from "@/lib/db";
 import { sendAppointmentConfirmedEmail, sendAppointmentEmail } from "@/lib/mail";
 import { AppointmentSchema } from "@/validators";
 import { Appointment } from "@prisma/client";
-
+import admin from "@/lib/firebaseAdmin";
+import { NotificationType } from "@/types";
 export const createAppointment = async (values: any) => {
     const validatedFields = AppointmentSchema.safeParse(values);
 
@@ -14,7 +15,9 @@ export const createAppointment = async (values: any) => {
     // }
 
     // const {email} = validatedFields.data;
-
+    const snapshot = await admin.database().ref('name').once('value');
+    const name = snapshot.val();
+    console.log(name)
     const existingUser = await getUserByClerkId(values.requestedById)
     const receiver = await getUserById(values.requestedForId)
 
@@ -24,10 +27,28 @@ export const createAppointment = async (values: any) => {
     values.requestedById = existingUser.id;
 
     try {
-      const apponitment=  await db.appointment.create({
+        const apponitment = await db.appointment.create({
             data: values
         })
-        await sendAppointmentEmail(receiver.email,apponitment.id, existingUser.name,receiver.name,apponitment);
+        await sendAppointmentEmail(receiver.email, apponitment.id, existingUser.name, receiver.name, apponitment);
+        const senderNotfication = {
+            title: 'New Appointment Requested',
+            message: `Your created new appointment request`,
+            timestamp: new Date().getTime(),
+            type: NotificationType.APPOINTMENT_CREATED,
+            read: false,
+            appointmentId: apponitment.id
+        };
+        const receiverNotification = {
+            title: 'New Appointment Received',
+            message: `you have received a new Appointment`,
+            timestamp: new Date().getTime(),
+            type: NotificationType.APPOINTMENT_RECEIVED,
+            read: false,
+            appointmentId: apponitment.id
+        };
+        createNotification(existingUser.clerkId, senderNotfication)
+        createNotification(receiver.clerkId, receiverNotification)
 
     } catch (e) {
         return { error: "Failed to create profile ! " }
@@ -36,7 +57,26 @@ export const createAppointment = async (values: any) => {
 
     return { success: "Appointment send successfully ! " }
 }
+export const getAppointmentById = async (id:string)=>{
+    try{
 
+        const appointment = await db.appointment.findUnique({
+            where:{id},
+            include: {
+                requestedFor: true,
+                requestedBy: true
+
+            }
+        });
+        return {success:"fetching data success",data:appointment};
+    }catch{
+        return {error:"appointment not found"};
+    }
+}
+const createNotification = (userId: string, notification: any) => {
+    const notificationsRef = admin.database().ref(`notifications/${userId}`);
+    notificationsRef.push(notification);
+};
 interface PaginationOptions {
     page: number;
     pageSize: number;
@@ -84,7 +124,7 @@ export const getRequestedAppointmentsWithPagenation = async (paginationOptions: 
             skip: skip,
             include: {
                 requestedFor: true,
-                requestedBy:true
+                requestedBy: true
 
             }
         });
@@ -92,7 +132,7 @@ export const getRequestedAppointmentsWithPagenation = async (paginationOptions: 
         return {
             data: users,
             page: page,
-            userId:existingUser.id,
+            userId: existingUser.id,
             pageSize: pageSize,
             totalPages: totalPages,
             totalRequestedAppointments: totalUsers,
@@ -144,14 +184,14 @@ export const getReceivedAppointmentsWithPagenation = async (paginationOptions: P
             skip: skip,
             include: {
                 requestedFor: true,
-                requestedBy:true
+                requestedBy: true
             }
         });
 
         return {
             data: users,
             page: page,
-            userId:existingUser.id,
+            userId: existingUser.id,
             pageSize: pageSize,
             totalPages: totalPages,
             totalRequestedAppointments: totalUsers,
@@ -220,14 +260,14 @@ export const upcommingAppointments = async (paginationOptions: PaginationOptions
             skip: skip,
             include: {
                 requestedFor: true,
-                requestedBy:true
+                requestedBy: true
 
             }
         });
 
         return {
             data: users,
-            userId:existingUser.id,
+            userId: existingUser.id,
             page: page,
             pageSize: pageSize,
             totalPages: totalPages,
@@ -296,7 +336,7 @@ export const pastAppointments = async (paginationOptions: PaginationOptions): Pr
             skip: skip,
             include: {
                 requestedFor: true,
-                requestedBy:true
+                requestedBy: true
 
             }
         });
@@ -304,7 +344,7 @@ export const pastAppointments = async (paginationOptions: PaginationOptions): Pr
         return {
             data: users,
             page: page,
-            userId:existingUser.id,
+            userId: existingUser.id,
             pageSize: pageSize,
             totalPages: totalPages,
             totalRequestedAppointments: totalUsers,
@@ -322,27 +362,36 @@ export const pastAppointments = async (paginationOptions: PaginationOptions): Pr
     }
 };
 
-export const confirmAppointment = async (appointmentId:string)=>{
-    try{
+export const confirmAppointment = async (appointmentId: string) => {
+    try {
         const appointment = await db.appointment.update({
             where: {
-              id: appointmentId
+                id: appointmentId
             },
             data: {
-             status:"CONFIRMED"
-            }, 
+                status: "CONFIRMED"
+            },
             include: {
                 requestedFor: true,
-                requestedBy:true
+                requestedBy: true
 
             }
-          })
-          await sendAppointmentConfirmedEmail(appointment);
+        })
+        await sendAppointmentConfirmedEmail(appointment);
+        const confirmNotificationMessage = {
+            title: 'Appointment Request Confirmed',
+            message: `Your Appointment Request has been confirmed`,
+            timestamp: new Date().getTime(),
+            type: NotificationType.APPOINTMENT_CONFIRMED,
+            read: false,
+            appointmentId: appointment.id
+        };
+        createNotification(appointment.requestedBy.clerkId, confirmNotificationMessage)
 
-        return { success: "Appointment Confirmed successfully ! " ,appointment}
-        ;
-    }catch(e){
+        return { success: "Appointment Confirmed successfully ! ", appointment }
+            ;
+    } catch (e) {
         return { error: "Error Confirming appointment " }
 
     }
- }
+}

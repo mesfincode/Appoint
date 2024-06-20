@@ -30,7 +30,7 @@ const HomeMobileNav = () => {
 
     return (
         <div className="flex 
-    items-center justify-between md:hidden
+    items-center justify-between lg:hidden
     bg-white-1 px-8 py-4 border-b border-gray-200
     ">
             <Link href="/" className='flex justify-center items-center gap-2'>

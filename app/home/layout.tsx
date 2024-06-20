@@ -1,9 +1,10 @@
 import LeftSideBar from "@/components/LeftSideBar";
 import RightSideBar from "@/components/RightSideBar";
 import HomeMobileNav from "@/components/home/HomeMobileNav";
+import HomeNav from "@/components/home/HomeNav";
 import Image from "next/image";
 import Link from "next/link";
-
+// import { app } from "@/lib/firebase";
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -19,7 +20,10 @@ export default function RootLayout({
                     ">
                     <div className="mx-auto flex  w-full flex-col  ">
                       <HomeMobileNav />
-                      {children}
+                   
+                     <div className="lg:ml-[270px]  xl:mr-[270px] m-4 p-4">
+                     {children}
+                     </div>
                     </div>
                 </section>
 

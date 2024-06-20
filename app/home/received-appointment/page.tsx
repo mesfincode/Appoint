@@ -13,7 +13,7 @@ import React, { startTransition, useEffect, useState, useTransition } from 'reac
 const ReceivedAppointment = () => {
     const [appointmentList, setAppointmentList] = useState<any[] | null>(null);
     const [page, setPage] = useState(0);
-    const [pageSize, setPageSize] = useState(7);
+    const [pageSize, setPageSize] = useState(6);
     const [totalPages, setTotalPages] = useState(0);
     const [totalRequestedAppointments, setTotalRequestedAppointments] = useState(0)
     const { clerkId } = useCurrentUser()

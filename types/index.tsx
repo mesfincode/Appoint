@@ -4,7 +4,11 @@ export  interface Profile {
     profileUrl:string;
     company: string
 }
-
+export enum NotificationType{
+    APPOINTMENT_CREATED,
+    APPOINTMENT_RECEIVED,
+    APPOINTMENT_CONFIRMED
+}
 export interface profileRepCard {
     profileUrl: string;
     firstName:string;

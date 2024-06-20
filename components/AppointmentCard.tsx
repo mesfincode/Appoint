@@ -17,7 +17,7 @@ const AppointmentCArd = ({ profileUrl,company, date, color, sidebar, status, iRe
 
     return (
 
-        <div className={`  max-sm:w-full  ${sidebar ? "w-[200px] h-[230px]" : "w-[250px]"} border-2 bg-gray-100 border-gray-200 transition-all duration-500 hover:bg-primary-2 cursor-pointer  p-4 rounded-lg`} onClick={onClick}>
+        <div className={`  max-sm:w-full  ${sidebar ? "w-[200px] h-[230px]" : "w-full"} border-2 bg-gray-100 border-gray-200 transition-all duration-500 hover:bg-primary-2 cursor-pointer  p-4 rounded-lg`} onClick={onClick}>
             <div className=' flex flex-col gap-1 justify-center  items-center'>
                 {
                     iRequested ? <>

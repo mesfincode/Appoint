@@ -10,9 +10,9 @@ import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { LogOutIcon } from 'lucide-react'
 const LeftSideBar = () => {
   const pathname = usePathname()
-  const { firstName, lastName, email,profileUrl } = useCurrentUser()
-   const router = useRouter()
-   const {signOut} = useClerk()
+  const { firstName, lastName, email, profileUrl } = useCurrentUser()
+  const router = useRouter()
+  const { signOut } = useClerk()
   return (
     <div className='left_sidebar'>
       <div className='flex flex-col  justify-between'>
@@ -39,12 +39,12 @@ const LeftSideBar = () => {
             {/* <SignedIn>
               <UserButton afterSignOutUrl="/sign-in" />
             </SignedIn> */}
-           <div className='flex  justify-between items-center w-full'>
-           {
-              profileUrl &&<Image onClick={()=>router.push("/home/profile")} src={profileUrl} width={40 } height={40}  alt="profile"style={{ borderRadius: "100%" }}  />
-            }
-            <Image onClick={()=>signOut()} src="/icons/log-out.svg" width={30} height={30} alt='logout' style={{cursor:"pointer"}}/>
-           </div>
+            <div className='flex  justify-between items-center w-full '>
+              {
+                profileUrl && <Image onClick={() => router.push("/home/profile")} src={profileUrl} width={40} height={40} alt="profile" style={{ borderRadius: "100%" }} />
+              }
+              <Image onClick={() => signOut()} src="/icons/log-out.svg" width={30} height={30} alt='logout' style={{ cursor: "pointer" }} />
+            </div>
             <h1 className='text-black-1'> {email?.slice(0, 15)}... </h1>
           </div>
         </div>

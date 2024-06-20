@@ -85,7 +85,7 @@ const UpcommingAppointments = () => {
     }
 
     return (
-        <section className='mx-8 my-8'>
+        <section className=' my-8'>
             <div className='flex justify-center items-center gap-2 flex-col'>
                 <h1 className='text-black-1 font-semibold text-2xl pb-4'>🕰️ Upcoming Appointments</h1>
 

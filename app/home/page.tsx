@@ -15,7 +15,27 @@ import { Loader } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import SkeletenComp from '@/components/SkeletenComp';
 import { DataTablePagination, PaginationOptions } from '@/components/PaginationComp';
-
+import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { get, onValue, ref, query, orderByChild, equalTo } from 'firebase/database';
+import { database } from '@/lib/firebase';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useRouter } from 'next/navigation';
+import TopBar from '@/components/TopBar';
+interface Notification {
+    id: string;
+    title: string;
+    message: string;
+    timestamp: string;
+    read: boolean;
+    type: 'info' | 'success' | 'warning' | 'error';
+}
 const Home = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [profile, setProfile] = useState<User | null>(null)
@@ -27,7 +47,8 @@ const Home = () => {
     const [pageSize, setPageSize] = useState(6);
     const [totalPages, setTotalPages] = useState(0);
     const [totalUsers, setTotalUsers] = useState(0)
-    const [searchKeyword, setSearchKeyWord] = useState("")
+    const [searchKeyword, setSearchKeyWord] = useState<string>("")
+
     useEffect(() => {
         // setIsMounted(true);
         getServiceProviders()
@@ -87,20 +108,16 @@ const Home = () => {
     const updatePageSize = (pageSize: number) => {
         setPageSize(pageSize);
     }
+
     return (
-        <section className='mx-8 my-8'>
-            <div className='flex justify-center items-center flex-col gap-4 pb-4'>
-                <div className='relative '>
-                    <Input type='text' onChange={(e) => setSearchKeyWord(e.target.value)} placeholder='Search with name, email,phone company' className='border-primary-1 rounded-full max-sm:w-[300px] w-[350px] focus-visible:ring-offset-primary-1' />
-                    <FaSearchengin className='absolute right-4 top-3' />
-                </div>
-            </div>
-<h1 className='text-center font-semibold text-black-2 py-4'>Send Appointment Request To Service Providers From All Over The World</h1>
+        <section className=''>
+           <TopBar setSearchKeyWord={setSearchKeyWord} />
+            <h1 className='text-center font-semibold text-black-2 py-4'>Send Appointment Request To Service Providers From All Over The World</h1>
 
             {
                 userList.length !== 0 ?
-                    <>
-                        <div className='grid max-sm:flex max-sm:flex-col sm:grid-cols-2 xl:grid-cols-3 gap-4'>
+                    <div className='w-full'>
+                        <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
                             {
                                 userList.map((item, index) => (
                                     <ServiceCard
@@ -108,15 +125,15 @@ const Home = () => {
                                             setIsOpen((prev) => !prev)
                                             setProfile(item)
                                         }}
-                                        key={index} firstName={item.firstName} lastName={item.lastName} email={item.email} serviceDescription={item.serviceDscription ?? ""}  profileUrl={item.profileUrl} company={item.companyName ?? ""} />
+                                        key={index} firstName={item.firstName} lastName={item.lastName} email={item.email} serviceDescription={item.serviceDscription ?? ""} profileUrl={item.profileUrl} company={item.companyName ?? ""} />
                                 ))
                             }
                         </div>
-                        <DataTablePagination fetchNext={fetchNext} updatePageSize={updatePageSize} page={page} pageSize={pageSize} totalPages={totalPages} />
+                        {/* <DataTablePagination fetchNext={fetchNext} updatePageSize={updatePageSize} page={page} pageSize={pageSize} totalPages={totalPages} /> */}
 
-                    </>
+                    </div>
                     : <div className='max-sm:mx-4'>
-                         <SkeletenComp length={pageSize} />
+                        <SkeletenComp length={pageSize} />
                     </div>
             }
 

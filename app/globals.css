@@ -18,10 +18,10 @@
     @apply flex justify-center items-center
   }
   .left_sidebar {
-    @apply sticky left-0 top-0  flex w-fit flex-col  justify-between     border-r-4 border-primary-2 pt-4 text-white-1 max-md:hidden lg:w-[270px] ;
+    @apply fixed left-0 top-0 bottom-0 z-50  flex w-fit flex-col  justify-between bg-white-1     border-r-4 border-primary-2 pt-4 text-white-1 max-lg:hidden lg:w-[270px] ;
   }
   .right_sidebar {
-    @apply sticky right-0 top-0 flex w-fit flex-col  gap-4     border-l-4 border-primary-2 pt-4 text-white-1 max-lg:hidden lg:w-[270px] lg:pl-8; ;
+    @apply fixed right-0 top-0 bottom-0 z-50  w-fit flex-col  gap-4  bg-white-1   border-l-4 border-primary-2 pt-4 text-white-1 hidden xl:flex xl:w-[270px] pl-4 ;
   }
 }
 
