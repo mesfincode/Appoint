@@ -31,9 +31,8 @@ services that will be used
 - chat featcher
 - virtual appointment with video call
 
-- display notification icon with titles on all pages
+- display notification detail when notification is clicked
 - add more icon to desplay details of the service provider with dialog box
-- no notification checker
 - create profile dialog ui update, onboarding
 - create appointment dialog
 - appointment detail dialog update

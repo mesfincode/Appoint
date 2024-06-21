@@ -70,7 +70,33 @@ const NotificationPage = () => {
                     {
                         unreadNotifications.length > 0 ? <>
                            <div className='flex justify-center items-center w-full gap-4'>
-                           <h1 className='text-center sm:text-2xl py-4'>Your recent notifications </h1><FaBell color='#47689A'  size={30}/>
+                           <h1 className='text-center sm:text-2xl py-4'>Your recent notifications </h1>
+                           {
+                    unreadNotifications.length > 0 ? <div>
+                        {
+                            unreadNotifications.length > 9 ? <div className='relative cursor-pointer' >
+                                <FaBell color='#47689A'  size={30}/>
+                                <div className=' bg-red-500 w-[37px] h-[18px] flex items-center justify-center rounded-full absolute right-[-20px]  top-[-10px]'>
+                                    <h1 className='text-white-1 '>{unreadNotifications.length}</h1>
+                                </div>
+                            </div> :
+                                <div className='relative cursor-pointer  hover:bg-primary-2 rounded-full' >
+                                <FaBell color='#47689A'  size={30}/>
+                                <div className=' bg-red-500 w-[20px] h-[20px] flex items-center justify-center rounded-full absolute right-[-10px]  top-[-10px]'>
+                                        <h1 className='text-white-1 '>{unreadNotifications.length}</h1>
+                                    </div>
+
+
+                                </div>
+                        }
+                    </div> : <div>
+
+                        <div className='relative cursor-pointer hover:bg-primary-2 rounded-full' >
+                        <FaBell color='#47689A'  size={30}/>
+
+                        </div>
+                    </div>
+                }
                            </div>
                             <div className='flex justify-center items-center flex-col w-full '>
                                 {

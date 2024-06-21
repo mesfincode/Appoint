@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { FaBell, FaSearchengin } from 'react-icons/fa6'
 import { Input } from './ui/input'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
@@ -6,18 +6,7 @@ import { useRouter } from 'next/navigation'
 import { equalTo, onValue, orderByChild, query, ref } from 'firebase/database'
 import { database } from '@/lib/firebase'
 import Image from 'next/image'
-
-interface topBarProps{
-    onKeyChange:(pageSize:string)=>void;
-
-}
-export interface ChildComponentProps {
-    // count: string;
-    setSearchKeyWord: React.Dispatch<React.SetStateAction<string>>;
-  }
-const TopBar = ({setSearchKeyWord}:ChildComponentProps) => {
-    
-
+const TitleWithNotificationIcon = ({title}:{title:ReactNode}) => {
     const [notifications, setNotifications] = useState<any>([]);
     const { clerkId } = useCurrentUser()
     const router = useRouter()
@@ -51,14 +40,9 @@ const TopBar = ({setSearchKeyWord}:ChildComponentProps) => {
         //   notificationsRef.off();
         // };
     }, [clerkId]);
-    return (
-        <div className='flex justify-center items-center gap-4 pb-4'>
-            <div className='relative '>
-                <Input type='text'
-                    onChange={(e) => setSearchKeyWord(e.target.value)} 
-                    placeholder='Search with name, email,phone company' className='border-primary-1 rounded-full max-sm:w-[220px] w-[350px] focus-visible:ring-offset-primary-1' />
-                <FaSearchengin className='absolute right-4 top-3' />
-            </div>
+  return (
+    <div className='flex justify-center items-center gap-4 pb-4'>
+          {title}
             <div className='flex justify-center items-center gap-4 '>
 
                 {
@@ -89,7 +73,7 @@ const TopBar = ({setSearchKeyWord}:ChildComponentProps) => {
                 }
             </div>
         </div>
-    )
+  )
 }
 
-export default TopBar
+export default TitleWithNotificationIcon

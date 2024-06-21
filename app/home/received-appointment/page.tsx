@@ -6,6 +6,7 @@ import EmptyData from '@/components/EmptyData';
 import { DataTablePagination } from '@/components/PaginationComp';
 import ProfileModal from '@/components/ProfileModal';
 import SkeletenComp from '@/components/SkeletenComp';
+import TitleWithNotificationIcon from '@/components/TitleWithNotificationIcon';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
@@ -70,8 +71,8 @@ const ReceivedAppointment = () => {
         setPageSize(pageSize);
     }
     return (
-        <section className='mx-8 my-8'>
-            <h1 className='text-black-1 text-center font-semibold text-2xl pb-4'>Received Appointments</h1>
+        <section className=' my-4'>
+            <TitleWithNotificationIcon title={<h1 className='text-black-1 text-center font-semibold text-2xl '>Received Appointments</h1>} />
             {
                 appointmentList ?
                     <>

@@ -6,6 +6,7 @@ import EmptyData from '@/components/EmptyData';
 import { DataTablePagination, PaginationOptions } from '@/components/PaginationComp';
 import ProfileModal from '@/components/ProfileModal';
 import SkeletenComp from '@/components/SkeletenComp';
+import TitleWithNotificationIcon from '@/components/TitleWithNotificationIcon';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
@@ -68,8 +69,9 @@ const RequestedAppointment = () => {
         setPageSize(pageSize);
     }
     return (
-        <section className='mx-8 my-8'>
-            <h1 className='text-black-1 text-center font-semibold text-2xl pb-4'>🕐 Requested Appointments</h1>
+        <section className=' my-4'>
+           
+            <TitleWithNotificationIcon title={ <h1 className='text-black-1 text-center font-semibold text-2xl '> Requested Appointments</h1>} />
             {
                 appointmentList ?
                     <>
@@ -77,7 +79,7 @@ const RequestedAppointment = () => {
                             appointmentList.length > 0 ?
                                 <>
 
-                                    <h1 className='text-black-2 text-lg font-semibold pb-4 text-center'>You have {totalRequestedAppointments} Requested Appointments</h1>
+                                    <h1 className='text-black-2 text-lg pb-4 text-center'>🕐 You have {totalRequestedAppointments} Requested Appointments</h1>
                                     <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4' >
 
                                         {
