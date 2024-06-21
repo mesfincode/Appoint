@@ -24,7 +24,7 @@ export const sendAppointmentConfirmedEmail = async (appointment: any) => {
   const { data, error } = await resend.emails.send({
     from: 'Appoint@appoint.victocode.com',
     to: appointment.requestedBy.email,
-    subject: 'New Appointment',
+    subject: 'Appointment Confirmed',
     // html: `<p>${name} has sent you a new appointment. Click <a href="${appointmentLink}">here</a> to see the appointment !</p>`
     html: appointmentConfirmEmailString(appointment)
   });

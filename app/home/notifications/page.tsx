@@ -1,4 +1,5 @@
 "use client"
+import EmptyData from '@/components/EmptyData';
 import NotificationCard from '@/components/NotificationCard';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { database } from '@/lib/firebase';
@@ -50,6 +51,8 @@ const NotificationPage = () => {
                             return b.timestamp - a.timestamp;  // Assuming "date" field holds Unix timestamps
                         });
                         setReadNotifications(sortedList);
+                    }else{
+                        setReadNotifications([])
                     }
                 });
 
@@ -94,6 +97,13 @@ const NotificationPage = () => {
                         }
                     </div>
                 </div> : <div></div>
+            }
+            {
+                readNotfifications != null && unreadNotifications !=null && readNotfifications.length <1 && unreadNotifications.length <1 &&(
+                    <div>
+                        <EmptyData message='You Don&apos;t Have Recent notifications'/>
+                    </div>
+                )
             }
         </section>
     )

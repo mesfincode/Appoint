@@ -20,7 +20,7 @@ const AppointmentCArd = ({ profileUrl, company, date, color, sidebar, status, iR
     return (
 
         <div className={`  max-sm:w-full  ${sidebar ? "w-[200px] h-[250px]" : "w-full"} border-2 bg-gray-100 border-gray-200 cursor-pointer  p-4 rounded-lg`} onClick={onClick}>
-            <div className=' flex flex-col gap-1 justify-center  items-center relative'>
+            <div className=' flex flex-col gap-1 justify-center  items-center relative '>
                 {
                     iRequested ? <>
                       <div className='w-[70px] h-[70px]'>
@@ -67,7 +67,7 @@ const AppointmentCArd = ({ profileUrl, company, date, color, sidebar, status, iR
                             }
                         </>
                 }
-               <div className='absolute top-0 right-0 BiSolidDetail  bg-gray-300 p-1 rounded-full  transition-all duration-500 hover:bg-primary-1 hover:text-white-1 '>
+               <div className='absolute top-0 right-0 BiSolidDetail  bg-gray-200 p-1 rounded-full  transition-all duration-500 hover:bg-primary-1 hover:text-white-1 '>
               <FaEllipsis  />
                </div>
             </div>

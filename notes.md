@@ -30,3 +30,11 @@ services that will be used
 - notification and badges realtime with firebase
 - chat featcher
 - virtual appointment with video call
+
+- display notification icon with titles on all pages
+- add more icon to desplay details of the service provider with dialog box
+- no notification checker
+- create profile dialog ui update, onboarding
+- create appointment dialog
+- appointment detail dialog update
+- work on the landing page 
