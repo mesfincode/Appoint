@@ -4,11 +4,12 @@ import { ProfileSchema, RegisterSchema } from "@/validators";
 import bcrypt from "bcryptjs"
 
 export const register = async ( values: any)=>{
-    const validatedFields = ProfileSchema.safeParse(values);
+  console.log(values)
 
-    if(!validatedFields.success){
-        return {error:"Invalid data"}
-    }
+    // const validatedFields = ProfileSchema.safeParse(values);
+    // if(!validatedFields.success){
+    //     return {error:"Invalid data"}
+    // }
 
 
 
@@ -17,6 +18,7 @@ export const register = async ( values: any)=>{
       data: values
      })
   }catch(e){
+    console.log(e)
     return {error:"Failed to create profile ! "}
   }
 

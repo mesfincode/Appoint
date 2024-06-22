@@ -14,7 +14,8 @@ const ServiceCard = ({ profileUrl, email, company, serviceDescription, firstName
         <div className={`  sm:max-w-[400px] w-full border-2 bg-gray-100 border-gray-200  cursor-pointer  p-4 rounded-lg`} onClick={onClick}>
             <div className=' flex flex-col gap-1  justify-between  items-center h-full'>
                 <div className='w-[90px] h-[90px]'>
-                    <Image src={profileUrl} width={90} height={90} alt={profileUrl} style={{ borderRadius: "100%" }} />
+                    {/* <Image src={profileUrl} width={90} height={90} alt={profileUrl} style={{ borderRadius: "100%" ,objectFit:"contain"}} /> */}
+                    <img src={profileUrl} alt="profile" className='w-[90px] h-[90px] object-fill rounded-full'  />
 
                 </div>
                 <div className='flex gap-2'>
@@ -25,7 +26,7 @@ const ServiceCard = ({ profileUrl, email, company, serviceDescription, firstName
                 <h1 className=' font-semibold text-black-1'>{company.length > 20 ? `${company.slice(0, 20)}...` : company}</h1>
                 {/* <h1 className='text-black-2'>{email}</h1> */}
                 {/* <h1 className='text-center pt-2'>{serviceDescription.slice(0, 100)}</h1> */}
-                <h1 className='text-center pt-1 px-2 max-w-[300px] w-full overflow-wrap-break-word'>{serviceDescription.length > 30 ? `${serviceDescription.slice(0, 30)}...` : serviceDescription}</h1>
+                <h1 className='text-center pt-1 px-2 min-h-[90px] max-w-[300px] w-full overflow-wrap-break-word'>{serviceDescription.length > 60 ? `${serviceDescription.slice(0, 60)}...` : serviceDescription}</h1>
                 <div className='flex items-baseline'>
                     <Button variant="custom" className='border-2 border-primary-1  bg-gray-100  transition-all duration-500 hover:bg-primary-1 hover:text-white-1  rounded-full flex justify-center items-center gap-2 ' >
                         <FaCalendarWeek />

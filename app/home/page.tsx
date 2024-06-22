@@ -29,6 +29,7 @@ import {
 import { useRouter } from 'next/navigation';
 import TopBar from '@/components/TopBar';
 import { Button } from '@/components/ui/button';
+import ProfileModalV2 from '@/components/ProfileModaV2';
 interface Notification {
     id: string;
     title: string;
@@ -140,7 +141,7 @@ const Home = () => {
 
 
             <AppointmentModal profile={profile} handleClose={() => setIsOpen((prev) => !prev)} isOpen={isOpen} />
-            <ProfileModal />
+            <ProfileModalV2 />
         </section>
     )
 }
