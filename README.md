@@ -59,7 +59,6 @@ npm install
 npm run dev
 ```
 
-
 ## Screenshoots
 ### Home Page
 ![Screenshot 1](./public/photos/home-page.png)
