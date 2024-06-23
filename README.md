@@ -2,7 +2,7 @@
 
 🕝 Appoint 🕒 is an app that allows users to easily schedule appointments with doctors, professionals, and other service providers. 
 
-[View Video](./public/video/video-record.mp4)
+[View Video](./public/video/video-recording.mp4)
 
 ## Home Page
 ![Screenshot 1](./public/photos/home-page.png)
