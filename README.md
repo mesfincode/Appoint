@@ -30,7 +30,11 @@ The app supports two types of appointments: virtual and in-person. It sends emai
 - [Next.js](https://nextjs.org/)
 - [Shadcn/ui](https://ui.shadcn.com/)
 - [Tailwindcss](https://tailwindcss.com/)
+- [clerk](https://clerk.com/)
+- [prisma](https://www.prisma.io/)
+- [postgress](https://www.postgresql.org/)
 - [Firebase](https://console.firebase.google.com/)
+- [resend](https://resend.com/)
 ## **Prerequisites**
 
 Make sure you have the following installed on your machine:
