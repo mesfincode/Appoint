@@ -15,6 +15,7 @@ export interface profileRepCard {
     lastName:string;
     email:string;
     company: string;
+    service: string;
     serviceDescription: string;
     onClick:()=>void;
 }

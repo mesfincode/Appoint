@@ -47,6 +47,7 @@ import { cn } from "@/lib/utils"
 import { confirmAppointment, createAppointment } from "@/actions/appointment"
 import { Textarea } from "./ui/textarea"
 import { useToast } from "./ui/use-toast"
+import { format } from 'date-fns';
 
 interface AppointmentModalDetailProps {
     isOpen: boolean;
@@ -60,6 +61,10 @@ const appointmentType = [
 ]
 
 const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }: AppointmentModalDetailProps) => {
+    const target = new Date(appointment.appointmentDate);
+
+    const now = new Date();
+    const remaining = target.getTime() - now.getTime();
     const { toast } = useToast()
 
     const { email, clerkId, profileUrl, firstName, lastName } = useCurrentUser()
@@ -104,13 +109,23 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
         setSuccess("");
         startTransition(() => {
             createAppointment(data).then((data) => {
-                setError(data.error)
-                setSuccess(data.success)
+                
+                
                 if (data.success) {
                     toast({
                         title: "Meeting created and sent",
                     })
+                    setSuccess(data.success)
+                    handleClose()
                 }
+                if(data.error){
+                    toast({
+                        title: "Failed Try agina",
+                        variant:"destructive"
+                    })
+                    setError(data.error)
+                }
+               
             })
         })
 
@@ -118,13 +133,23 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
     const handleConfirmAppointment = () => {
         startTransition(() => {
             confirmAppointment(appointment.id).then((data) => {
-                setError(data.error)
-                setSuccess(data.success)
+                
+               
                 if (data.success) {
+                    setSuccess(data.success)
                     toast({
                         title: "Appointment Confirmed successfully",
                     })
+                    handleClose()
                 }
+                if(data.error){
+                    toast({
+                        title: "Failed Try agina",
+                        variant:"destructive"
+                    })
+                    setError(data.error)
+                }
+            
             })
         })
     }
@@ -135,7 +160,7 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
             </DialogTrigger> */}
             <DialogContent className="  z-50">
                 <DialogHeader>
-                    <div className="flex flex-col justify-center items-center gap-4">
+                    <div className="flex flex-col justify-center items-center gap-4 w-full">
 
                         {
                             iRequested ?
@@ -147,7 +172,7 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
                                 </> :
                                 <>
 
-                                    <DialogTitle >{appointment?.requestedBy?.name} Requested This Appointment</DialogTitle>
+                                    <DialogTitle >You Received This Appointment</DialogTitle>
                                     <DialogDescription>
                                         Requested By
                                     </DialogDescription>
@@ -155,8 +180,8 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
                         }
                     </div>
                 </DialogHeader>
-                <div className="flex flex-col justify-center items-center w-full gap-4">
-                    <div className="pb-4 flex gap-4 justify-center flex-col items-center">
+                <div className="  w-full gap-4">
+                    <div className="pb-4 flex gap-4 justify-center flex-col items-center w-full">
 
                         {/* <div>
                             <h1>{appointment?.name}</h1>
@@ -167,66 +192,89 @@ const AppointmentDetailModal = ({ isOpen, handleClose, appointment, iRequested }
                             iRequested ?
 
                                 <>
-                                    <div className="flex gap-4 flex-col justify-center items-center">
-                                        <Image src={appointment.requestedFor?.profileUrl} width={40} height={40} alt={appointment.requestedFor.name} style={{ borderRadius: "100%" }} />
-                                        <div>
-                                            <div className="flex gap-2">
-                                                <h1 className="text-center font-bold">{appointment.requestedFor?.firstName}</h1>
-                                                <h1 className="text-center font-bold">{appointment.requestedFor?.lastName}</h1>
+                                    <div className="flex gap-4  justify-start items-center w-full">
+                                        <Image src={appointment.requestedFor?.profileUrl} width={100} height={100} alt={appointment.requestedFor.name} style={{ borderRadius: "5px" }} />
+                                        <div >
+                                            <div className="flex gap-2 ">
+                                                <h1 className="text-start font-bold">{appointment.requestedFor?.firstName}</h1>
+                                                <h1 className="text-start font-bold">{appointment.requestedFor?.lastName}</h1>
                                             </div>
-                                            <h1 className="text-center">{appointment.requestedFor?.companyName}</h1>
-                                            {/* <h1 className="text-center">{appointment.requestedFor?.email}</h1> */}
+
+                                            <h1 className="text-start">{appointment.requestedFor?.companyName}</h1>
 
                                         </div>
                                     </div>
-                                    <h1 className="overflow-wrap-break-word  max-w-[300px]">{appointment.requestedFor?.serviceDscription}</h1>
+                                    <div className="flex w-full flex-col justify-start">
+                                        <h1 className="text-start">{appointment.requestedFor?.service}</h1>
+
+                                        <h1 className="overflow-wrap-break-word text-start text-black-2">{appointment.requestedFor?.serviceDscription}</h1>
+
+
+                                    </div>
 
                                 </> :
                                 <>
-                                    <div className="flex gap-4 flex-col items-center">
-                                        <Image src={appointment.requestedBy?.profileUrl} width={40} height={40} alt={appointment.requestedBy?.name} style={{ borderRadius: "100%" }} />
+                                    <div className="flex gap-4 justify-start  items-center w-full">
+                                        <Image src={appointment.requestedBy?.profileUrl} width={100} height={100} alt={appointment.requestedBy?.name} style={{ borderRadius: "5px" }} />
                                         <div>
                                             <div className="flex gap-2">
-                                                <h1 className="text-center font-bold">{appointment.requestedBy?.firstName}</h1>
-                                                <h1 className="text-center font-bold">{appointment.requestedBy?.lastName}</h1>
+                                                <h1 className="text-start font-bold">{appointment.requestedBy?.firstName}</h1>
+                                                <h1 className="text-start font-bold">{appointment.requestedBy?.lastName}</h1>
                                             </div>
-                                            <h1 className="text-center">{appointment.requestedBy?.companyName}</h1>
                                             {/* <h1 className="text-center">{appointment.requestedBy?.email}</h1> */}
+                                            <h1 className="text-start">{appointment.requestedBy?.companyName}</h1>
 
                                         </div>
-                                    </div>
-                                    <h1 className="overflow-wrap-break-word max-w-[300px]">{appointment.requestedBy?.serviceDscription}</h1>
 
+                                    </div>
+                                    <div className="flex flex-col justify-start">
+                                        <h1 className="text-start ">{appointment.requestedBy?.service}</h1>
+
+                                        <h1 className="overflow-wrap-break-word text-start text-black-2">{appointment.requestedBy?.serviceDscription}</h1>
+
+                                    </div>
                                 </>
                         }
                     </div>
-                    <div className="flex flex-col justify-center items-center gap-4">
-                        <div className="flex flex-col justify-center items-center gap-2">
-                            <h1 className="text-black-2 font-bold">Reason</h1>
+                    <div className="flex flex-col justify-start items-start gap-4 w-full">
+                        <div className="flex flex-col justify-start items-start gap-2 w-full">
+                            <h1 className="text-black-2 font-bold">Appointment Reason</h1>
                             <h1 className=""> {appointment.reason}</h1>
                         </div>
 
-                        <div className="flex flex-col justify-center items-center">
-                            <h1 className="text-black-2 font-bold">Notes</h1>
+                        <div className="flex flex-col justify-start items-start w-full">
+                            <h1 className="text-black-2 font-bold">Appointment Notes</h1>
 
-                            <h1 >Note: {appointment.notes}</h1>
+                            <h1 > {appointment.notes}</h1>
+                        </div>
+                        <div className="flex flex-col justify-start items-start w-full pb-2">
+                            <h1 className="text-black-2 font-bold">Appointment Date</h1>
+
+                            <h1 > {
+                                appointment.appointmentDate != null && <>{format(appointment.appointmentDate.toString(), 'EEE MMM d/ hh:mm:ss a')} {remaining <0 && <label htmlFor="" className="text-red-600">Expired</label>} </> 
+                            }</h1>
                         </div>
                     </div>
 
                     <DialogFooter>
                         {
-                            appointment.status == "PENDING" && !iRequested ?
-                                <Button onClick={handleConfirmAppointment} type="submit" variant="outline" className='w-full bg-primary-1 text-white-1 transition-all duration-500 hover:bg-primary-3 hover:text-black-1' >
+                            appointment.status == "PENDING" && !iRequested &&    appointment.status !== "CONFIRMED" ?
+                                <Button disabled={remaining <0} onClick={handleConfirmAppointment} type="submit" variant="outline" className='w-full bg-primary-1 text-white-1 transition-all duration-500 hover:bg-primary-2 hover:text-black-1' >
                                     {
                                         isPending ? <>
                                             <Loader />Loading
                                         </> : <>Confirm Appointment</>
                                     }
-                                </Button> : <div className="flex flex-col justify-center items-center ">
-                                    <h1>Status</h1>
-
-                                    <h1>{appointment.status}</h1>
-                                </div>
+                                </Button> :
+                                <>
+                                {
+                                    remaining>0 &&(<div className="flex flex-col justify-start items-start w-full">
+                                        <h1 className="text-black-2 font-bold">Status</h1>
+    
+                                        <h1>{appointment.status}</h1>
+                                    </div>)
+                                }
+                                </>
 
                         }
                     </DialogFooter>

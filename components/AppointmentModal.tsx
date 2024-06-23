@@ -102,14 +102,20 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
         setSuccess("");
         startTransition(() => {
             createAppointment(data).then((data) => {
-                setError(data.error)
-                setSuccess(data.success)
+                
+                
                 if (data.success) {
                     toast({
                         title: "Appointmnet created and sent",
 
                     })
+                    setSuccess(data.success)
+                    handleClose();
                 }
+                if(data.error){
+                    setError(data.error)
+                }
+                
             })
         })
 
@@ -124,20 +130,18 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                     <DialogHeader>
                         <div className="flex flex-col justify-center items-center gap-4">
                             <DialogTitle >Request Appointment</DialogTitle>
-                            <DialogDescription>
-                                Fill the following form and request appointment
-                            </DialogDescription>
+
                         </div>
                     </DialogHeader>
                     <div className="flex flex-col justify-center items-center w-full gap-1">
-                        <div className="pb-4 flex gap-4 justify-center items-center">
+                        <div className="pb-4 flex gap-4 justify-center items-center w-full">
                             {
                                 profile?.profileUrl && (
-                                    <Image src={profile?.profileUrl} width={80} height={80} alt={profile.name} style={{ borderRadius: "100%" }} />
+                                    <Image src={profile?.profileUrl} width={100} height={100} alt={profile.name} style={{ borderRadius: "5px", objectFit: "fill" }} />
 
                                 )
                             }
-                            <div>
+                            <div className="flex flex-col items-center justify-center">
                                 <div className="flex gap-2 text-black-1 font-bold uppercase">
                                     <h1>{profile?.firstName}</h1>
                                     <h1>{profile?.lastName}</h1>
@@ -148,11 +152,11 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                             </div>
 
                         </div>
-                        <div className="max-w-[300px]">
-                            <h1 className="overflow-wrap-break-word">{profile?.serviceDscription}</h1>
+                        <div className=" flex justify-start items-start">
+                            <h1 className="overflow-wrap-break-word text-center text-black-2">{profile?.serviceDscription}</h1>
 
                         </div>
-                        <div>
+                        <div className="w-full">
                             <Form {...form}>
                                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 
@@ -187,21 +191,25 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                                     <div className="flex gap-4 max-sm:flex-col-reverse">
                                         <div className='flex w-full flex-col gap-2.5 flex-1'>
                                             <label className='text-base text-normal leading-[22px] text-sky-2'>Select Date and Time</label>
-                                            <ReactDatePicker selected={dateTime}
+                                            <ReactDatePicker
+                                                selected={dateTime}
                                                 onChange={(date) => setDateTime(date!)}
                                                 showTimeSelect
                                                 timeFormat="HH:mm"
                                                 timeIntervals={15}
                                                 timeCaption="time"
                                                 dateFormat="MMMM d, yyyy h:mm aa"
-                                                className="w-full p-2 focus:outline-none bg-primary-3  border-2 border-primary-1 rounded-xl"
+                                                className="w-full h-12 p-2 focus:outline-none border-2 border-primary-1 rounded-xl"
+                                                calendarClassName="bg-primary-1"
+                                                dayClassName={(date) => `bg-primary-3 text-white`}
+                                                
                                             />
                                         </div>
                                         <div className="flex flex-col  gap-2.5">
                                             <label className='text-base text-normal leading-[22px] text-sky-2'>Select Appointment Type</label>
 
                                             <Select onValueChange={(value) => setTypeOfAppointment(value)}>
-                                                <SelectTrigger className={cn('text-16 w-full py-2 bg-primary-3 border-2 border-primary-1  text-gray-1  focus:ring-offset-orange-1')}>
+                                                <SelectTrigger className={cn('text-16 w-full h-12 rounded-xl py-2 bg-primary-3 border-2 border-primary-1  text-gray-1  focus:ring-offset-orange-1')}>
                                                     <SelectValue placeholder="Select Appointment Type" />
                                                 </SelectTrigger>
                                                 <SelectContent className=" z-[200] bg-primary-3  border-2 border-primary-1  font-bold text-primary-1focus:ring-offset-orange-1">
@@ -244,20 +252,18 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                         <DialogHeader>
                             <div className="flex flex-col justify-center items-center gap-4">
                                 <DialogTitle >Request Appointment</DialogTitle>
-                                <DialogDescription>
-                                    Fill the following form and request appointment
-                                </DialogDescription>
+
                             </div>
                         </DialogHeader>
                         <div className="flex flex-col justify-center items-center w-full gap-1">
-                            <div className="pb-4 flex gap-4 justify-center items-center">
+                            <div className="pb-4 flex gap-4 justify-center items-center w-full">
                                 {
                                     profile?.profileUrl && (
-                                        <Image src={profile?.profileUrl} width={80} height={80} alt={profile.name} style={{ borderRadius: "100%" }} />
+                                        <Image src={profile?.profileUrl} width={100} height={100} alt={profile.name} style={{ borderRadius: "5px", objectFit: "fill" }} />
 
                                     )
                                 }
-                                <div>
+                                <div className="flex flex-col items-center justify-center">
                                     <div className="flex gap-2 text-black-1 font-bold uppercase">
                                         <h1>{profile?.firstName}</h1>
                                         <h1>{profile?.lastName}</h1>
@@ -268,12 +274,11 @@ const AppointmentModal = ({ isOpen, handleClose, profile }: modalProps) => {
                                 </div>
 
                             </div>
-                            <div className="max-w-[300px]">
-                                <h1 className="overflow-wrap-break-word">{profile?.serviceDscription}</h1>
-
+                            <div className=" flex justify-start items-start">
+                                <h1 className="overflow-wrap-break-word text-center text-black-2">{profile?.serviceDscription}</h1>
                             </div>
 
-                            <h1 className="text-black-2"> User is Not available for appointments</h1>
+                            <h1 className=" text-red-400"> User is Not available for appointments</h1>
                         </div>
 
                     </DialogContent>

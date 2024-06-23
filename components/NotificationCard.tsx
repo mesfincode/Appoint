@@ -7,15 +7,19 @@ import { getAppointmentById } from '@/actions/appointment';
 import { Appointment } from '@prisma/client';
 import Image from 'next/image';
 import NotificationCardSkeleton from './NotificationCardSkeleton';
+import AppointmentDetailModal from './AppointmentDetailModal';
+import { getUserByClerkId } from '@/actions/user';
 
 const TimeAgo = ({ timestamp }: { timestamp: any }) => {
     const timeAgo = formatDistance(timestamp, new Date(), { addSuffix: true })
 
     return <div className='flex justify-end items-end w-full text-black-2'><h1 className='text-center'>{timeAgo}</h1></div>;
 };
-const NotificationCard = ({ notification, clerkId }: { notification: any, clerkId: any }) => {
+const NotificationCard = ({ notification, clerkId ,userId}: { notification: any, clerkId: any, userId:string }) => {
+    const [isOpen, setIsOpen] = useState(false)
+    const [iRequested, setIRequested] = useState(false)
+
     const [appointmentDetail, setAppointmentDetail] = useState<any>()
-    const [iRequsted, setIrequested] = useState()
     const [isLoading, setTransition] = useTransition()
     const [success, setSuccess] = useState()
     const [error, setError] = useState<string>()
@@ -23,6 +27,7 @@ const NotificationCard = ({ notification, clerkId }: { notification: any, clerkI
         console.log(notificationId)
         console.log(notification)
         const headerRef = ref(database, 'notifications/' + clerkId + "/" + notificationId);
+       
         notification.read = true;
         // const notificationsRef =database.ref(`notifications/${currentUserId}/${notificationId}`);
         set(headerRef, notification).then((data) => {
@@ -30,12 +35,17 @@ const NotificationCard = ({ notification, clerkId }: { notification: any, clerkI
         }).catch((e) => {
             console.log(e)
         })
+      
     };
     useEffect(() => {
         setTransition(() => {
+       
             getAppointmentById(notification.appointmentId).then((response) => {
                 if (response.data) {
                     setAppointmentDetail(response.data)
+                    const requestedFor = response.data.requestedFor;
+                    const iRequested = response.data.requestedById == userId? true:false;
+                    setIRequested(iRequested)
                     console.log(response.data)
                 } else {
                     setError(response.error)
@@ -47,7 +57,7 @@ const NotificationCard = ({ notification, clerkId }: { notification: any, clerkI
         <div className='  mx-8 max-w-[600px] w-full my-1 '>
             {
                 !isLoading && appointmentDetail != null ?
-                    <div onClick={() => markNotificationAsRead(notification.id)} className={`${notification.read ? "border-2 border-primary-2 rounded-lg" : "bg-primary-2 border-2 border-primary-2 rounded-lg "}`}>
+                    <div onClick={() => setIsOpen(true)} className={`${notification.read ? "border-2 border-primary-2 rounded-lg cursor-pointer" : "bg-primary-2 border-2 border-primary-2 rounded-lg cursor-pointer "}`}>
 
                         <div className='flex flex-col justify-start items-start p-2'>
                             <div className='flex gap-4 justify-center items-center ' >
@@ -95,9 +105,14 @@ const NotificationCard = ({ notification, clerkId }: { notification: any, clerkI
                             }
                         </div>
 
+                        <AppointmentDetailModal iRequested={iRequested} appointment={appointmentDetail} handleClose={() => {
+                            setIsOpen((prev) => !prev)
+                            markNotificationAsRead(notification.id)
+                        }} isOpen={isOpen} />
 
                     </div> :<NotificationCardSkeleton length={1}/>
             }
+
         </div>
     )
 }

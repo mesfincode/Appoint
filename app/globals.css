@@ -25,7 +25,31 @@
   }
 }
 
-
+.react-datepicker__header {
+  text-align: center;
+  background-color: #95bef9;
+  border-bottom: 1px solid #aeaeae;
+  border-top-left-radius: 0.3rem;
+  padding: 8px 0;
+  position: relative;
+}
+.react-datepicker {
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+  font-size: 0.8rem;
+  background-color: #d88080;
+  color: #000;
+  border: 1px solid #aeaeae;
+  border-radius: 0.3rem;
+  display: inline-block;
+  position: relative;
+  line-height: initial;
+}
+.list-item {
+  height: 30px;
+  padding: 5px 10px;
+  white-space: nowrap;
+  background-color: red;
+}
 /* ===== custom classes ===== */
 
 .custom-scrollbar::-webkit-scrollbar {

@@ -23,8 +23,9 @@ const ReceivedAppointment = () => {
     const [isPending, startTransition] = useTransition()
     const [userId, setUserId] = useState("");
     const [isOpen, setIsOpen] = useState(false)
-    const [appointment, setAppointment] = useState(false)
     const [iRequested, setIRequested] = useState(false)
+
+    const [appointment, setAppointment] = useState(false)
 
     useEffect(() => {
         // setIsMounted(true);
